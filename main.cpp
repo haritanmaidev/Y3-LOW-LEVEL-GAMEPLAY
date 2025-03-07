@@ -5,13 +5,19 @@
 */
 int WinMain()
 {
+    //SHAPES SECTION
     sf::RenderWindow window(sf::VideoMode({ 400, 400 }), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::CircleShape shape(70.F);
+    sf::Vector2f shapePosition(200, 200);
+    shape.setPosition(shapePosition);
+    shape.setFillColor(sf::Color::Red);
+    shape.setOutlineThickness(-10.0f);
+    shape.setOutlineColor(sf::Color::White);
 
+    //TEXT SECTION
     sf::Font font("Arial.ttf"); // Throws sf::Exception if an error occurs
     sf::Text text(font); // a font is required to make a text object
-    text.setString("Scunthorpe Problem!");
+    text.setString("CALLING ALL AUTOBOTS!");
     text.setCharacterSize(24); // in pixels, not points!
     text.setFillColor(sf::Color::Red);
     text.setStyle(sf::Text::Bold | sf::Text::Underlined);
