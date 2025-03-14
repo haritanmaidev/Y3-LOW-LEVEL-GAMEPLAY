@@ -4,6 +4,6 @@
 class InputHandler
 {
 public:
-	static void MoveCharacter(sf::Sprite & character);
+	static void MoveCharacter(sf::Sprite &character);
 };
 

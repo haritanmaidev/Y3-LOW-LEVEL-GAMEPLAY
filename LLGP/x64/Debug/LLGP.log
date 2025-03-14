@@ -1,4 +1,24 @@
 ﻿  InputHandler.cpp
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         with
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         [
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:             T=float
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         ]
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         with
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         [
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:             T=float
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         ]
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         with
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         [
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:             T=float
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         ]
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         with
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         [
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:             T=float
+D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         ]
 sfml-graphics-s-d.lib(Transformable.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Transformable.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(VertexArray.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(VertexArray.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Shape.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shape.obj)' or at ''; linking object as if no debug info
