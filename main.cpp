@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Ellipse.h"
+#include "InputHandler.h"
 
 int WinMain()
 {
@@ -57,6 +58,7 @@ int WinMain()
             //Do physics
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
+            InputHandler::MoveCharacter(otherCharacter);
         }
 
         // Event polling section of code - this must be done in the thread which created the window, we will talk about threading later, but essentially this must be done here

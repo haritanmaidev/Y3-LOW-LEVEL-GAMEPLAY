@@ -1,9 +1,4 @@
-﻿  main.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(52,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(52,125): warning C4244:         with
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(52,125): warning C4244:         [
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(52,125): warning C4244:             _Rep=__int64
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(52,125): warning C4244:         ]
+﻿  InputHandler.cpp
 sfml-graphics-s-d.lib(Transformable.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Transformable.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(VertexArray.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(VertexArray.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Shape.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shape.obj)' or at ''; linking object as if no debug info
@@ -26,11 +21,13 @@ sfml-graphics-s-d.lib(Shader.obj) : warning LNK4099: PDB '' was not found with '
 sfml-graphics-s-d.lib(VertexBuffer.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(VertexBuffer.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(RenderTextureImplFBO.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(RenderTextureImplFBO.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Glsl.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Glsl.obj)' or at ''; linking object as if no debug info
+sfml-window-s-d.lib(Keyboard.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(Keyboard.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(VideoMode.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(VideoMode.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(WindowBase.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowBase.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(Window.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(Window.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(GlResource.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(GlResource.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(Context.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(Context.obj)' or at ''; linking object as if no debug info
+sfml-window-s-d.lib(InputImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(InputImpl.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(VideoModeImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(VideoModeImpl.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(Cursor.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(Cursor.obj)' or at ''; linking object as if no debug info
 sfml-window-s-d.lib(WindowImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowImpl.obj)' or at ''; linking object as if no debug info
@@ -78,4 +75,4 @@ freetyped.lib(ftmm.obj) : warning LNK4099: PDB '' was not found with 'freetyped.
 freetyped.lib(ftgzip.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftgzip.obj)' or at ''; linking object as if no debug info
 freetyped.lib(ftlzw.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftlzw.obj)' or at ''; linking object as if no debug info
 freetyped.lib(ftdebug.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftdebug.obj)' or at ''; linking object as if no debug info
-  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+  LLGP.vcxproj -> D:\R\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
