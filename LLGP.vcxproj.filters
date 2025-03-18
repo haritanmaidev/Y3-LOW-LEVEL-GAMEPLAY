@@ -39,9 +39,6 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerProjectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="packages\SFML\include\SFML\Audio.hpp">
@@ -351,9 +348,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ellipse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerProjectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

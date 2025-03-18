@@ -1,24 +1,9 @@
-﻿  InputHandler.cpp
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         with
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         [
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:             T=float
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(9,34): warning C4244:         ]
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         with
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         [
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:             T=float
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(14,31): warning C4244:         ]
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         with
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         [
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:             T=float
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(19,34): warning C4244:         ]
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         with
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         [
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:             T=float
-D:\R\LOW-LEVEL-GAMEPLAY\InputHandler.cpp(24,31): warning C4244:         ]
+﻿  main.cpp
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(61,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(61,125): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(61,125): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(61,125): warning C4244:             _Rep=__int64
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(61,125): warning C4244:         ]
 sfml-graphics-s-d.lib(Transformable.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Transformable.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(VertexArray.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(VertexArray.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Shape.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shape.obj)' or at ''; linking object as if no debug info
@@ -95,4 +80,5 @@ freetyped.lib(ftmm.obj) : warning LNK4099: PDB '' was not found with 'freetyped.
 freetyped.lib(ftgzip.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftgzip.obj)' or at ''; linking object as if no debug info
 freetyped.lib(ftlzw.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftlzw.obj)' or at ''; linking object as if no debug info
 freetyped.lib(ftdebug.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftdebug.obj)' or at ''; linking object as if no debug info
-  LLGP.vcxproj -> D:\R\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+InputHandler.obj : error LNK2001: unresolved external symbol "public: static class sf::Vector2<float> InputHandler::direction" (?direction@InputHandler@@2V?$Vector2@M@sf@@A)
+D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe : fatal error LNK1120: 1 unresolved externals

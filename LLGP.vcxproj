@@ -138,7 +138,6 @@
   <ItemGroup>
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlayerProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ellipse.h" />
@@ -244,7 +243,6 @@
     <ClInclude Include="packages\SFML\include\SFML\Window\WindowBase.hpp" />
     <ClInclude Include="packages\SFML\include\SFML\Window\WindowEnums.hpp" />
     <ClInclude Include="packages\SFML\include\SFML\Window\WindowHandle.hpp" />
-    <ClInclude Include="PlayerProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\SFML\include\SFML\Audio\SoundFileFactory.inl" />

@@ -40,6 +40,15 @@ int WinMain()
     sf::Sprite otherCharacter(character);
     otherCharacter.setPosition(sf::Vector2(100.0f, 100.0f));
 
+    //PROJECTILE SPAWNING
+    sf::Texture playerProjectile;
+    const sf::Image projectile("assets/ProjectilesSpriteSheet1");
+    bool resultProj = character.loadFromImage(projectile, false, sf::IntRect({ 50,50 }, { 100,100 }));
+    
+    sf::Sprite spawnedProjectile(playerProjectile);
+    spawnedProjectile.setPosition(mainCharacter.getPosition());
+    InputHandler::FireProjectile(spawnedProjectile);
+
     //TIME UPDATE
 
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -74,6 +83,7 @@ int WinMain()
         window.draw(text);
         window.draw(mainCharacter);
         window.draw(otherCharacter);
+        window.draw(spawnedProjectile);
         window.display();
     }
 }
