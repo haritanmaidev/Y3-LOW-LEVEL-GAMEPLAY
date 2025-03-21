@@ -2,7 +2,8 @@
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
-	int speed = 4;
+	speed = 4;
+	projectileSpeed = 10;
 	direction = sf::Vector2f(0, 0);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
@@ -34,7 +35,5 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 
 void InputHandler::FireProjectile(sf::Sprite &projectile)
 {
-	int speed = 10.f;
-
-	projectile.move(sf::Vector2f(direction.x * speed, direction.y * speed));
+	projectile.move(sf::Vector2f(direction.x * projectileSpeed, direction.y * projectileSpeed));
 }

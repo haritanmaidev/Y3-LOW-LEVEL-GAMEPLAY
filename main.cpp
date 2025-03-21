@@ -6,7 +6,7 @@ void CollisionCheck(sf::Sprite& mainCharacter);
 
 int WinMain()
 {
-    sf::RenderWindow window(sf::VideoMode({ 500, 500 }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ 400, 400 }), "SFML works!");
     InputHandler inputHandler;
     
     //SHAPES SECTION
@@ -45,10 +45,10 @@ int WinMain()
 
     //PROJECTILE SPAWNING
     sf::Texture playerProjectile;
-    const sf::Image projectile("assets/ProjectilesSpriteSheet1");
+    const sf::Image projectile("assets/ProjectilesSpriteSheet1.gif");
     bool resultProj = character.loadFromImage(projectile, false, sf::IntRect({ 50,50 }, { 100,100 }));
     
-    sf::Sprite spawnedProjectile(playerProjectile);
+        sf::Sprite spawnedProjectile(playerProjectile);
     spawnedProjectile.setPosition(mainCharacter.getPosition());
     inputHandler.FireProjectile(spawnedProjectile);
 
@@ -57,7 +57,8 @@ int WinMain()
     float deltaTime = 0;
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
-    
+   
+    //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
         //TIME UPDATE
@@ -70,6 +71,16 @@ int WinMain()
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
             inputHandler.MoveCharacter(otherCharacter);
+
+            /*for (int i = 0; i < objects.size(); i++)
+            {
+                for (int j = i + 1; j < objects.size(); j++)
+                {
+                    checkCollision(object[i], object[j]);
+                }
+            }*/
+            CollisionCheck(otherCharacter);
+            CollisionCheck(mainCharacter);
         }
 
         // Event polling section of code - this must be done in the thread which created the window, we will talk about threading later, but essentially this must be done here
@@ -79,15 +90,13 @@ int WinMain()
                 window.close();
         }
 
-        CollisionCheck(mainCharacter);
-
         window.clear();
         window.draw(shape);
         window.draw(shapeEllipse);
         window.draw(text);
         window.draw(mainCharacter);
         window.draw(otherCharacter);
-        window.draw(spawnedProjectile);
+        //window.draw(spawnedProjectile);
         window.display();
     }
 }
@@ -95,15 +104,15 @@ int WinMain()
 void CollisionCheck(sf::Sprite &mainCharacter)
 {
     //COLLISIONS
-//Right Collision
+    //Right Collision
     if (mainCharacter.getPosition().x < 0)
     {
         mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
     }
     //Left Collision
-    if (mainCharacter.getPosition().x > 500)
+    if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 400)//window.getSize().x)
     {
-        mainCharacter.setPosition(sf::Vector2f(500, mainCharacter.getPosition().y));
+        mainCharacter.setPosition(sf::Vector2f(400 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
     }
     //Top Collision
     if (mainCharacter.getPosition().y < 0)
@@ -111,8 +120,8 @@ void CollisionCheck(sf::Sprite &mainCharacter)
         mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
     }
     //Bottom Collision
-    if (mainCharacter.getPosition().y > 500)
+    if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 400)
     {
-        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 500));
+        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 400-mainCharacter.getGlobalBounds().size.y));
     }
 }
