@@ -1,13 +1,8 @@
 #include "InputHandler.h"
 
-int main()
-{
-	
-}
-
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
-	int speed = 2;
+	int speed = 4;
 	direction = sf::Vector2f(0, 0);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
@@ -37,7 +32,7 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 	//Normalize Speed for diagonal movement.
 }
 
-void InputHandler::FireProjectile(sf::Sprite projectile)
+void InputHandler::FireProjectile(sf::Sprite &projectile)
 {
 	int speed = 10.f;
 

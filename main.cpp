@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
-#include "Ellipse.h"
 #include "InputHandler.h"
+#include "Ellipse.h"
+
+void CollisionCheck(sf::Sprite& mainCharacter);
 
 int WinMain()
 {
-    sf::RenderWindow window(sf::VideoMode({ 400, 400 }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ 500, 500 }), "SFML works!");
+    InputHandler inputHandler;
     
     //SHAPES SECTION
     //Circle
@@ -47,15 +50,14 @@ int WinMain()
     
     sf::Sprite spawnedProjectile(playerProjectile);
     spawnedProjectile.setPosition(mainCharacter.getPosition());
-    InputHandler::FireProjectile(spawnedProjectile);
+    inputHandler.FireProjectile(spawnedProjectile);
 
     //TIME UPDATE
-
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     float deltaTime = 0;
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
-
+    
     while (window.isOpen())
     {
         //TIME UPDATE
@@ -67,7 +69,7 @@ int WinMain()
             //Do physics
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
-            InputHandler::MoveCharacter(otherCharacter);
+            inputHandler.MoveCharacter(otherCharacter);
         }
 
         // Event polling section of code - this must be done in the thread which created the window, we will talk about threading later, but essentially this must be done here
@@ -77,6 +79,8 @@ int WinMain()
                 window.close();
         }
 
+        CollisionCheck(mainCharacter);
+
         window.clear();
         window.draw(shape);
         window.draw(shapeEllipse);
@@ -85,5 +89,30 @@ int WinMain()
         window.draw(otherCharacter);
         window.draw(spawnedProjectile);
         window.display();
+    }
+}
+
+void CollisionCheck(sf::Sprite &mainCharacter)
+{
+    //COLLISIONS
+//Right Collision
+    if (mainCharacter.getPosition().x < 0)
+    {
+        mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
+    }
+    //Left Collision
+    if (mainCharacter.getPosition().x > 500)
+    {
+        mainCharacter.setPosition(sf::Vector2f(500, mainCharacter.getPosition().y));
+    }
+    //Top Collision
+    if (mainCharacter.getPosition().y < 0)
+    {
+        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
+    }
+    //Bottom Collision
+    if (mainCharacter.getPosition().y > 500)
+    {
+        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 500));
     }
 }
