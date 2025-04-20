@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 #include "Ellipse.h"
 
-void CollisionCheck(sf::Sprite& mainCharacter);
+void BorderCollisionCheck(sf::Sprite& mainCharacter);
 
 int WinMain()
 {
@@ -36,21 +36,20 @@ int WinMain()
 
     //Character
     sf::Texture character;
-    const sf::Image packedSheetCharacters("assets/GokuSSJ3SpriteSheet.jpg");
-    bool result = character.loadFromImage(packedSheetCharacters, false, sf::IntRect({ 0, 0 }, {65, 90}));
-
+    const sf::Image LoadGoku("assets/walk.png");
+    character.loadFromImage(LoadGoku, false, sf::IntRect({ 0, 0 }, {65, 80}));
     sf::Sprite mainCharacter(character);
     sf::Sprite otherCharacter(character);
-    otherCharacter.setPosition(sf::Vector2(100.0f, 100.0f));
+    otherCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
+    otherCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
 
     //PROJECTILE SPAWNING
     sf::Texture playerProjectile;
     const sf::Image projectile("assets/ProjectilesSpriteSheet1.gif");
-    bool resultProj = character.loadFromImage(projectile, false, sf::IntRect({ 50,50 }, { 100,100 }));
-    
-        sf::Sprite spawnedProjectile(playerProjectile);
+    playerProjectile.loadFromImage(projectile, false, sf::IntRect({ 50,50 }, { 100,100 }));
+    sf::Sprite spawnedProjectile(playerProjectile);
+    spawnedProjectile.setScale(sf::Vector2f(0.5f, 0.5f));
     spawnedProjectile.setPosition(mainCharacter.getPosition());
-    inputHandler.FireProjectile(spawnedProjectile);
 
     //TIME UPDATE
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -61,7 +60,7 @@ int WinMain()
     //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
-        //TIME UPDATE
+        /*--------------------------------|||| [[[UPDATE]] ] ||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
@@ -72,6 +71,9 @@ int WinMain()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
             inputHandler.MoveCharacter(otherCharacter);
 
+            BorderCollisionCheck(otherCharacter);
+            BorderCollisionCheck(mainCharacter);
+            inputHandler.FireProjectile(spawnedProjectile);
             /*for (int i = 0; i < objects.size(); i++)
             {
                 for (int j = i + 1; j < objects.size(); j++)
@@ -79,8 +81,6 @@ int WinMain()
                     checkCollision(object[i], object[j]);
                 }
             }*/
-            CollisionCheck(otherCharacter);
-            CollisionCheck(mainCharacter);
         }
 
         // Event polling section of code - this must be done in the thread which created the window, we will talk about threading later, but essentially this must be done here
@@ -93,17 +93,16 @@ int WinMain()
         window.clear();
         window.draw(shape);
         window.draw(shapeEllipse);
-        window.draw(text);
+        //window.draw(text);
         window.draw(mainCharacter);
         window.draw(otherCharacter);
-        //window.draw(spawnedProjectile);
+        window.draw(spawnedProjectile);
         window.display();
     }
 }
 
-void CollisionCheck(sf::Sprite &mainCharacter)
+void BorderCollisionCheck(sf::Sprite &mainCharacter)
 {
-    //COLLISIONS
     //Right Collision
     if (mainCharacter.getPosition().x < 0)
     {

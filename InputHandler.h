@@ -6,8 +6,8 @@ class InputHandler
 public:
 	void MoveCharacter(sf::Sprite &character);
 	void FireProjectile(sf::Sprite &projectile);
-	sf::Vector2f direction;
+	sf::Vector2f direction = sf::Vector2f(0, 0);
 private:
-	int speed = 2;
-	int projectileSpeed = 10;
+	float speed = 2;
+	float projectileSpeed = 10;
 };
