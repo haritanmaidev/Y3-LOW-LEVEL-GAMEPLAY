@@ -4,9 +4,12 @@
 
 void BorderCollisionCheck(sf::Sprite& mainCharacter);
 
+#define WINDOW_HEIGHT 1000
+#define WINDOW_WIDTH 1000
+
 int WinMain()
 {
-    sf::RenderWindow window(sf::VideoMode({ 400, 400 }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
     InputHandler inputHandler;
     
     //SHAPES SECTION
@@ -37,11 +40,14 @@ int WinMain()
     //Character
     sf::Texture character;
     const sf::Image LoadGoku("assets/walk.png");
-    character.loadFromImage(LoadGoku, false, sf::IntRect({ 0, 0 }, {65, 80}));
+    character.loadFromImage(LoadGoku, false, sf::IntRect({ 0, 0 }, {55, 55}));
     sf::Sprite mainCharacter(character);
-    sf::Sprite otherCharacter(character);
-    otherCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
-    otherCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
+    sf::Sprite playerCharacter(character);
+    playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
+    playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
+
+    //Custom Hitbox
+    sf::FloatRect playerHitbox = sf::FloatRect();
 
     //PROJECTILE SPAWNING
     sf::Texture playerProjectile;
@@ -60,7 +66,7 @@ int WinMain()
     //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
-        /*--------------------------------|||| [[[UPDATE]] ] ||||--------------------------------*/
+        /*--------------------------------|||| [[[UPDATE]]] ||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
@@ -69,9 +75,9 @@ int WinMain()
             //Do physics
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
-            inputHandler.MoveCharacter(otherCharacter);
+            inputHandler.MoveCharacter(playerCharacter);
 
-            BorderCollisionCheck(otherCharacter);
+            BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);
             inputHandler.FireProjectile(spawnedProjectile);
             /*for (int i = 0; i < objects.size(); i++)
@@ -95,7 +101,7 @@ int WinMain()
         window.draw(shapeEllipse);
         //window.draw(text);
         window.draw(mainCharacter);
-        window.draw(otherCharacter);
+        window.draw(playerCharacter);
         window.draw(spawnedProjectile);
         window.display();
     }
@@ -109,9 +115,9 @@ void BorderCollisionCheck(sf::Sprite &mainCharacter)
         mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
     }
     //Left Collision
-    if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 400)//window.getSize().x)
+    if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 1000)
     {
-        mainCharacter.setPosition(sf::Vector2f(400 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
+        mainCharacter.setPosition(sf::Vector2f(1000 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
     }
     //Top Collision
     if (mainCharacter.getPosition().y < 0)
@@ -119,8 +125,8 @@ void BorderCollisionCheck(sf::Sprite &mainCharacter)
         mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
     }
     //Bottom Collision
-    if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 400)
+    if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 1000)
     {
-        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 400-mainCharacter.getGlobalBounds().size.y));
+        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 -mainCharacter.getGlobalBounds().size.y));
     }
 }

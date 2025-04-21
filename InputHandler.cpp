@@ -2,7 +2,7 @@
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
-	speed = 4;
+	speed = 14;
 	direction = sf::Vector2f(0, 0); // Reset direction before checking keys
 
 	//Y axis is reversed, hence why W gets -ve & S gets +ve
@@ -38,7 +38,7 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 
 void InputHandler::FireProjectile(sf::Sprite& projectile)
 {
-	projectileSpeed = 10;
+	projectileSpeed = 2;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
