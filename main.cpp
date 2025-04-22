@@ -1,52 +1,38 @@
 #include <SFML/Graphics.hpp>
 #include "InputHandler.h"
 #include "Ellipse.h"
-
-void BorderCollisionCheck(sf::Sprite& mainCharacter);
-
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
+void BorderCollisionCheck(sf::Sprite& mainCharacter);
+
 int WinMain()
 {
-    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
     InputHandler inputHandler;
-    
-    //Circle
-    sf::CircleShape shape(70.F);
-    sf::Vector2f shapePosition(100, 100);
-    shape.setPosition(shapePosition);
-    shape.setFillColor(sf::Color::Red);
-    shape.setOutlineThickness(-10.0f);
-    shape.setOutlineColor(sf::Color::White);
+    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
 
     //Character
     sf::Texture character;
-    const sf::Image LoadGoku("assets/walk.png");
-    character.loadFromImage(LoadGoku, false, sf::IntRect({ 0, 0 }, {55, 55}));
+    const sf::Image LoadSprite("assets/walk.png");
+    character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {55, 55}));
     sf::Sprite mainCharacter(character);
     sf::Sprite playerCharacter(character);
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
 
-    //PROJECTILE SPAWNING
-    sf::Texture playerProjectile;
-    const sf::Image projectile("assets/ProjectilesSpriteSheet1.gif");
-    playerProjectile.loadFromImage(projectile, false, sf::IntRect({ 50,50 }, { 100,100 }));
-    sf::Sprite spawnedProjectile(playerProjectile);
-    spawnedProjectile.setScale(sf::Vector2f(0.5f, 0.5f));
-    spawnedProjectile.setPosition(mainCharacter.getPosition());
-
-    //TIME UPDATE
+    //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     float deltaTime = 0;
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
    
+    //Projectiles
+    std::vector<sf::CircleShape> bullets;
+
     //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
-        /*--------------------------------|||| [[[UPDATE]]] ||||--------------------------------*/
+        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
@@ -55,11 +41,21 @@ int WinMain()
             //Do physics
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
+
             inputHandler.MoveCharacter(playerCharacter);
+            
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+            {
+                inputHandler.isFiring = true;
+            }
+            else
+            {
+				inputHandler.isFiring = false;
+			}
 
             BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);
-            inputHandler.FireProjectile(spawnedProjectile);
+
             /*for (int i = 0; i < objects.size(); i++)
             {
                 for (int j = i + 1; j < objects.size(); j++)
@@ -68,8 +64,7 @@ int WinMain()
                 }
             }*/
         }
-
-        // Event polling section of code - this must be done in the thread which created the window, we will talk about threading later, but essentially this must be done here
+        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -77,10 +72,24 @@ int WinMain()
         }
 
         window.clear();
-        window.draw(shape);
+
+        if (inputHandler.isFiring == true)
+        {
+			sf::CircleShape newBullet(5.f);
+			newBullet.setFillColor(sf::Color::Red);
+			newBullet.setPosition(playerCharacter.getPosition());
+			bullets.push_back(newBullet);
+            inputHandler.isFiring = false;
+        }
+
+        for (auto& bullet : bullets)
+        {
+			bullet.move(inputHandler.lastDirection * 10.f);
+			window.draw(bullet);
+		}
+
         window.draw(mainCharacter);
         window.draw(playerCharacter);
-        window.draw(spawnedProjectile);
         window.display();
     }
 }

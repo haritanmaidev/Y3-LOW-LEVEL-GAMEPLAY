@@ -9,25 +9,24 @@ void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
-	speed = 14;
-	direction = sf::Vector2f(0, 0); // Reset direction before checking keys
+	direction = sf::Vector2f(0, 0);
 
-	//Y axis is reversed, hence why W gets -ve & S gets +ve
+	//Y axis is reversed, hence why the W key gets -ve & the S key gets +ve
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		direction.y = -speed;
+		direction.y = -playerSpeed;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		direction.x = -speed;
+		direction.x = -playerSpeed;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		direction.y = speed;
+		direction.y = playerSpeed;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		direction.x = speed;
+		direction.x = playerSpeed;
 	}
 
 	//Normalize Speed for diagonal movement.
@@ -35,26 +34,29 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 	{
 		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 		direction /= magnitude;
-		direction *= speed;    // Apply the speed
+		velocity = direction * playerSpeed;
+		lastDirection = direction;
+	}
+	else
+	{
+		velocity = direction;
 	}
 
-	// Moves the character in the new direction
-	character.move(direction);
+	character.move(velocity);
 }
 
 void InputHandler::FireProjectile(sf::Sprite& projectile)
 {
-	projectileSpeed = 2;
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
-		if (direction != sf::Vector2f(0, 0)) // Ensure a direction exists
+		isFiring = true;
+		if (direction != sf::Vector2f(0, 0))
 		{
-			projectile.move(sf::Vector2f(direction.x * projectileSpeed, direction.y * projectileSpeed));
+			projectile.move(sf::Vector2f(direction * projectileSpeed));
 		}
 		else
 		{
-			projectile.move(sf::Vector2f(0, projectileSpeed)); // Default direction if no movement keys are pressed
+			projectile.move(sf::Vector2f(lastDirection * projectileSpeed));
 		}
 	}
 }
