@@ -84,7 +84,9 @@ int WinMain()
 
         for (auto& bullet : bullets)
         {
-			bullet.move(inputHandler.lastDirection * 10.f);
+            //Call a Fire() from bullet class which takes the direction at bullets instantiation!
+            //Or make a Vector2 List, storing bullet, and it's direction, and apply direction correspondingly!
+			bullet.move(inputHandler.lastDirection); 
 			window.draw(bullet);
 		}
 

@@ -26,6 +26,8 @@ public:
 	{
 		window.draw(sprite);
 	}
+
+	virtual void OnCollision() = 0;
 	
 	//ASK: What else must be done in the destructor?
 	virtual void Destroy() 
