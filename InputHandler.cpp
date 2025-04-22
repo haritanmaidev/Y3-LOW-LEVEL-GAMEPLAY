@@ -1,5 +1,12 @@
 #include "InputHandler.h"
 
+void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
+{
+	//ASK: Is this the right way to do this?
+	MoveCharacter(characterRef);
+	FireProjectile(projectileRef);
+}	
+
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
 	speed = 14;
@@ -26,7 +33,6 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 	//Normalize Speed for diagonal movement.
 	if (direction.x != 0 && direction.y != 0)
 	{
-		//CAN I USE STANDARD LIB???
 		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 		direction /= magnitude;
 		direction *= speed;    // Apply the speed

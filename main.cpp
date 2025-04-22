@@ -12,7 +12,6 @@ int WinMain()
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
     InputHandler inputHandler;
     
-    //SHAPES SECTION
     //Circle
     sf::CircleShape shape(70.F);
     sf::Vector2f shapePosition(100, 100);
@@ -20,22 +19,6 @@ int WinMain()
     shape.setFillColor(sf::Color::Red);
     shape.setOutlineThickness(-10.0f);
     shape.setOutlineColor(sf::Color::White);
-
-    //Ellipse
-    EllipseShape shapeEllipse;
-    shapeEllipse.setRadius(sf::Vector2f(50, 10));
-    shapeEllipse.setPosition(sf::Vector2f(300, 300));
-    shapeEllipse.setFillColor(sf::Color::Blue);
-    shapeEllipse.setOutlineThickness(-2.0f);
-    shapeEllipse.setOutlineColor(sf::Color::White);
-
-    //TEXT SECTION
-    sf::Font font("Arial.ttf"); // Throws sf::Exception if an error occurs
-    sf::Text text(font); // a font is required to make a text object
-    text.setString("CALLING ALL AUTOBOTS!");
-    text.setCharacterSize(24); // in pixels, not points!
-    text.setFillColor(sf::Color::Red);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     //Character
     sf::Texture character;
@@ -45,9 +28,6 @@ int WinMain()
     sf::Sprite playerCharacter(character);
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
-
-    //Custom Hitbox
-    sf::FloatRect playerHitbox = sf::FloatRect();
 
     //PROJECTILE SPAWNING
     sf::Texture playerProjectile;
@@ -98,8 +78,6 @@ int WinMain()
 
         window.clear();
         window.draw(shape);
-        window.draw(shapeEllipse);
-        //window.draw(text);
         window.draw(mainCharacter);
         window.draw(playerCharacter);
         window.draw(spawnedProjectile);

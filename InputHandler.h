@@ -4,6 +4,7 @@
 class InputHandler
 {
 public:
+	void Update(sf::Sprite& characterRef, sf::Sprite& projectileRef);
 	void MoveCharacter(sf::Sprite &character);
 	void FireProjectile(sf::Sprite &projectile);
 	sf::Vector2f direction = sf::Vector2f(0, 0);
