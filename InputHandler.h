@@ -17,5 +17,5 @@ public:
 
 private:
 	float playerSpeed = 10;
-	float projectileSpeed = 10;
+	float projectileSpeed = 2;
 };

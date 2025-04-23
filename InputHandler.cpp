@@ -29,17 +29,19 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 		direction.x = playerSpeed;
 	}
 
+	velocity = direction;
+
 	//Normalize Speed for diagonal movement.
 	if (direction.x != 0 && direction.y != 0)
 	{
 		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 		direction /= magnitude;
 		velocity = direction * playerSpeed;
-		lastDirection = direction;
+		lastDirection = velocity;
 	}
-	else
+	else if (direction.x != 0 || direction.y != 0)
 	{
-		velocity = direction;
+		lastDirection = direction;
 	}
 
 	character.move(velocity);

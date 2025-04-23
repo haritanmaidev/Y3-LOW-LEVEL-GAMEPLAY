@@ -1,8 +1,8 @@
 ﻿  main.cpp
 G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(17,28): warning C4834: discarding return value of function with [[nodiscard]] attribute
-G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         with
-G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         [
-G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:             _Rep=__int64
-G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         ]
-  LLGP.vcxproj -> G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(37,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(37,125): warning C4244:         with
+G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(37,125): warning C4244:         [
+G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(37,125): warning C4244:             _Rep=__int64
+G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\main.cpp(37,125): warning C4244:         ]
+LINK : fatal error LNK1168: cannot open G:\GitHub Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe for writing

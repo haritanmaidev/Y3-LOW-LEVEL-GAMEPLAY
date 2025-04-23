@@ -27,7 +27,8 @@ int WinMain()
     float physicsTimeStep = 20000;
    
     //Projectiles
-    std::vector<sf::CircleShape> bullets;
+    //std::vector<sf::CircleShape> bullets;
+    std::vector<std::pair<sf::CircleShape, sf::Vector2f>> bullets;
 
     //std::vector <managedObjects> objects;
     while (window.isOpen())
@@ -78,7 +79,8 @@ int WinMain()
 			sf::CircleShape newBullet(5.f);
 			newBullet.setFillColor(sf::Color::Red);
 			newBullet.setPosition(playerCharacter.getPosition());
-			bullets.push_back(newBullet);
+            sf::Vector2f bulletDir = inputHandler.lastDirection * 0.1f;
+            bullets.push_back(std::make_pair(newBullet, bulletDir));
             inputHandler.isFiring = false;
         }
 
@@ -86,8 +88,8 @@ int WinMain()
         {
             //Call a Fire() from bullet class which takes the direction at bullets instantiation!
             //Or make a Vector2 List, storing bullet, and it's direction, and apply direction correspondingly!
-			bullet.move(inputHandler.lastDirection); 
-			window.draw(bullet);
+            bullet.first.move(bullet.second);
+            window.draw(bullet.first);
 		}
 
         window.draw(mainCharacter);
