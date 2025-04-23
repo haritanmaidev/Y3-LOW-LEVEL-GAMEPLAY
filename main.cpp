@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <math.h>
 #include "InputHandler.h"
 #include "Ellipse.h"
 #define WINDOW_HEIGHT 1000
@@ -28,7 +29,7 @@ int WinMain()
    
     //Projectiles
     //std::vector<sf::CircleShape> bullets;
-    std::vector<std::pair<sf::CircleShape, sf::Vector2f>> bullets;
+    std::vector<std::pair<sf::CircleShape, float>> bullets;
 
     //std::vector <managedObjects> objects;
     while (window.isOpen())
@@ -79,8 +80,10 @@ int WinMain()
 			sf::CircleShape newBullet(5.f);
 			newBullet.setFillColor(sf::Color::Red);
 			newBullet.setPosition(playerCharacter.getPosition());
-            sf::Vector2f bulletDir = inputHandler.lastDirection * 0.1f;
-            bullets.push_back(std::make_pair(newBullet, bulletDir));
+            //sf::Vector2f bulletDir = inputHandler.lastDirection * 0.1f;
+            float angle = atan2(sf::Mouse::getPosition(window).y - playerCharacter.getPosition().y,
+                sf::Mouse::getPosition(window).x - playerCharacter.getPosition().x);
+            bullets.push_back(std::make_pair(newBullet, angle));
             inputHandler.isFiring = false;
         }
 
@@ -88,7 +91,7 @@ int WinMain()
         {
             //Call a Fire() from bullet class which takes the direction at bullets instantiation!
             //Or make a Vector2 List, storing bullet, and it's direction, and apply direction correspondingly!
-            bullet.first.move(bullet.second);
+            bullet.first.move(sf::Vector2f(1 * cos(bullet.second), 1 * sin(bullet.second)));
             window.draw(bullet.first);
 		}
 

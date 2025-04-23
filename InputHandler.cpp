@@ -9,6 +9,7 @@ void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
 {
+	//Resetting direction to 0 since this runs every frame. To stop the character movement when no inputs pressed
 	direction = sf::Vector2f(0, 0);
 
 	//Y axis is reversed, hence why the W key gets -ve & the S key gets +ve
