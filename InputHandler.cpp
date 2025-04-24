@@ -4,7 +4,7 @@ void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 {
 	//ASK: Is this the right way to do this?
 	MoveCharacter(characterRef);
-	FireProjectile(projectileRef);
+	FireProjectile();
 }	
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
@@ -48,18 +48,15 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 	character.move(velocity);
 }
 
-void InputHandler::FireProjectile(sf::Sprite& projectile)
+void InputHandler::FireProjectile()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		isFiring = true;
-		if (direction != sf::Vector2f(0, 0))
-		{
-			projectile.move(sf::Vector2f(direction * projectileSpeed));
-		}
-		else
-		{
-			projectile.move(sf::Vector2f(lastDirection * projectileSpeed));
-		}
+
+	}
+	else
+	{
+		isFiring = false;
 	}
 }

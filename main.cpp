@@ -45,16 +45,8 @@ int WinMain()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             inputHandler.MoveCharacter(playerCharacter);
-            
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-            {
-                inputHandler.isFiring = true;
-            }
-            else
-            {
-				inputHandler.isFiring = false;
-			}
-
+            inputHandler.FireProjectile();
+           
             BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);
 
