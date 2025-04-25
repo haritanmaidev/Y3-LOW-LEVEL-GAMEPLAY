@@ -353,6 +353,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\SFML\include\SFML\Audio\SoundFileFactory.inl">

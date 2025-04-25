@@ -5,47 +5,53 @@ struct Transform
 {
 	sf::Vector2f position {0.f, 0.f};
 	sf::Vector2f scale {1.f, 1.f};
-	float rotation = 0.f;
-
-	//Transform() : position(0, 0), scale(1, 1), rotation(0) {}
-	//Transform(sf::Vector2f pos, sf::Vector2f scl, float rot) : position(pos), scale(scl), rotation(rot) {}
+	sf::Angle rotation = sf::Angle::Zero;
 };
 
 class GameObject
 {
 public:
-	//ASK: Why is this a pure virtual function? & What is this for?
+	//Destructor
 	virtual ~GameObject() = default;
 
-	//ASK: Why is there 0?
+	//Pure functions
 	virtual void Awake() = 0;
-	virtual void Update(float dt) = 0;
-
-	//ASK: Do this need to be virtual?
-	virtual void Render(sf::RenderWindow& window)
-	{
-		window.draw(sprite);
-	}
-
+	virtual void Update() = 0;
 	virtual void OnCollision() = 0;
-	
-	//ASK: What else must be done in the destructor?
-	virtual void Destroy() 
-	{
-		isActive = false;
-	}
 
-	//ASK: What are these?
+	//NOTE:Make this Render virtual if I wanna do particle effects for certain classes!
+	void Render(sf::RenderWindow& window) { window.draw(sprite);}
+	
+	//Setters and Getters
+	void SetActive(bool status) { isActive = status; }
+	void SetTag(const std::string& newTag) { tag = newTag; }
+	void SetPosition(float x, float y) { transform.position = { x, y }; sprite.setPosition(transform.position); }
+	void SetScale(float x, float y) { transform.scale = { x, y }; sprite.setScale(transform.scale); }
+	void SetRotation(sf::Angle angle) { transform.rotation = angle; sprite.setRotation(transform.rotation); }
+	bool IsActive() const { return isActive; }
+	const std::string& GetTag() const { return tag; }
+	sf::Vector2f GetPosition() const { return transform.position; }
+	sf::Vector2f GetScale() const { return transform.scale; }
+	sf::Angle GetRotation() const { return transform.rotation; }
 	Transform& GetTransform() { return transform; }
 	const Transform& GetTransform() const { return transform; }
 
-	//Unsure functions:
-	//void SetPosition(float x, float y) { transform.position = { x, y }; }
-	//void SetScale(float x, float y) { transform.scale = { x, y }; }
-	//void SetRotation()
-	//{
-	//	 sprite.setRotation(transform.rotation);
-	//}
+	void SyncTransformWithSprite()
+	{
+		transform.position = sprite.getPosition();
+		transform.scale = sprite.getScale();
+		transform.rotation = sprite.getRotation();
+	}
+
+	bool LoadTexture(const std::string& filePath)
+	{
+		if (!texture.loadFromFile(filePath))
+		{
+			return false;
+		}
+		sprite.setTexture(texture);
+		return true;
+	}
 
 protected:
 	Transform transform;

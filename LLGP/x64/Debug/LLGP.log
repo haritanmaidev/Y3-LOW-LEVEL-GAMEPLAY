@@ -1,7 +1,1 @@
-﻿  main.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(64,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(64,125): warning C4244:         with
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(64,125): warning C4244:         [
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(64,125): warning C4244:             _Rep=__int64
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(64,125): warning C4244:         ]
-  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+﻿  LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
