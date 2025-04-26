@@ -56,7 +56,6 @@ public:
 			std::cout << "Projectile's Texture didn't load!" << std::endl;
 			return false;
 		}
-		
 
 		sprite.setTexture(texture);
 		std::cout << "Texture set!" << std::endl;

@@ -31,8 +31,6 @@ int main()
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
    
-    //Projectiles
-    std::vector<std::pair<sf::CircleShape, sf::Vector2f>> bullets;
     std::vector<std::unique_ptr<Projectile>> projectileList;
 
     //std::vector <managedObjects> objects;
@@ -72,39 +70,20 @@ int main()
 
         window.clear();
 
-		//OLD PROJECTILE CODE LOGIC: WORKING!
-  //      if (inputHandler.isFiring == true)
-  //      {
-  //          sf::CircleShape newBullet(5.f);
-  //          newBullet.setFillColor(sf::Color::Red);
-  //          newBullet.setPosition(playerCharacter.getPosition());
-  //          sf::Vector2f direction = GetMouseDirection(window, playerCharacter);
-  //          bullets.push_back(std::make_pair(newBullet, direction));
-  //          inputHandler.isFiring = false;
-		//}
-
-		//for (auto& bullet : bullets)
-		//{
-		//	bullet.first.move(bullet.second);
-		//	window.draw(bullet.first);
-		//}
-
-        // NEW PROJECTILE CODE LOGIC:
         if (inputHandler.isFiring)
         {
             auto newProjectile = std::make_unique<Projectile>
-            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 2.f );
+            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 1.f );
             newProjectile->SetActive(true);
             newProjectile->Awake();
             projectileList.push_back(std::move(newProjectile));
-            inputHandler.isFiring = false; // Reset fire flag
+            inputHandler.isFiring = false;
         }
 
         for (auto& projectile : projectileList)
         {
             projectile->Update();
             projectile->Render(window);
-			//window.draw(projectile->GetSprite());
         }
 
         window.draw(mainCharacter);

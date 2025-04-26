@@ -8,16 +8,11 @@ class Projectile : public GameObject
 {
 public:
 	Projectile(sf::RenderWindow& window, const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed) 
-		: GameObject(), renderWindow(window), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
+	: GameObject(), renderWindow(window), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
 	{
-		LoadGameObjectTexture("assets/Cropped/BasicProjectile.png");
 		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setPosition(spawnPoint);
 		sprite.setScale(sf::Vector2f(.25f, .25f));
-		sf::Texture projTexture;
-		const sf::Image LoadSprite("assets/Cropped/BasicProjectile.png");
-		bool result = projTexture.loadFromImage(LoadSprite);
-		sf::Sprite projSprite(projTexture);
 		SetActive(true);
 	}
 
@@ -29,7 +24,6 @@ public:
 	{
 		sprite.move(aimDirection * projectileSpeed);
 		//std::cout << "Projectile moved to: " << sprite.getPosition().x << ", " << sprite.getPosition().y << std::endl;
-
 	}
 
 	void OnCollision() override

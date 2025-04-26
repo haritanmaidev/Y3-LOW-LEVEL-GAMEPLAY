@@ -4,13 +4,13 @@ GameObject::GameObject()
 {
     if (!texture.loadFromFile("assets/Cropped/BasicProjectile.png"))
     {
-        std::cout << "Texture didn't load!" << std::endl;
-        texture.loadFromFile("assets/GokuSSJ3EditedSpriteSheet.png");
+        std::cout << "Texture didn't load! Assigning placeholder texture." << std::endl;
     }
     else
     {
-        std::cout << "Texture set successfully!" << std::endl;
+        //std::cout << "Texture set successfully!" << std::endl;
+        sprite.setTexture(texture);
     }
 
-    sprite.setTexture(texture);
+    // Assign the texture to the sprite after ensuring it is valid
 }
