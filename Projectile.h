@@ -17,7 +17,6 @@ public:
 		const sf::Image LoadSprite("assets/Cropped/BasicProjectile.png");
 		bool result = projTexture.loadFromImage(LoadSprite);
 		sf::Sprite projSprite(projTexture);
-		
 		SetActive(true);
 		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 	}

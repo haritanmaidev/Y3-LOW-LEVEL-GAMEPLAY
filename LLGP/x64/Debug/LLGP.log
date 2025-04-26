@@ -1,7 +1,11 @@
 ﻿  main.cpp
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(46,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(46,125): warning C4244:         with
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(46,125): warning C4244:         [
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(46,125): warning C4244:             _Rep=__int64
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(46,125): warning C4244:         ]
-  LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(11,15): error C2512: 'GameObject::GameObject': no appropriate default constructor available
+  (compiling source file 'main.cpp')
+      C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(11,15):
+      while trying to match the argument list '()'
+  
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         with
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         [
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:             _Rep=__int64
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         ]

@@ -13,11 +13,19 @@ class GameObject
 {
 public:
 	//Constructor
-	GameObject() : sprite(texture)
+	GameObject(sf::Texture ConsTexture) : texture(ConsTexture), sprite(texture)
 	{
+
+		if (!texture.loadFromFile("assets/Cropped/BasicProjectile.png"))
+		{
+			std::cout << "Texture didn't load!" << std::endl;
+		}
+		else
+		{
+			sprite.setTexture(texture);
+		}
 	}
 
-	sf::Sprite sprite;
 	sf::CircleShape newCircle;
 
 	//Destructor
@@ -70,6 +78,7 @@ public:
 protected:
 	Transform transform;
 	sf::Texture texture;
+	sf::Sprite sprite;
 	sf::IntRect hitbox;
 	std::string tag;
 	int ID = 0;

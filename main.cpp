@@ -18,14 +18,15 @@ int main()
     //Character
     sf::Texture character;
     const sf::Image LoadSprite("assets/walk.png");
-    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {55, 55}));
+    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {50, 50}));
     sf::Sprite mainCharacter(character);
     sf::Sprite playerCharacter(character);
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
     //Goku Character
     sf::Texture Goku;
-    bool resultGoku = Goku.loadFromFile("assets/GokuSSJ3EditedSpriteSheet.png");
+	const sf::Image LoadGoku("assets/GokuSSJ3EditedSpriteSheet.png");
+    //bool resultGoku = Goku.loadFromImage(LoadGoku, false, sf::IntRect({ 0,0 }, {0,0}));
 	playerCharacter.setTexture(Goku);
 
 
