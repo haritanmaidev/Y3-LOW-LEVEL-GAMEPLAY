@@ -2,10 +2,9 @@
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(69,23): warning C4834: discarding return value of function with [[nodiscard]] attribute
   (compiling source file 'main.cpp')
   
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         with
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         [
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:             _Rep=__int64
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         ]
-sfml-graphics-s-d.lib(RenderWindow.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(RenderWindow.obj)' or at ''; linking object as if no debug info
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         with
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         [
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:             _Rep=__int64
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         ]
   LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

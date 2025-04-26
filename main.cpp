@@ -23,11 +23,6 @@ int main()
     sf::Sprite playerCharacter(character);
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
-    //Goku Character
-    sf::Texture Goku;
-	const sf::Image LoadGoku("assets/GokuSSJ3EditedSpriteSheet.png");
-    //bool resultGoku = Goku.loadFromImage(LoadGoku, false, sf::IntRect({ 0,0 }, {0,0}));
-	playerCharacter.setTexture(Goku);
 
 
     //Time Update
@@ -98,7 +93,7 @@ int main()
         if (inputHandler.isFiring)
         {
             auto newProjectile = std::make_unique<Projectile>
-            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 3.f );
+            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 2.f );
             newProjectile->SetActive(true);
             newProjectile->Awake();
             projectileList.push_back(std::move(newProjectile));
@@ -109,7 +104,7 @@ int main()
         {
             projectile->Update();
             projectile->Render(window);
-			window.draw(projectile->GetSprite());
+			//window.draw(projectile->GetSprite());
         }
 
         window.draw(mainCharacter);

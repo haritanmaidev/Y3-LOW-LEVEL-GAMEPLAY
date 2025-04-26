@@ -11,14 +11,14 @@ public:
 		: GameObject(), renderWindow(window), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
 	{
 		LoadGameObjectTexture("assets/Cropped/BasicProjectile.png");
+		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setPosition(spawnPoint);
-		sprite.setScale(sf::Vector2f(1.f, 1.f));
+		sprite.setScale(sf::Vector2f(.25f, .25f));
 		sf::Texture projTexture;
 		const sf::Image LoadSprite("assets/Cropped/BasicProjectile.png");
 		bool result = projTexture.loadFromImage(LoadSprite);
 		sf::Sprite projSprite(projTexture);
 		SetActive(true);
-		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 	}
 
 	void Awake() override
