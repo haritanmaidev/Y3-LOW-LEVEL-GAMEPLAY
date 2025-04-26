@@ -10,7 +10,7 @@
 void BorderCollisionCheck(sf::Sprite& mainCharacter);
 sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player);
 
-int WinMain()
+int main()
 {
     InputHandler inputHandler;
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
@@ -18,11 +18,16 @@ int WinMain()
     //Character
     sf::Texture character;
     const sf::Image LoadSprite("assets/walk.png");
-    character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {55, 55}));
+    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {55, 55}));
     sf::Sprite mainCharacter(character);
     sf::Sprite playerCharacter(character);
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
+    //Goku Character
+    sf::Texture Goku;
+    bool resultGoku = Goku.loadFromFile("assets/GokuSSJ3EditedSpriteSheet.png");
+	playerCharacter.setTexture(Goku);
+
 
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -31,14 +36,13 @@ int WinMain()
     float physicsTimeStep = 20000;
    
     //Projectiles
-    //std::vector<sf::CircleShape> bullets;
-    std::vector<std::pair<sf::CircleShape, float>> bullets;
+    std::vector<std::pair<sf::CircleShape, sf::Vector2f>> bullets;
     std::vector<std::unique_ptr<Projectile>> projectileList;
 
     //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
-        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
+        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY - START]]]:||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
@@ -62,7 +66,8 @@ int WinMain()
                 }
             }*/
         }
-        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
+        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY - END]]]:||||--------------------------------*/
+        
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -71,42 +76,40 @@ int WinMain()
 
         window.clear();
 
-        //Projectile initialzation logic
-        if (inputHandler.isFiring == true)
+		//OLD PROJECTILE CODE LOGIC: WORKING!
+  //      if (inputHandler.isFiring == true)
+  //      {
+  //          sf::CircleShape newBullet(5.f);
+  //          newBullet.setFillColor(sf::Color::Red);
+  //          newBullet.setPosition(playerCharacter.getPosition());
+  //          sf::Vector2f direction = GetMouseDirection(window, playerCharacter);
+  //          bullets.push_back(std::make_pair(newBullet, direction));
+  //          inputHandler.isFiring = false;
+		//}
+
+		//for (auto& bullet : bullets)
+		//{
+		//	bullet.first.move(bullet.second);
+		//	window.draw(bullet.first);
+		//}
+
+        // NEW PROJECTILE CODE LOGIC:
+        if (inputHandler.isFiring)
         {
-  			sf::CircleShape newBullet(5.f);
-			newBullet.setFillColor(sf::Color::Red);
-			newBullet.setPosition(playerCharacter.getPosition());
-            //sf::Vector2f bulletDir = inputHandler.lastDirection * 0.1f;
-            float angle = atan2(sf::Mouse::getPosition(window).y - playerCharacter.getPosition().y,
-                sf::Mouse::getPosition(window).x - playerCharacter.getPosition().x);
-            bullets.push_back(std::make_pair(newBullet, angle));
-            inputHandler.isFiring = false;
+            auto newProjectile = std::make_unique<Projectile>
+            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 300.f );
+            newProjectile->SetActive(true);
+            newProjectile->Awake();
+            projectileList.push_back(std::move(newProjectile));
+            inputHandler.isFiring = false; // Reset fire flag
         }
 
-        //Projectile update logic
-        for (auto& bullet : bullets)
+        for (auto& projectile : projectileList)
         {
-            //Call a Fire() from bullet class which takes the direction at bullets instantiation!
-            //Or make a Vector2 List, storing bullet, and it's direction, and apply direction correspondingly!
-            bullet.first.move(sf::Vector2f(1 * cos(bullet.second), 1 * sin(bullet.second)));
-            window.draw(bullet.first);
-		}
-
-		if (inputHandler.isFiring == true)
-		{
-			std::unique_ptr<Projectile> newProjectile = std::make_unique<Projectile>(window);
-			newProjectile->Awake();
-			newProjectile->SetDirection(GetMouseDirection(window, playerCharacter));
-			projectileList.push_back(std::move(newProjectile));
-            inputHandler.isFiring = false;
-		}
-
-	 //   for (auto& projectile : projectileList)
-		//{
-		//	projectile->Update();
-  //          projectile->Render(window);
-		//}
+            projectile->Update();
+            projectile->Render(window);
+			window.draw(projectile->GetSprite());
+        }
 
         window.draw(mainCharacter);
         window.draw(playerCharacter);
@@ -138,11 +141,11 @@ void BorderCollisionCheck(sf::Sprite &mainCharacter)
     }
 }
 
-//TO-DO: Use PlayerCharacter class instead of Sprite here!
 sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player)
 {
+    //ASK: Is it better to keep this here or in InputHandler?
+    //TO-DO: Use PlayerCharacter class instead of Sprite here!
     float angle = atan2(sf::Mouse::getPosition(window).y - player.getPosition().y,
                         sf::Mouse::getPosition(window).x - player.getPosition().x);
-
     return sf::Vector2f(cos(angle), sin(angle));
 }

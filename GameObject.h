@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 struct Transform
 {
@@ -11,6 +12,14 @@ struct Transform
 class GameObject
 {
 public:
+	//Constructor
+	GameObject() : sprite(texture)
+	{
+	}
+
+	sf::Sprite sprite;
+	sf::CircleShape newCircle;
+
 	//Destructor
 	virtual ~GameObject() = default;
 
@@ -20,7 +29,7 @@ public:
 	virtual void OnCollision() = 0;
 
 	//NOTE:Make this Render virtual if I wanna do particle effects for certain classes!
-	void Render(sf::RenderWindow& window) { window.draw(sprite);}
+	void Render(sf::RenderWindow& window) { window.draw(sprite); }
 	
 	//Setters and Getters
 	void SetActive(bool status) { isActive = status; }
@@ -28,13 +37,15 @@ public:
 	void SetPosition(float x, float y) { transform.position = { x, y }; sprite.setPosition(transform.position); }
 	void SetScale(float x, float y) { transform.scale = { x, y }; sprite.setScale(transform.scale); }
 	void SetRotation(sf::Angle angle) { transform.rotation = angle; sprite.setRotation(transform.rotation); }
-	bool IsActive() const { return isActive; }
+	void SetSpriteTexture(const sf::Texture& newTexture) { sprite.setTexture(newTexture); }
+	bool GetActiveStatus() const { return isActive; }
 	const std::string& GetTag() const { return tag; }
 	sf::Vector2f GetPosition() const { return transform.position; }
 	sf::Vector2f GetScale() const { return transform.scale; }
 	sf::Angle GetRotation() const { return transform.rotation; }
 	Transform& GetTransform() { return transform; }
 	const Transform& GetTransform() const { return transform; }
+	sf::Sprite& GetSprite() { return sprite; }
 
 	void SyncTransformWithSprite()
 	{
@@ -47,16 +58,18 @@ public:
 	{
 		if (!texture.loadFromFile(filePath))
 		{
+			std::cout << "Projectile's Texture didn't load!" << std::endl;
 			return false;
 		}
+
 		sprite.setTexture(texture);
+		std::cout << "Texture set!" << std::endl;
 		return true;
 	}
 
 protected:
 	Transform transform;
 	sf::Texture texture;
-	sf::Sprite sprite;
 	sf::IntRect hitbox;
 	std::string tag;
 	int ID = 0;

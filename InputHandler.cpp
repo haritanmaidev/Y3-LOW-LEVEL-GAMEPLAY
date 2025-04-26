@@ -1,4 +1,6 @@
 #include "InputHandler.h"
+#include <iostream>
+
 
 void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 {
@@ -53,7 +55,6 @@ void InputHandler::FireProjectile()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		isFiring = true;
-
 	}
 	else
 	{
