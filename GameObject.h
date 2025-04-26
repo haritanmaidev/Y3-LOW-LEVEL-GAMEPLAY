@@ -43,7 +43,7 @@ public:
 		transform.rotation = sprite.getRotation();
 	}
 
-	bool LoadTexture(const std::string& filePath)
+	bool LoadGameObjectTexture(const std::string& filePath)
 	{
 		if (!texture.loadFromFile(filePath))
 		{

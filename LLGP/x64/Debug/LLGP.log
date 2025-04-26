@@ -1,1 +1,32 @@
-﻿  LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+﻿  main.cpp
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(21,28): warning C4834: discarding return value of function with [[nodiscard]] attribute
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         with
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         [
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:             _Rep=__int64
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(42,125): warning C4244:         ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,35): error C2665: 'Projectile::Projectile': no overloaded function could convert all the argument types
+  (compiling source file 'main.cpp')
+      C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(50,1):
+      could be 'Projectile::Projectile(Projectile &&)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,35):
+          'Projectile::Projectile(Projectile &&)': cannot convert argument 1 from 'sf::RenderWindow' to 'Projectile &&'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56):
+              Reason: cannot convert from 'sf::RenderWindow' to 'Projectile'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56):
+              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+      C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(50,1):
+      or       'Projectile::Projectile(const Projectile &)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,35):
+          'Projectile::Projectile(const Projectile &)': cannot convert argument 1 from 'sf::RenderWindow' to 'const Projectile &'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56):
+              Reason: cannot convert from 'sf::RenderWindow' to 'const Projectile'
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56):
+              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,35):
+      while trying to match the argument list '(sf::RenderWindow)'
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,35):
+      the template instantiation context (the oldest one first) is
+          C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(98,53):
+          see reference to function template instantiation 'std::unique_ptr<Projectile,std::default_delete<Projectile>> std::make_unique<Projectile,sf::RenderWindow&,0>(sf::RenderWindow &)' being compiled
+  
