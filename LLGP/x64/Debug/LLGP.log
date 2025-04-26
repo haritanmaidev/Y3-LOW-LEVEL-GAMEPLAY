@@ -1,11 +1,11 @@
 ﻿  main.cpp
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(11,15): error C2512: 'GameObject::GameObject': no appropriate default constructor available
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(69,23): warning C4834: discarding return value of function with [[nodiscard]] attribute
   (compiling source file 'main.cpp')
-      C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(11,15):
-      while trying to match the argument list '()'
   
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         with
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         [
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:             _Rep=__int64
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         ]
+sfml-graphics-s-d.lib(RenderWindow.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(RenderWindow.obj)' or at ''; linking object as if no debug info
+  LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

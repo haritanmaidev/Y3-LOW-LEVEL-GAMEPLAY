@@ -13,20 +13,7 @@ class GameObject
 {
 public:
 	//Constructor
-	GameObject(sf::Texture ConsTexture) : texture(ConsTexture), sprite(texture)
-	{
-
-		if (!texture.loadFromFile("assets/Cropped/BasicProjectile.png"))
-		{
-			std::cout << "Texture didn't load!" << std::endl;
-		}
-		else
-		{
-			sprite.setTexture(texture);
-		}
-	}
-
-	sf::CircleShape newCircle;
+	GameObject();
 
 	//Destructor
 	virtual ~GameObject() = default;
@@ -37,7 +24,7 @@ public:
 	virtual void OnCollision() = 0;
 
 	//NOTE:Make this Render virtual if I wanna do particle effects for certain classes!
-	void Render(sf::RenderWindow& window) { window.draw(sprite); }
+	void Render(sf::RenderWindow &window) { window.draw(sprite); }
 	
 	//Setters and Getters
 	void SetActive(bool status) { isActive = status; }
@@ -69,16 +56,25 @@ public:
 			std::cout << "Projectile's Texture didn't load!" << std::endl;
 			return false;
 		}
+		
 
 		sprite.setTexture(texture);
 		std::cout << "Texture set!" << std::endl;
 		return true;
 	}
 
+	sf::Sprite& MakeSprite()
+	{
+		sf::Texture texture;
+		texture.loadFromFile("assets/Cropped/BasicProjectile.png");
+		sf::Sprite playersprite(texture);
+		return playersprite;
+	}
+
 protected:
 	Transform transform;
 	sf::Texture texture;
-	sf::Sprite sprite;
+	sf::Sprite sprite = MakeSprite();
 	sf::IntRect hitbox;
 	std::string tag;
 	int ID = 0;

@@ -12,7 +12,7 @@ public:
 	{
 		LoadGameObjectTexture("assets/Cropped/BasicProjectile.png");
 		sprite.setPosition(spawnPoint);
-		sprite.setScale(sf::Vector2f(15.f, 15.f));
+		sprite.setScale(sf::Vector2f(1.f, 1.f));
 		sf::Texture projTexture;
 		const sf::Image LoadSprite("assets/Cropped/BasicProjectile.png");
 		bool result = projTexture.loadFromImage(LoadSprite);

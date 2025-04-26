@@ -98,7 +98,7 @@ int main()
         if (inputHandler.isFiring)
         {
             auto newProjectile = std::make_unique<Projectile>
-            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 300.f );
+            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 3.f );
             newProjectile->SetActive(true);
             newProjectile->Awake();
             projectileList.push_back(std::move(newProjectile));
