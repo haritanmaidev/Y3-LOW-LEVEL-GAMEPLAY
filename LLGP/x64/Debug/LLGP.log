@@ -1,10 +1,6 @@
-﻿  main.cpp
+﻿  GameObject.cpp
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(68,23): warning C4834: discarding return value of function with [[nodiscard]] attribute
-  (compiling source file 'main.cpp')
+  (compiling source file 'GameObject.cpp')
   
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         with
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         [
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:             _Rep=__int64
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         ]
+C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(70,1): warning C4172: returning address of local variable or temporary : playersprite
   LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
