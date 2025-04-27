@@ -1,12 +1,14 @@
 #include "InputHandler.h"
+#include "EntityManager.h"
 #include <iostream>
 
+EntityManager entityManager;
 
 void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 {
 	//ASK: Is this the right way to do this?
-	MoveCharacter(characterRef);
-	FireProjectile();
+	//MoveCharacter(characterRef);
+	//FireProjectile();
 }	
 
 void InputHandler::MoveCharacter(sf::Sprite &character)
@@ -50,11 +52,13 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 	character.move(velocity);
 }
 
-void InputHandler::FireProjectile()
+void InputHandler::FireProjectile(const sf::Vector2f& position, const sf::Vector2f& direction)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		isFiring = true;
+		entityManager.SpawnProjectile(position, direction, projectileSpeed);
+		//WORKS: std::cout << "Spacebar Pressed!" << std::endl;
 	}
 	else
 	{

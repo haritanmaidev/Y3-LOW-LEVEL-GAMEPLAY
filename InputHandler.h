@@ -6,7 +6,8 @@ class InputHandler
 public:
 	void Update(sf::Sprite& characterRef, sf::Sprite& projectileRef);
 	void MoveCharacter(sf::Sprite &character);
-	void FireProjectile();
+	//ASK: Should these be const?
+	void FireProjectile(const sf::Vector2f& position, const sf::Vector2f& direction);
 
 	sf::Vector2f direction = sf::Vector2f(0, 0);
 	sf::Vector2f velocity = sf::Vector2f(0, 0);
@@ -16,5 +17,5 @@ public:
 
 private:
 	float playerSpeed = 10;
-	float projectileSpeed = 2;
+	float projectileSpeed = 3.5f;
 };

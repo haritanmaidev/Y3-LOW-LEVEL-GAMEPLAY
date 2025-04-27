@@ -1,9 +1,7 @@
-#include <SFML/Graphics.hpp>
 #include <math.h>
-#include "GameObject.h"
-#include "InputHandler.h"
-#include "Projectile.h"
 #include "Ellipse.h"
+#include "InputHandler.h"
+#include "EntityManager.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -13,6 +11,7 @@ sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player);
 int main()
 {
     InputHandler inputHandler;
+	EntityManager entityManager;
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
 
     //Character
@@ -47,7 +46,7 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             inputHandler.MoveCharacter(playerCharacter);
-            inputHandler.FireProjectile();
+            inputHandler.FireProjectile(playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter));
            
             BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);
@@ -60,7 +59,7 @@ int main()
                 }
             }*/
         }
-        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY - END]]]:||||--------------------------------*/
+        /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         
         while (const std::optional event = window.pollEvent())
         {
@@ -68,24 +67,26 @@ int main()
                 window.close();
         }
 
+        //--------------------------------:||||[[[DRAWING ON WINDOW]]]||||:--------------------------------
         window.clear();
 
-        if (inputHandler.isFiring)
-        {
-            auto newProjectile = std::make_unique<Projectile>
-            (window, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 1.f );
-            newProjectile->SetActive(true);
-            newProjectile->Awake();
-            projectileList.push_back(std::move(newProjectile));
-            inputHandler.isFiring = false;
-        }
+        //if (inputHandler.isFiring)
+        //{
+        //    auto newProjectile = std::make_unique<Projectile>
+        //    (playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 1.f );
+        //    newProjectile->SetActive(true);
+        //    newProjectile->Awake();
+        //    projectileList.push_back(std::move(newProjectile));
+        //    inputHandler.isFiring = false;
+        //}
+        //for (auto& projectile : projectileList)
+        //{
+        //    projectile->Update();
+        //    projectile->Render(window);
+        //}
 
-        for (auto& projectile : projectileList)
-        {
-            projectile->Update();
-            projectile->Render(window);
-        }
-
+		entityManager.UpdateAllProjectiles();
+		entityManager.RenderAllProjectiles(window);
         window.draw(mainCharacter);
         window.draw(playerCharacter);
         window.display();
