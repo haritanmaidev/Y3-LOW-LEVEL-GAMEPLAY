@@ -1,8 +1,4 @@
-﻿  InputHandler.cpp
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(68,23): warning C4834: discarding return value of function with [[nodiscard]] attribute
-  (compiling source file 'InputHandler.cpp')
-  
-  main.cpp
+﻿  main.cpp
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\GameObject.h(68,23): warning C4834: discarding return value of function with [[nodiscard]] attribute
   (compiling source file 'main.cpp')
   
@@ -11,5 +7,4 @@ C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(39,125): warning C4244:         with
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(39,125): warning C4244:         [
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(39,125): warning C4244:             _Rep=__int64
 C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(39,125): warning C4244:         ]
-  Generating Code...
   LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

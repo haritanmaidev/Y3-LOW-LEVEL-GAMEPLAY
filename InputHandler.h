@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "EntityManager.h"
 
 class InputHandler
 {
@@ -7,7 +8,7 @@ public:
 	void Update(sf::Sprite& characterRef, sf::Sprite& projectileRef);
 	void MoveCharacter(sf::Sprite &character);
 	//ASK: Should these be const?
-	void FireProjectile(const sf::Vector2f& position, const sf::Vector2f& direction);
+	void FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction);
 
 	sf::Vector2f direction = sf::Vector2f(0, 0);
 	sf::Vector2f velocity = sf::Vector2f(0, 0);

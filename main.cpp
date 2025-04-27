@@ -1,7 +1,7 @@
 #include <math.h>
 #include "Ellipse.h"
 #include "InputHandler.h"
-#include "EntityManager.h"
+
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -46,7 +46,7 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             inputHandler.MoveCharacter(playerCharacter);
-            inputHandler.FireProjectile(playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter));
+            inputHandler.FireProjectile(entityManager, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter));
            
             BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);

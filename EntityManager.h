@@ -5,6 +5,8 @@ class EntityManager
 {
 public:
 	//===========================|||||[ALL GAME OBJECT'S MANAGER]|||||===========================
+    std::vector<std::unique_ptr<GameObject>> EntityList;
+
     void AddEntity(std::unique_ptr<GameObject> entity)
     {
         EntityList.push_back(std::move(entity));
@@ -27,6 +29,8 @@ public:
     }
 
 	//==================================|||||[PROJECTILE STUFF]|||||==================================
+	std::vector<std::unique_ptr<Projectile>> ProjectileList;
+
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
 		ProjectileList.push_back(std::move(projectile));
@@ -41,7 +45,6 @@ public:
 		newProjectile->Awake();
 		AddProjectile(std::move(newProjectile));
 		//WORKS: std::cout << "Spawn Projectile Called!" << std::endl;
-		//ProjectileList.push_back(std::move(newProjectile));
 	}
 
 	void UpdateAllProjectiles()
@@ -64,6 +67,4 @@ public:
 
 
 private:
-    std::vector<std::unique_ptr<GameObject>> EntityList;
-	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 };
