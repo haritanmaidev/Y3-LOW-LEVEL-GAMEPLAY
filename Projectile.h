@@ -11,6 +11,7 @@ public:
 	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
 	{
 		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
+		LoadGameObjectTexture("assets/Cropped/BasicProjectile.png");
 		sprite.setPosition(spawnPoint);
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetActive(true);
@@ -22,6 +23,7 @@ public:
 
 	void Update() override
 	{
+		//std::cout << "ProjectileList's Update is called!" << std::endl;
 		sprite.move(aimDirection * projectileSpeed);
 		//std::cout << "Projectile moved to: " << sprite.getPosition().x << ", " << sprite.getPosition().y << std::endl;
 	}

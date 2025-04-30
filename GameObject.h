@@ -33,7 +33,7 @@ public:
 	void SetScale(float x, float y) { transform.scale = { x, y }; sprite.setScale(transform.scale); }
 	void SetRotation(sf::Angle angle) { transform.rotation = angle; sprite.setRotation(transform.rotation); }
 	void SetSpriteTexture(const sf::Texture& newTexture) { sprite.setTexture(newTexture); }
-	bool GetActiveStatus() const { return isActive; }
+	bool IsActive() const { return isActive; }
 	const std::string& GetTag() const { return tag; }
 	sf::Vector2f GetPosition() const { return transform.position; }
 	sf::Vector2f GetScale() const { return transform.scale; }
@@ -42,6 +42,7 @@ public:
 	const Transform& GetTransform() const { return transform; }
 	sf::Sprite& GetSprite() { return sprite; }
 
+	//Extra functions
 	void SyncTransformWithSprite()
 	{
 		transform.position = sprite.getPosition();
@@ -53,29 +54,34 @@ public:
 	{
 		if (!texture.loadFromFile(filePath))
 		{
-			std::cout << "Projectile's Texture didn't load!" << std::endl;
+			std::cout << "Texture didn't load!" << std::endl;
 			return false;
 		}
+		else
+		{
+			sprite.setTexture(texture);	
+			std::cout << "Texture loaded successfully!" << std::endl;
+			return true;
+		}
 
-		sprite.setTexture(texture);
-		std::cout << "Texture set!" << std::endl;
-		return true;
 	}
 
+protected:
+	//Sprite variable was throwing annoying errors, set this up as a quick fix.
 	sf::Sprite& MakeSprite()
 	{
 		sf::Texture texture;
-		texture.loadFromFile("assets/Cropped/BasicProjectile.png");
+		bool result = texture.loadFromFile("assets/walk.png");
 		sf::Sprite playersprite(texture);
 		return playersprite;
 	}
 
-protected:
+	//Class Variables
 	Transform transform;
 	sf::Texture texture;
 	sf::Sprite sprite = MakeSprite();
 	sf::IntRect hitbox;
 	std::string tag;
-	int ID = 0;
+	int id = 0;
 	bool isActive = true;
 };

@@ -23,15 +23,12 @@ int main()
     playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
     playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
 
-
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     float deltaTime = 0;
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
    
-    std::vector<std::unique_ptr<Projectile>> projectileList;
-
     //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
@@ -46,8 +43,9 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             inputHandler.MoveCharacter(playerCharacter);
-            inputHandler.FireProjectile(entityManager, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter));
-           
+            inputHandler.FireProjectile(entityManager, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 10.f);
+            entityManager.UpdateAllProjectiles();
+
             BorderCollisionCheck(playerCharacter);
             BorderCollisionCheck(mainCharacter);
 
@@ -67,25 +65,8 @@ int main()
                 window.close();
         }
 
-        //--------------------------------:||||[[[DRAWING ON WINDOW]]]||||:--------------------------------
+        //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
         window.clear();
-
-        //if (inputHandler.isFiring)
-        //{
-        //    auto newProjectile = std::make_unique<Projectile>
-        //    (playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 1.f );
-        //    newProjectile->SetActive(true);
-        //    newProjectile->Awake();
-        //    projectileList.push_back(std::move(newProjectile));
-        //    inputHandler.isFiring = false;
-        //}
-        //for (auto& projectile : projectileList)
-        //{
-        //    projectile->Update();
-        //    projectile->Render(window);
-        //}
-
-		entityManager.UpdateAllProjectiles();
 		entityManager.RenderAllProjectiles(window);
         window.draw(mainCharacter);
         window.draw(playerCharacter);
@@ -123,5 +104,6 @@ sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player)
     //TO-DO: Use PlayerCharacter class instead of Sprite here!
     float angle = atan2(sf::Mouse::getPosition(window).y - player.getPosition().y,
                         sf::Mouse::getPosition(window).x - player.getPosition().x);
+
     return sf::Vector2f(cos(angle), sin(angle));
 }

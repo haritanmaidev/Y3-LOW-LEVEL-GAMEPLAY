@@ -4,9 +4,26 @@
 class EntityManager
 {
 public:
-	//===========================|||||[ALL GAME OBJECT'S MANAGER]|||||===========================
-    std::vector<std::unique_ptr<GameObject>> EntityList;
+	EntityManager() = default;
+	~EntityManager() = default;
 
+	template <typename T> void UpdateAll(std::vector<std::unique_ptr<T>>& list)
+	{
+		for (auto& entity : list)
+		{
+			entity->Update();
+		}
+	}
+
+	template <typename T> void RenderAll(std::vector<std::unique_ptr<T>>& list, sf::RenderWindow& window)
+	{
+		for (auto& entity : list)
+		{
+			entity->Render(window);
+		}
+	}
+
+	//===========================|||||[ALL GAME OBJECT'S MANAGER]|||||===========================
     void AddEntity(std::unique_ptr<GameObject> entity)
     {
         EntityList.push_back(std::move(entity));
@@ -14,28 +31,29 @@ public:
 
     void UpdateAllEntities()
     {
-        for (auto& entity : EntityList)
-        {
-            entity->Update();
-        }
+		UpdateAll(EntityList);
     }
 
     void RenderAllEntities(sf::RenderWindow& window)
     {
-        for (auto& entity : EntityList)
-        {
-            entity->Render(window);
-        }
+		RenderAll(EntityList, window);
     }
 
 	//==================================|||||[PROJECTILE STUFF]|||||==================================
-	std::vector<std::unique_ptr<Projectile>> ProjectileList;
-
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
 		ProjectileList.push_back(std::move(projectile));
-		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
-		//WORKS: std::cout << "Projectile Added to Projectile List!" << std::endl;
+		//WORKS: std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
+	}
+
+	void UpdateAllProjectiles()
+	{
+		UpdateAll(ProjectileList);
+	}
+
+	void RenderAllProjectiles(sf::RenderWindow& window)
+	{
+		RenderAll(ProjectileList, window);
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -44,27 +62,22 @@ public:
 		newProjectile->SetActive(true);
 		newProjectile->Awake();
 		AddProjectile(std::move(newProjectile));
-		//WORKS: std::cout << "Spawn Projectile Called!" << std::endl;
+		//std::cout << "Spawn Projectile Called!" << std::endl;
 	}
 
-	void UpdateAllProjectiles()
+	void RemoveProjectile(Projectile* projectile)
 	{
-		std::cout << "ProjectileList's Update is called!" << std::endl;
-		for (auto& projectile : ProjectileList)
+		auto it = std::remove_if(ProjectileList.begin(), ProjectileList.end(),
+			[projectile](const std::unique_ptr<Projectile>& p) { return p.get() == projectile; });
+		if (it != ProjectileList.end())
 		{
-			projectile->Update();
+			ProjectileList.erase(it, ProjectileList.end());
+			std::cout << "Projectile Removed from Projectile List!" << std::endl;
 		}
 	}
-
-	void RenderAllProjectiles(sf::RenderWindow& window)
-	{
-		for (auto& projectile : ProjectileList)
-		{
-			projectile->Render(window);
-		}
-	}
-
-
 
 private:
+	std::vector<std::unique_ptr<GameObject>> EntityList;
+	std::vector<std::unique_ptr<Projectile>> ProjectileList;
+	//std::vector<std::unique_ptr<>
 };
