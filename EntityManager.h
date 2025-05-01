@@ -60,7 +60,7 @@ public:
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		newProjectile->SetActive(true);
-		newProjectile->Awake();
+		//newProjectile->Awake();
 		AddProjectile(std::move(newProjectile));
 		//std::cout << "Spawn Projectile Called!" << std::endl;
 	}

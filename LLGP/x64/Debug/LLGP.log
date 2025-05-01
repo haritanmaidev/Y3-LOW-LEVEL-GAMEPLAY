@@ -1,20 +1,3 @@
 ﻿  GameObject.cpp
-  InputHandler.cpp
-  main.cpp
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         with
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         [
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:             _Rep=__int64
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(36,125): warning C4244:         ]
-  Generating Code...
 D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\GameObject.h(76,1): warning C4172: returning address of local variable or temporary : playersprite
-sfml-graphics-s-d.lib(Image.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Image.obj)' or at ''; linking object as if no debug info
-sfml-graphics-s-d.lib(Shader.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shader.obj)' or at ''; linking object as if no debug info
-sfml-graphics-s-d.lib(Texture.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Texture.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(GlContext.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(GlContext.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(JoystickImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(JoystickImpl.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(VideoModeImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(VideoModeImpl.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(VulkanImplWin32.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(VulkanImplWin32.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(WindowImplWin32.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowImplWin32.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(WglContext.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WglContext.obj)' or at ''; linking object as if no debug info
   LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

@@ -67,7 +67,7 @@ public:
 	}
 
 protected:
-	//Sprite variable was throwing annoying errors, set this up as a quick fix.
+	//ASK:Sprite variable was throwing annoying errors, set this up as a quick fix.
 	sf::Sprite& MakeSprite()
 	{
 		sf::Texture texture;

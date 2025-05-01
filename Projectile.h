@@ -17,15 +17,15 @@ public:
 		SetActive(true);
 	}
 
+	//NOTE:Removing Awake is throwing me "Projectile can't instantiate abstract class" error
 	void Awake() override
 	{
 	}
 
 	void Update() override
 	{
-		//std::cout << "ProjectileList's Update is called!" << std::endl;
 		sprite.move(aimDirection * projectileSpeed);
-		//std::cout << "Projectile moved to: " << sprite.getPosition().x << ", " << sprite.getPosition().y << std::endl;
+		//std::cout << "ProjectileList's Update is called!" << std::endl;
 	}
 
 	void OnCollision() override

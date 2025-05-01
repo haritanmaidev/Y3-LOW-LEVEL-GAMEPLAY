@@ -55,7 +55,7 @@ void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& 
 	{
 		isFiring = true;
 		entManger.SpawnProjectile(position, direction, speed);
-		//WORKS: std::cout << "Spacebar Pressed!" << std::endl;
+		//std::cout << "Spacebar Pressed!" << std::endl;
 	}
 	else
 	{
