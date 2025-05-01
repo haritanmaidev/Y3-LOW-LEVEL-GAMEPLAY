@@ -60,7 +60,7 @@ public:
 		else
 		{
 			sprite.setTexture(texture);	
-			std::cout << "Texture loaded successfully!" << std::endl;
+			//std::cout << "Texture loaded successfully!" << std::endl;
 			return true;
 		}
 

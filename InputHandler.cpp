@@ -50,17 +50,24 @@ void InputHandler::MoveCharacter(PlayerCharacter& character)
 	character.GetSprite().move(velocity);
 }
 
-void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
+void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed, float& deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	time += 0.1f;
+	if (fireRate < time) 
 	{
-		isFiring = true;
-		entManger.SpawnProjectile(position, direction, speed);
-		//std::cout << "Spacebar Pressed!" << std::endl;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+		{
+			std:: cout<< "Time value is:" << time << std::endl;
+			isFiring = true;
+			entManger.SpawnProjectile(position, direction, speed);
+			time = 0.f;
+			//std::cout << "Spacebar Pressed!" << std::endl;
+		}
+		else
+		{
+			isFiring = false;
+		}
 	}
-	else
-	{
-		isFiring = false;
-	}
+
 }
 

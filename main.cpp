@@ -9,6 +9,7 @@
 
 void BorderCollisionCheck(sf::Sprite& mainCharacter);
 sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player);
+void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite);
 
 int main()
 {
@@ -47,7 +48,7 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             inputHandler.MoveCharacter(*player);
-            inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f);
+            inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f, deltaTime);
             entityManager.UpdateAllProjectiles();
 
             BorderCollisionCheck(player->GetSprite());
@@ -74,6 +75,7 @@ int main()
 		entityManager.RenderAllProjectiles(window);
        // window.draw(mainCharacter);
         window.draw(player->GetSprite());
+        DrawDebugLines(window, player->GetSprite());
         window.display();
     }
 }
@@ -98,7 +100,7 @@ void BorderCollisionCheck(sf::Sprite &mainCharacter)
     //Bottom Collision
     if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 1000)
     {
-        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 -mainCharacter.getGlobalBounds().size.y));
+        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 - mainCharacter.getGlobalBounds().size.y));
     }
 }
 
@@ -110,4 +112,19 @@ sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player
                         sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
 
     return sf::Vector2f(cos(angle), sin(angle));
+}
+
+void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite) {
+    sf::IntRect textureRect = sprite.getTextureRect();
+
+    sf::RectangleShape debugRect;
+    debugRect.setSize(sf::Vector2f(static_cast<float>(textureRect.size.x), static_cast<float>(textureRect.size.y)));
+    debugRect.setPosition(sprite.getPosition());
+    debugRect.setOrigin(sprite.getOrigin());
+    debugRect.setScale(sprite.getScale());
+    debugRect.setOutlineColor(sf::Color::Red);
+    debugRect.setOutlineThickness(1.0f);
+    debugRect.setFillColor(sf::Color::Transparent);
+
+    window.draw(debugRect);
 }

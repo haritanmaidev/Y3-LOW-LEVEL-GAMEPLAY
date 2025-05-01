@@ -2,10 +2,11 @@
 
 PlayerCharacter::PlayerCharacter() : Character()
 {
-	drawbox = sf::IntRect({ 10, 10 }, { 45, 45 });
+	drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if(LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
 	{
 		sprite.setTextureRect(drawbox);
+		sprite.setScale(sf::Vector2f(25.f, 25.f));
 		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(1.25f, 1.25f));
 		SetActive(true);

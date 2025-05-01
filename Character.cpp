@@ -2,12 +2,7 @@
 
 Character::Character() : GameObject()
 {
-	drawbox = sf::IntRect({ 0, 0 }, { 10045, 10045 });
-	if(LoadGameObjectTextureFromFile("assets/errorcharacter.png", drawbox))
-	{
-		sprite.setScale(sf::Vector2f(.25f, .25f));
-		SetActive(true);
-	}
+	LoadGameObjectTextureFromFile("assets/errorcharacter.png", drawbox);
 }
 
 void Character::OnCollision()
