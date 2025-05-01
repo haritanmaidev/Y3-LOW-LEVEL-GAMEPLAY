@@ -24,46 +24,30 @@ public:
 		}
 	}
 
-	//===========================|||||[ALL GAME OBJECT'S MANAGER]|||||===========================
+	//==================================|||||[ALL GAME OBJECT'S MANAGER]|||||==================================
     void AddEntity(std::unique_ptr<GameObject> entity)
     {
         EntityList.push_back(std::move(entity));
     }
 
-    void UpdateAllEntities()
-    {
-		UpdateAll(EntityList);
-    }
-
-    void RenderAllEntities(sf::RenderWindow& window)
-    {
-		RenderAll(EntityList, window);
-    }
+    void UpdateAllEntities(){ UpdateAll(EntityList); }
+    void RenderAllEntities(sf::RenderWindow& window) { RenderAll(EntityList, window); }
 
 	//==================================|||||[PROJECTILE STUFF]|||||==================================
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
 		ProjectileList.push_back(std::move(projectile));
-		//WORKS: std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
+		//std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
 	}
 
-	void UpdateAllProjectiles()
-	{
-		UpdateAll(ProjectileList);
-	}
-
-	void RenderAllProjectiles(sf::RenderWindow& window)
-	{
-		RenderAll(ProjectileList, window);
-	}
+	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
+	void RenderAllProjectiles(sf::RenderWindow& window){ RenderAll(ProjectileList, window); }
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		newProjectile->SetActive(true);
-		//newProjectile->Awake();
 		AddProjectile(std::move(newProjectile));
-		//std::cout << "Spawn Projectile Called!" << std::endl;
 	}
 
 	void RemoveProjectile(Projectile* projectile)
@@ -79,6 +63,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<GameObject>> EntityList;
+	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 	//std::vector<std::unique_ptr<>
 };

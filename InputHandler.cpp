@@ -17,19 +17,19 @@ void InputHandler::MoveCharacter(PlayerCharacter& character)
 	//Y axis is reversed, hence why the W key gets -ve & the S key gets +ve
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		direction.y = -playerSpeed;
+		direction.y = -character.GetSpeed();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		direction.x = -playerSpeed;
+		direction.x = -character.GetSpeed();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		direction.y = playerSpeed;
+		direction.y = character.GetSpeed();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		direction.x = playerSpeed;
+		direction.x = character.GetSpeed();
 	}
 
 	velocity = direction;
@@ -39,7 +39,7 @@ void InputHandler::MoveCharacter(PlayerCharacter& character)
 	{
 		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 		direction /= magnitude;
-		velocity = direction * playerSpeed;
+		velocity = direction * character.GetSpeed();
 		lastDirection = velocity;
 	}
 	else if (direction.x != 0 || direction.y != 0)
@@ -57,17 +57,14 @@ void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& 
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 		{
-			std:: cout<< "Time value is:" << time << std::endl;
 			isFiring = true;
 			entManger.SpawnProjectile(position, direction, speed);
 			time = 0.f;
-			//std::cout << "Spacebar Pressed!" << std::endl;
 		}
 		else
 		{
 			isFiring = false;
 		}
 	}
-
 }
 

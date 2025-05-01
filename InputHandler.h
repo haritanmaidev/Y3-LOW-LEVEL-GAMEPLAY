@@ -21,6 +21,4 @@ public:
 	bool isFiring = false;
 	float fireRate = 1.f;
 	float time = 0.f;
-private:
-	float playerSpeed = 10;
 };
