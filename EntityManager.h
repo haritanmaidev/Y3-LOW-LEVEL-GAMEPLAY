@@ -2,11 +2,18 @@
 #include "GameObject.h"
 #include "Projectile.h"
 
+class Character;
+
 class EntityManager
 {
 public:
 	EntityManager() = default;
 	~EntityManager() = default;
+
+	template <typename T> void Add(std::vector<std::unique_ptr<T>> entity, std::unique_ptr<T>& list)
+	{
+		list.push_back(std::move(entity));
+	}
 
 	template <typename T> void UpdateAll(std::vector<std::unique_ptr<T>>& list)
 	{
@@ -24,16 +31,27 @@ public:
 		}
 	}
 
-	//==================================|||||[ALL GAME OBJECT'S MANAGER]|||||==================================
-    void AddEntity(std::unique_ptr<GameObject> entity)
-    {
-        EntityList.push_back(std::move(entity));
-    }
+	//==================================:::::|||||[ALL GAME OBJECTS]|||||:::::==================================//
+    void AddEntity(std::unique_ptr<GameObject> entity) 
+	{ 
+		Add(entity, EntityList);
+		//EntityList.push_back(std::move(entity));
+	}
 
     void UpdateAllEntities(){ UpdateAll(EntityList); }
+
     void RenderAllEntities(sf::RenderWindow& window) { RenderAll(EntityList, window); }
 
-	//==================================|||||[PROJECTILE STUFF]|||||==================================
+
+	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
+	void AddCharacter(std::unique_ptr<Character> character) { CharacterList.push_back(std::move(character)); }
+
+	void UpdateAllCharacters() { UpdateAll(CharacterList); }
+
+	void RenderAllCharacters(sf::RenderWindow& window) { RenderAll(CharacterList, window); }
+
+
+	//==================================:::::|||||[PROJECTILE STUFF]|||||:::::==================================//
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
 		ProjectileList.push_back(std::move(projectile));

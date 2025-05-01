@@ -20,6 +20,7 @@ void PlayerCharacter::Awake()
 
 void PlayerCharacter::Update()
 {
+	std::cout << "Player Update is called!" << std::endl;
 }
 
 void PlayerCharacter::OnCollision()

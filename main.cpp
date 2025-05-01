@@ -49,7 +49,9 @@ int main()
 
             inputHandler.MoveCharacter(*player);
             inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f, deltaTime);
+            //entityManager.UpdateAllCharacters();
             entityManager.UpdateAllProjectiles();
+
 
             BorderCollisionCheck(player->GetSprite());
             //BorderCollisionCheck(mainCharacter);
@@ -73,7 +75,8 @@ int main()
         //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
         window.clear();
 		entityManager.RenderAllProjectiles(window);
-       // window.draw(mainCharacter);
+        //entityManager.RenderAllCharacters(window);
+        //window.draw(mainCharacter);
         window.draw(player->GetSprite());
         DrawDebugLines(window, player->GetSprite());
         window.display();
