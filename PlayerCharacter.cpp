@@ -7,3 +7,20 @@ PlayerCharacter::PlayerCharacter()
 	sprite.setScale(sf::Vector2f(1.25f, 1.25f));
 	SetActive(true);
 }
+
+void PlayerCharacter::TakeDamage(int& damage)
+{
+	health -= damage;
+	if (health <= 0) Die();
+}
+
+void PlayerCharacter::Move(const sf::Vector2f& direction)
+{
+	sprite.move(direction * speed);
+}
+
+void PlayerCharacter::Die()
+{
+	SetActive(false);
+	std::cout << "Player is dead!" << std::endl;
+}

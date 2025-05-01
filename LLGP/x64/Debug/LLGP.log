@@ -1,3 +1,20 @@
-﻿  GameObject.cpp
-D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\GameObject.h(76,1): warning C4172: returning address of local variable or temporary : playersprite
-  LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+﻿  main.cpp
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(17,21): error C2259: 'PlayerCharacter': cannot instantiate abstract class
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\PlayerCharacter.h(3,7):
+      see declaration of 'PlayerCharacter'
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(17,21):
+      due to following members:
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(17,21):
+      'void GameObject::Awake(void)': is abstract
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\GameObject.h(22,15):
+      see declaration of 'GameObject::Awake'
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(17,21):
+      'void GameObject::Update(void)': is abstract
+      D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\GameObject.h(23,15):
+      see declaration of 'GameObject::Update'
+  
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(44,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(44,125): warning C4244:         with
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(44,125): warning C4244:         [
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(44,125): warning C4244:             _Rep=__int64
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(44,125): warning C4244:         ]

@@ -1,12 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "EntityManager.h"
+#include "PlayerCharacter.h"
+
+// Forward declaratio
+//class PlayerCharacter;
 
 class InputHandler
 {
 public:
 	void Update(sf::Sprite& characterRef, sf::Sprite& projectileRef);
-	void MoveCharacter(sf::Sprite &character);
+	void MoveCharacter(PlayerCharacter& character);
 	//ASK: Should these be const?
 	void FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed);
 

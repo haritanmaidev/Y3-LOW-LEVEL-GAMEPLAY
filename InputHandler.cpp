@@ -1,4 +1,5 @@
 #include "InputHandler.h"
+#include "PlayerCharacter.h"
 #include <iostream>
 
 void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
@@ -8,7 +9,7 @@ void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
 	//FireProjectile();
 }	
 
-void InputHandler::MoveCharacter(sf::Sprite &character)
+void InputHandler::MoveCharacter(PlayerCharacter& character)
 {
 	//Resetting direction to 0 since this runs every frame. To stop the character movement when no inputs pressed
 	direction = sf::Vector2f(0, 0);
@@ -46,7 +47,7 @@ void InputHandler::MoveCharacter(sf::Sprite &character)
 		lastDirection = direction;
 	}
 
-	character.move(velocity);
+	character.GetSprite().move(velocity);
 }
 
 void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed)

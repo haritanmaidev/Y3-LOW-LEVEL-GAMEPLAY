@@ -1,27 +1,35 @@
 #include <math.h>
 #include "Ellipse.h"
 #include "InputHandler.h"
+#include "EntityManager.h"
+#include "PlayerCharacter.h"
 
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
 void BorderCollisionCheck(sf::Sprite& mainCharacter);
-sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player);
+sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player);
 
 int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
+    PlayerCharacter player;
+	//auto player = std::make_unique<PlayerCharacter>();
+	//player->GetSprite().setPosition(sf::Vector2f(100.0f, 100.0f));
+    //ASK: WHY DOESN'T THIS WORK???
+	//PlayerCharacter Player = std::make_unique<PlayerCharacter>();
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
 
     //Character
     sf::Texture character;
     const sf::Image LoadSprite("assets/walk.png");
-    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 0, 0 }, {50, 50}));
+    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));
     sf::Sprite mainCharacter(character);
-    sf::Sprite playerCharacter(character);
-    playerCharacter.setPosition(sf::Vector2f(100.0f, 100.0f));
-    playerCharacter.setScale(sf::Vector2f(1.5f, 1.5f));
+    //sf::Sprite playerCharacter(character);
+    //playerCharacter.sprite.setPosition(sf::Vector2f(100.0f, 100.0f));
+    //playerCharacter.sprite.setScale(sf::Vector2f(1.5f, 1.5f));
+    //playerCharacter.setOrigin(sf::Vector2f(character.getSize().x / 2.f, character.getSize().y / 2.f));
 
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -42,11 +50,11 @@ int main()
             mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-            inputHandler.MoveCharacter(playerCharacter);
-            inputHandler.FireProjectile(entityManager, playerCharacter.getPosition(), GetMouseDirection(window, playerCharacter), 10.f);
+            inputHandler.MoveCharacter(player);
+            inputHandler.FireProjectile(entityManager, player.GetSprite().getPosition(), GetMouseDirection(window, player), 10.f);
             entityManager.UpdateAllProjectiles();
 
-            BorderCollisionCheck(playerCharacter);
+            BorderCollisionCheck(player.GetSprite());
             BorderCollisionCheck(mainCharacter);
 
             /*for (int i = 0; i < objects.size(); i++)
@@ -69,7 +77,7 @@ int main()
         window.clear();
 		entityManager.RenderAllProjectiles(window);
         window.draw(mainCharacter);
-        window.draw(playerCharacter);
+        window.draw(player.GetSprite());
         window.display();
     }
 }
@@ -98,12 +106,12 @@ void BorderCollisionCheck(sf::Sprite &mainCharacter)
     }
 }
 
-sf::Vector2f GetMouseDirection(sf::RenderWindow& window, sf::Sprite player)
+sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
 {
     //ASK: Is it better to keep this here or in InputHandler?
     //TO-DO: Use PlayerCharacter class instead of Sprite here!
-    float angle = atan2(sf::Mouse::getPosition(window).y - player.getPosition().y,
-                        sf::Mouse::getPosition(window).x - player.getPosition().x);
+    float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
+                        sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
 
     return sf::Vector2f(cos(angle), sin(angle));
 }
