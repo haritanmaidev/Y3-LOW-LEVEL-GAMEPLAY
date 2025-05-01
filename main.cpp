@@ -14,22 +14,18 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-    PlayerCharacter player;
-	//auto player = std::make_unique<PlayerCharacter>();
-	//player->GetSprite().setPosition(sf::Vector2f(100.0f, 100.0f));
+    std::unique_ptr<PlayerCharacter> player = std::make_unique<PlayerCharacter>();
+    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
+
+	player->GetSprite().setPosition(sf::Vector2f(100.0f, 100.0f));
     //ASK: WHY DOESN'T THIS WORK???
 	//PlayerCharacter Player = std::make_unique<PlayerCharacter>();
-    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "SFML works!");
 
     //Character
     sf::Texture character;
     const sf::Image LoadSprite("assets/walk.png");
-    bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));
-    sf::Sprite mainCharacter(character);
-    //sf::Sprite playerCharacter(character);
-    //playerCharacter.sprite.setPosition(sf::Vector2f(100.0f, 100.0f));
-    //playerCharacter.sprite.setScale(sf::Vector2f(1.5f, 1.5f));
-    //playerCharacter.setOrigin(sf::Vector2f(character.getSize().x / 2.f, character.getSize().y / 2.f));
+    //bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));
+    //sf::Sprite mainCharacter(character);
 
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -47,15 +43,15 @@ int main()
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
             //Do physics
-            mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
+            //mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-            inputHandler.MoveCharacter(player);
-            inputHandler.FireProjectile(entityManager, player.GetSprite().getPosition(), GetMouseDirection(window, player), 10.f);
+            inputHandler.MoveCharacter(*player);
+            inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f);
             entityManager.UpdateAllProjectiles();
 
-            BorderCollisionCheck(player.GetSprite());
-            BorderCollisionCheck(mainCharacter);
+            BorderCollisionCheck(player->GetSprite());
+            //BorderCollisionCheck(mainCharacter);
 
             /*for (int i = 0; i < objects.size(); i++)
             {
@@ -76,8 +72,8 @@ int main()
         //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
         window.clear();
 		entityManager.RenderAllProjectiles(window);
-        window.draw(mainCharacter);
-        window.draw(player.GetSprite());
+       // window.draw(mainCharacter);
+        window.draw(player->GetSprite());
         window.display();
     }
 }

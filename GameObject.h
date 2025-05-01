@@ -50,9 +50,9 @@ public:
 		transform.rotation = sprite.getRotation();
 	}
 
-	bool LoadGameObjectTexture(const std::string& filePath)
+	bool LoadGameObjectTextureFromFile(const std::string& filePath, const sf::IntRect& intrect)
 	{
-		if (!texture.loadFromFile(filePath))
+		if (!texture.loadFromFile(filePath, false, intrect))
 		{
 			std::cout << "Texture didn't load!" << std::endl;
 			return false;
@@ -78,9 +78,11 @@ protected:
 
 	//Class Variables
 	Transform transform;
+	sf::Vector2f spawnPoint {0.f, 0.f};
 	sf::Texture texture;
 	sf::Sprite sprite = MakeSprite();
-	sf::IntRect hitbox;
+	sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});
+	sf::IntRect hitbox = sf::IntRect({0, 0} , {0, 0});
 	std::string tag;
 	int id = 0;
 	bool isActive = true;

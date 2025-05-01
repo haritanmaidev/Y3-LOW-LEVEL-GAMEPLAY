@@ -1,11 +1,30 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter()
+PlayerCharacter::PlayerCharacter() : Character()
 {
-	LoadGameObjectTexture("assets/walk.png");
-	sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
-	sprite.setScale(sf::Vector2f(1.25f, 1.25f));
-	SetActive(true);
+	drawbox = sf::IntRect({ 10, 10 }, { 45, 45 });
+	if(LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
+	{
+		sprite.setTextureRect(drawbox);
+		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
+		sprite.setScale(sf::Vector2f(1.25f, 1.25f));
+		SetActive(true);
+		Awake();
+	}
+}
+
+void PlayerCharacter::Awake()
+{
+}
+
+void PlayerCharacter::Update()
+{
+}
+
+void PlayerCharacter::OnCollision()
+{
+	std::cout << "Player collided!" << std::endl;
+	SetActive(false);
 }
 
 void PlayerCharacter::TakeDamage(int& damage)

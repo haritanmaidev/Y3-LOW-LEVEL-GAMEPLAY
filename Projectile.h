@@ -10,10 +10,9 @@ public:
 	Projectile(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed) 
 	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
 	{
-		//sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
-		LoadGameObjectTexture("assets/Cropped/BasicProjectile.png");
+		LoadGameObjectTextureFromFile("assets/Cropped/BasicProjectile.png", drawbox);
+		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setPosition(spawnPoint);
-		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetActive(true);
 	}
 

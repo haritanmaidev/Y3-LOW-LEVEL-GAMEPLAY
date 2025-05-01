@@ -1,11 +1,13 @@
 #include "Character.h"
 
-Character::Character() 
+Character::Character() : GameObject()
 {
-	LoadGameObjectTexture("assets/errorcharacter.png");
-	sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
-	sprite.setScale(sf::Vector2f(1.25f, 1.25f));
-	SetActive(true);
+	drawbox = sf::IntRect({ 0, 0 }, { 10045, 10045 });
+	if(LoadGameObjectTextureFromFile("assets/errorcharacter.png", drawbox))
+	{
+		sprite.setScale(sf::Vector2f(.25f, .25f));
+		SetActive(true);
+	}
 }
 
 void Character::OnCollision()

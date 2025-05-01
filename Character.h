@@ -5,6 +5,7 @@ class Character : public GameObject
 public:
 	//Constructor & Destructor
 	Character();
+
 	~Character() = default;
 
 	//Override Functions
@@ -24,4 +25,5 @@ public:
 protected:
 	int health = 100;
 	float speed = 10.f;
+	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
 };
