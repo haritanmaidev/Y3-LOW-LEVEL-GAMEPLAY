@@ -78,7 +78,7 @@ protected:
 
 	//Class Variables
 	Transform transform;
-	sf::Vector2f spawnPoint {0.f, 0.f};
+	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
 	sf::Texture texture;
 	sf::Sprite sprite = MakeSprite();
 	sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});

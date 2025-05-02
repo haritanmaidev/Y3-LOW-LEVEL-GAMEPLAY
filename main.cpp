@@ -16,6 +16,7 @@ int main()
     InputHandler inputHandler;
 	EntityManager entityManager;
     std::unique_ptr<PlayerCharacter> player = std::make_unique<PlayerCharacter>();
+	entityManager.SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
 	player->GetSprite().setPosition(sf::Vector2f(100.0f, 100.0f));
@@ -23,8 +24,8 @@ int main()
 	//PlayerCharacter Player = std::make_unique<PlayerCharacter>();
 
     //Character
-    sf::Texture character;
-    const sf::Image LoadSprite("assets/walk.png");
+    //sf::Texture character;
+    //const sf::Image LoadSprite("assets/walk.png");
     //bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));
     //sf::Sprite mainCharacter(character);
 
@@ -34,7 +35,6 @@ int main()
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
    
-    //std::vector <managedObjects> objects;
     while (window.isOpen())
     {
         /*--------------------------------||||:[[[UPDATE FUNCTIONALITY - START]]]:||||--------------------------------*/
@@ -49,9 +49,8 @@ int main()
 
             inputHandler.MoveCharacter(*player);
             inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f, deltaTime);
-            //entityManager.UpdateAllCharacters();
             entityManager.UpdateAllProjectiles();
-
+            //entityManager.UpdateAllCharacters();
 
             BorderCollisionCheck(player->GetSprite());
             //BorderCollisionCheck(mainCharacter);
@@ -74,10 +73,10 @@ int main()
 
         //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
         window.clear();
-		entityManager.RenderAllProjectiles(window);
-        //entityManager.RenderAllCharacters(window);
         //window.draw(mainCharacter);
         window.draw(player->GetSprite());
+        //entityManager.RenderAllCharacters(window);
+		entityManager.RenderAllProjectiles(window);
         DrawDebugLines(window, player->GetSprite());
         window.display();
     }

@@ -1,6 +1,6 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter() : Character()
+PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(), PlayerSpawnPoint(spawn)
 {
 	drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if(LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
