@@ -15,13 +15,7 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-    auto player = std::make_unique<PlayerCharacter>();
-    //ASK: Comment this to make it work!
-	entityManager.AddCharacter(std::move(player));
-	//entityManager.SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
-    //ASK: WHY DOESN'T THIS WORK???
-	//PlayerCharacter Player = std::make_unique<PlayerCharacter>();
 
     //Characterd
     //sf::Texture character;
@@ -47,12 +41,10 @@ int main()
             //mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-            inputHandler.MoveCharacter(*player);
-            inputHandler.FireProjectile(entityManager, player->GetSprite().getPosition(), GetMouseDirection(window, *player), 10.f, deltaTime);
             entityManager.UpdateAllProjectiles();
+            entityManager.UpdateAllCharacters(window, inputHandler, deltaTime);
             //entityManager.UpdateAllCharacters();
 
-            BorderCollisionCheck(player->GetSprite());
             //BorderCollisionCheck(mainCharacter);
 
             /*for (int i = 0; i < objects.size(); i++)
@@ -74,46 +66,11 @@ int main()
         //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
         window.clear();
         //window.draw(mainCharacter);
-        window.draw(player->GetSprite());
         //entityManager.RenderAllCharacters(window);
 		entityManager.RenderAllProjectiles(window);
-        DrawDebugLines(window, player->GetSprite());
+        entityManager.RenderAllCharacters(window);
         window.display();
     }
-}
-
-void BorderCollisionCheck(sf::Sprite &mainCharacter)
-{
-    //Right Collision
-    if (mainCharacter.getPosition().x < 0)
-    {
-        mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
-    }
-    //Left Collision
-    if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 1000)
-    {
-        mainCharacter.setPosition(sf::Vector2f(1000 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
-    }
-    //Top Collision
-    if (mainCharacter.getPosition().y < 0)
-    {
-        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
-    }
-    //Bottom Collision
-    if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 1000)
-    {
-        mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 - mainCharacter.getGlobalBounds().size.y));
-    }
-}
-
-sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
-{
-    //ASK: Is it better to keep this here or in InputHandler?
-    //TO-DO: Use PlayerCharacter class instead of Sprite here!
-    float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
-                        sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
-
-    return sf::Vector2f(cos(angle), sin(angle));
 }
 
 void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite) {

@@ -2,14 +2,53 @@
 #include "GameObject.h"
 #include "Projectile.h"
 #include "PlayerCharacter.h"
+#include "InputHandler.h"
 
 class Character;
 class PlayerCharacter;
 
 class EntityManager
 {
+	void BorderCollisionCheck(sf::Sprite& mainCharacter)
+	{
+		//Right Collision
+		if (mainCharacter.getPosition().x < 0)
+		{
+			mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
+		}
+		//Left Collision
+		if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 1000)
+		{
+			mainCharacter.setPosition(sf::Vector2f(1000 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
+		}
+		//Top Collision
+		if (mainCharacter.getPosition().y < 0)
+		{
+			mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
+		}
+		//Bottom Collision
+		if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 1000)
+		{
+			mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 - mainCharacter.getGlobalBounds().size.y));
+		}
+	}
+
+	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
+	{
+		//ASK: Is it better to keep this here or in InputHandler?
+		//TO-DO: Use PlayerCharacter class instead of Sprite here!
+		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
+			sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
+
+		return sf::Vector2f(cos(angle), sin(angle));
+	}
+
 public:
-	EntityManager() = default;
+	EntityManager()
+	{
+		Player = std::make_unique<PlayerCharacter>();
+	}
+
 	~EntityManager() = default;
 
 	template <typename T> void Add(std::unique_ptr<T>& entity, std::vector<std::unique_ptr<T>>& list)
@@ -36,20 +75,32 @@ public:
 	//==================================:::::|||||[ALL GAME OBJECTS]|||||:::::==================================//
     void AddEntity(std::unique_ptr<GameObject>& entity) 
 	{ 
-		Add(entity, EntityList);
+		Add(entity, GameObjectList);
 	}
 
-    void UpdateAllEntities(){ UpdateAll(EntityList); }
+    void UpdateAllEntities(){ UpdateAll(GameObjectList); }
 
-    void RenderAllEntities(sf::RenderWindow& window) { RenderAll(EntityList, window); }
+    void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
 
 	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
-	void AddCharacter(std::unique_ptr<Character> character) { Add(character, CharacterList); }
+	Character* AddCharacter(std::unique_ptr<Character> character) { Add(character, CharacterList); }
 
-	void UpdateAllCharacters() { UpdateAll(CharacterList); }
+	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler, float deltaTime)
+	{
+		UpdateAll(CharacterList);
 
-	void RenderAllCharacters(sf::RenderWindow& window) { RenderAll(CharacterList, window); }
+		inputHandler.MoveCharacter(*Player);
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 10.f, deltaTime);
+
+		BorderCollisionCheck(Player->GetSprite());
+	}
+
+	void RenderAllCharacters(sf::RenderWindow& window)
+	{
+		RenderAll(CharacterList, window);
+		Player->Render(window);
+	}
 
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
@@ -57,6 +108,7 @@ public:
 		newCharacter->SetPosition(position.x, position.y);
 		newCharacter->SetActive(true);
 		AddCharacter(std::move(newCharacter));
+		//CharacterList.push_back(newCharacter);
 	}
 
 
@@ -90,7 +142,8 @@ public:
 	}
 
 private:
-	std::vector<std::unique_ptr<GameObject>> EntityList;
+	std::unique_ptr <PlayerCharacter> Player;
+	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 };

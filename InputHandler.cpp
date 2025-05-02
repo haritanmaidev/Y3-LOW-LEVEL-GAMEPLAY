@@ -1,5 +1,6 @@
 #include "InputHandler.h"
 #include "PlayerCharacter.h"
+#include "EntityManager.h"
 #include <iostream>
 
 void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)

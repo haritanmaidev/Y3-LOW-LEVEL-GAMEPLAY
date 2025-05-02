@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "EntityManager.h"
 #include "PlayerCharacter.h"
 
 // Forward declaratio
 //class PlayerCharacter;
+
+class EntityManager;
 
 class InputHandler
 {
