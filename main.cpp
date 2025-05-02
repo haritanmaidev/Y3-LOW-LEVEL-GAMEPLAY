@@ -7,8 +7,6 @@
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
-void BorderCollisionCheck(sf::Sprite& mainCharacter);
-sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player);
 void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite);
 
 int main()

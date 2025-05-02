@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "PlayerCharacter.h"
 #include "InputHandler.h"
+#include "EnemyCharacter.h"
 
 class Character;
 class PlayerCharacter;
@@ -51,7 +52,7 @@ public:
 
 	~EntityManager() = default;
 
-	template <typename T> void Add(std::unique_ptr<T>& entity, std::vector<std::unique_ptr<T>>& list)
+	template <typename T> void Add(std::unique_ptr<T> && entity, std::vector<std::unique_ptr<T>>& list)
 	{
 		list.push_back(std::move(entity));
 	}
@@ -72,19 +73,18 @@ public:
 		}
 	}
 
-	//==================================:::::|||||[ALL GAME OBJECTS]|||||:::::==================================//
-    void AddEntity(std::unique_ptr<GameObject>& entity) 
+	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
+	Character* AddCharacter(std::unique_ptr<Character> character) { Add(std::move(character), CharacterList); }
+
+	void AddToPlayerCharacterList(std::unique_ptr<PlayerCharacter>& player)
 	{ 
-		Add(entity, GameObjectList);
+		Add(std::unique_ptr<Character>(player.release()), CharacterList);
 	}
 
-    void UpdateAllEntities(){ UpdateAll(GameObjectList); }
-
-    void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
-
-
-	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
-	Character* AddCharacter(std::unique_ptr<Character> character) { Add(character, CharacterList); }
+	void AddEnemyCharacterToList(std::unique_ptr<EnemyCharacter>& enemy)
+	{
+		Add(std::unique_ptr<Character>(enemy.release()), CharacterList);
+	}
 
 	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler, float deltaTime)
 	{
@@ -108,14 +108,13 @@ public:
 		newCharacter->SetPosition(position.x, position.y);
 		newCharacter->SetActive(true);
 		AddCharacter(std::move(newCharacter));
-		//CharacterList.push_back(newCharacter);
 	}
 
 
 	//==================================:::::|||||[PROJECTILE STUFF]|||||:::::==================================//
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
-		Add(projectile, ProjectileList);
+		Add(std::move(projectile), ProjectileList);
 		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
 	}
 
@@ -127,19 +126,15 @@ public:
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		newProjectile->SetActive(true);
 		AddProjectile(std::move(newProjectile));
-		//AddProjectile(newProjectile);
 	}
 
-	void RemoveProjectile(Projectile* projectile)
-	{
-		auto it = std::remove_if(ProjectileList.begin(), ProjectileList.end(),
-			[projectile](const std::unique_ptr<Projectile>& p) { return p.get() == projectile; });
-		if (it != ProjectileList.end())
-		{
-			ProjectileList.erase(it, ProjectileList.end());
-			std::cout << "Projectile Removed from Projectile List!" << std::endl;
-		}
-	}
+	//==================================:::::|||||[ALL GAME OBJECTS]|||||:::::==================================//
+	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
+
+	void UpdateAllEntities() { UpdateAll(GameObjectList); }
+
+	void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
+
 
 private:
 	std::unique_ptr <PlayerCharacter> Player;

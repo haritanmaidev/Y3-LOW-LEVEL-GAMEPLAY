@@ -137,6 +137,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputHandler.h" />
