@@ -1,12 +1,2 @@
-﻿  Character.cpp
-  EnemyCharacter.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\EnemyCharacter.cpp(6,2): error C2065: 'drawbox': undeclared identifier
-D:\Repo\LOW-LEVEL-GAMEPLAY\EnemyCharacter.cpp(7,55): error C2065: 'drawbox': undeclared identifier
-D:\Repo\LOW-LEVEL-GAMEPLAY\EnemyCharacter.cpp(9,25): error C2065: 'drawbox': undeclared identifier
-  main.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(33,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(33,125): warning C4244:         with
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(33,125): warning C4244:         [
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(33,125): warning C4244:             _Rep=__int64
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(33,125): warning C4244:         ]
-  Generating Code...
+﻿  PlayerCharacter.cpp
+  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

@@ -10,7 +10,7 @@ public:
 	Projectile(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed) 
 	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed)
 	{;
-		LoadGameObjectTextureFromFile("assets/Cropped/BasisadcProjectile.png", std::nullopt);
+		LoadGameObjectTextureFromFile("assets/Cropped/BasicProjectile.png", std::nullopt);
  		sprite.setTextureRect(sf::IntRect({0, 0}, sf::Vector2i(texture->getSize())));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
