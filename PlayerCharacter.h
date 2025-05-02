@@ -4,7 +4,7 @@ class PlayerCharacter : public Character
 {
 public:
 	//Constructor & Destructor
-	PlayerCharacter(const sf ::Vector2f& spawn);
+	PlayerCharacter();
 	~PlayerCharacter() = default;
 
 	//Override Functions
@@ -21,5 +21,6 @@ public:
 
 private:
 	int score = 0;
+	sf::Vector2f PlayerSpawnPoint = sf::Vector2f(0.f, 0.f);
 };
 

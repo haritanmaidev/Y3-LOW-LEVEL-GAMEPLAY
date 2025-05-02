@@ -25,5 +25,5 @@ public:
 protected:
 	int health = 100;
 	float speed = 10.f;
-	sf::Vector2f PlayerSpawnPoint = sf::Vector2f(0.f, 0.f);
+	//sf::Vector2f PlayerSpawnPoint = sf::Vector2f(0.f, 0.f);
 };

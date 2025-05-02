@@ -15,6 +15,7 @@ public:
 		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setPosition(spawnPoint);
 		SetActive(true);
+		SetTag("Projectile");
 	}
 
 	//NOTE:Removing Awake is throwing me "Projectile can't instantiate abstract class" error

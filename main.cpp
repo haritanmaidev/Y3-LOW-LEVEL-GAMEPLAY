@@ -15,15 +15,15 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-    std::unique_ptr<PlayerCharacter> player = std::make_unique<PlayerCharacter>();
-	entityManager.SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
+    auto player = std::make_unique<PlayerCharacter>();
+    //ASK: Comment this to make it work!
+	entityManager.AddCharacter(std::move(player));
+	//entityManager.SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
-
-	player->GetSprite().setPosition(sf::Vector2f(100.0f, 100.0f));
     //ASK: WHY DOESN'T THIS WORK???
 	//PlayerCharacter Player = std::make_unique<PlayerCharacter>();
 
-    //Character
+    //Characterd
     //sf::Texture character;
     //const sf::Image LoadSprite("assets/walk.png");
     //bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));

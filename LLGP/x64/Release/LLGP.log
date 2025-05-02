@@ -1,16 +1,8 @@
 ﻿  main.cpp
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\Projectile.h(25,24): warning C4834: discarding return value of function with [[nodiscard]] attribute
-  (compiling source file 'main.cpp')
-  
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(21,28): warning C4834: discarding return value of function with [[nodiscard]] attribute
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(41,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(41,125): warning C4244:         with
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(41,125): warning C4244:         [
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(41,125): warning C4244:             _Rep=__int64
-C:\GithubRepo\LOW-LEVEL-GAMEPLAY\main.cpp(41,125): warning C4244:         ]
-  Generating code
-  1 of 457 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  LLGP.vcxproj -> C:\GithubRepo\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         with
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         [
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:             _Rep=__int64
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\main.cpp(47,125): warning C4244:         ]
+MSVCRT.lib(exe_winmain.obj) : error LNK2001: unresolved external symbol WinMain
+D:\UNIVERSITY YEAR 3\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe : fatal error LNK1120: 1 unresolved externals

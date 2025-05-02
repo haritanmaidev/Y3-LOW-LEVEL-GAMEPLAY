@@ -1,8 +1,10 @@
 #pragma once
 #include "GameObject.h"
 #include "Projectile.h"
+#include "PlayerCharacter.h"
 
 class Character;
+class PlayerCharacter;
 
 class EntityManager
 {
@@ -43,7 +45,7 @@ public:
 
 
 	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
-	void AddCharacter(std::unique_ptr<Character>& character) { Add(character, CharacterList); }
+	void AddCharacter(std::unique_ptr<Character> character) { Add(character, CharacterList); }
 
 	void UpdateAllCharacters() { UpdateAll(CharacterList); }
 
@@ -54,13 +56,12 @@ public:
 		auto newCharacter = std::make_unique<PlayerCharacter>();
 		newCharacter->SetPosition(position.x, position.y);
 		newCharacter->SetActive(true);
-		AddCharacter(newCharacter);
-		//AddCharacter(std::move(newCharacter));
+		AddCharacter(std::move(newCharacter));
 	}
 
 
 	//==================================:::::|||||[PROJECTILE STUFF]|||||:::::==================================//
-	void AddProjectile(std::unique_ptr<Projectile>& projectile)
+	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
 		Add(projectile, ProjectileList);
 		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
@@ -73,8 +74,8 @@ public:
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		newProjectile->SetActive(true);
-		//AddProjectile(std::move(newProjectile));
-		AddProjectile(newProjectile);
+		AddProjectile(std::move(newProjectile));
+		//AddProjectile(newProjectile);
 	}
 
 	void RemoveProjectile(Projectile* projectile)

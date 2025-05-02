@@ -1,6 +1,6 @@
 #include "PlayerCharacter.h"
 
-PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(), PlayerSpawnPoint(spawn)
+PlayerCharacter::PlayerCharacter() : Character()
 {
 	drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if(LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
@@ -10,7 +10,8 @@ PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(), Playe
 		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(1.25f, 1.25f));
 		SetActive(true);
-		Awake();
+		//SetTag("Player");
+		//Awake();
 	}
 }
 
