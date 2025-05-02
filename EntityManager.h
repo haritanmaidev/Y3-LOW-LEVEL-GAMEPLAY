@@ -47,7 +47,7 @@ class EntityManager
 public:
 	EntityManager()
 	{
-		Player = std::make_unique<PlayerCharacter>();
+		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
 	}
 
 	~EntityManager() = default;
@@ -104,8 +104,7 @@ public:
 
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
-		auto newCharacter = std::make_unique<PlayerCharacter>();
-		newCharacter->SetPosition(position.x, position.y);
+		auto newCharacter = std::make_unique<PlayerCharacter>(position);
 		newCharacter->SetActive(true);
 		AddCharacter(std::move(newCharacter));
 	}

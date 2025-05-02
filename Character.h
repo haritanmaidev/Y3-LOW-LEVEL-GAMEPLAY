@@ -4,8 +4,7 @@ class Character : public GameObject
 {
 public:
 	//Constructor & Destructor
-	Character();
-
+	Character(const sf::Vector2f& spawn);
 	~Character() = default;
 
 	//Override Functions

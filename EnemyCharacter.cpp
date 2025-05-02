@@ -1,14 +1,14 @@
 #include "EnemyCharacter.h"
 
 
-EnemyCharacter::EnemyCharacter() : Character()
+EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn) : Character(spawn)
 {
-	drawbox = sf::IntRect({ 200, 200 }, { 220, 230 });
+	sf::IntRect drawbox = sf::IntRect({ 200, 200 }, { 220, 230 });
 	if (LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
 	{
 		sprite.setTextureRect(drawbox);
 		sprite.setScale(sf::Vector2f(5.f, 5.f));
-		sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.f, texture.getSize().y / 2.f));
+		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		SetActive(true);
 	}
 }

@@ -4,7 +4,7 @@ class EnemyCharacter :public Character
 {
 public:
 	//Constructor & Destructor
-	EnemyCharacter();
+	EnemyCharacter(const sf::Vector2f& spawn);
 	~EnemyCharacter() = default;
 
 	//Override Functions

@@ -1,8 +1,10 @@
 #include "Character.h"
 
-Character::Character() : GameObject()
+Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn)
 {
+	sf::IntRect drawbox = sf::IntRect({ 0 , 0 }, { 0 , 0 });
 	LoadGameObjectTextureFromFile("assets/errorcharacter.png", drawbox);
+	sprite.setPosition(spawnPoint);
 }
 
 void Character::OnCollision()

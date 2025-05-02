@@ -50,38 +50,35 @@ public:
 		transform.rotation = sprite.getRotation();
 	}
 
-	bool LoadGameObjectTextureFromFile(const std::string& filePath, const sf::IntRect& intrect)
+	bool LoadGameObjectTextureFromFile(const std::string& filePath, const std::optional<sf::IntRect>& intrect)
 	{
-		if (!texture.loadFromFile(filePath, false, intrect))
+		if (intrect.has_value())
 		{
-			std::cout << "Texture didn't load!" << std::endl;
-			return false;
+			if (!texture->loadFromFile(filePath, false, intrect.value()))
+			{
+				std::cout << "Texture didn't load!" << std::endl;
+				return false;
+			}
 		}
 		else
 		{
-			sprite.setTexture(texture);	
-			//std::cout << "Texture loaded successfully!" << std::endl;
-			return true;
+			if (!texture->loadFromFile(filePath, false))
+			{
+				std::cout << "Texture didn't load!" << std::endl;
+				return false;
+			}
 		}
 
+		return true;
 	}
 
 protected:
-	//ASK:Sprite variable was throwing annoying errors, set this up as a quick fix.
-	sf::Sprite& MakeSprite()
-	{
-		sf::Texture texture;
-		bool result = texture.loadFromFile("assets/walk.png");
-		sf::Sprite playersprite(texture);
-		return playersprite;
-	}
-
 	//Class Variables
 	Transform transform;
 	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
-	sf::Texture texture;
-	sf::Sprite sprite = MakeSprite();
-	sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});
+	std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
+	sf::Sprite sprite = sf::Sprite(*texture);
+	//sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});
 	sf::IntRect hitbox = sf::IntRect({0, 0} , {0, 0});
 	std::string tag;
 	int id = 0;
