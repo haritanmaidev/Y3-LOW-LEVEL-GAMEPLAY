@@ -64,7 +64,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
-		auto newCharacter = std::make_unique<EnemyCharacter>(position, Player.get());
+		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player);
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
 	}

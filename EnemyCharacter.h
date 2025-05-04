@@ -7,7 +7,7 @@ class EnemyCharacter : public Character
 {
 public:
 	//Constructor & Destructor
-	EnemyCharacter(const sf::Vector2f& spawn, PlayerCharacter* player);
+	EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player);
 	~EnemyCharacter() = default;
 
 	//Override Functions
@@ -19,6 +19,5 @@ public:
 	void Die() override;
 
 private:
-	PlayerCharacter* playerref;
+	const PlayerCharacter& playerref;
 };
-

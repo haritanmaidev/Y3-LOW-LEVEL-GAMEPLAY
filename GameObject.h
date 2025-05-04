@@ -41,6 +41,7 @@ public:
 	Transform& GetTransform() { return transform; }
 	const Transform& GetTransform() const { return transform; }
 	sf::Sprite& GetSprite() { return sprite; }
+	const sf::Sprite& GetSpriteConst() const { return sprite; }
 
 	//Extra functions
 	void SyncTransformWithSprite()

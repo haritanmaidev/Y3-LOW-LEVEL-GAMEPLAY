@@ -2,7 +2,7 @@
 #include "PlayerCharacter.h"
 
 
-EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, PlayerCharacter* player) : Character(spawn), playerref(player)
+EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player) : Character(spawn), playerref(player)
 {
 	//sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if (LoadGameObjectTextureFromFile("assets/Cropped/BasicEnemy.png", std::nullopt))
@@ -24,19 +24,14 @@ void EnemyCharacter::Awake()
 void EnemyCharacter::Update()
 {
 	//std::cout << "Enemy Update is called!" << std::endl;
-	if (playerref && IsActive()) 
+	if (IsActive()) 
 	{
-		sf::Vector2f playerPosition = playerref->GetSprite().getPosition();
+		sf::Vector2f playerPosition = playerref.GetConstSprite().getPosition();
 		sf::Vector2f enemyPosition = sprite.getPosition();
-
 		sf::Vector2f direction = playerPosition - enemyPosition;
-
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-		if (mag != 0.f) 
-		{
-			direction /= mag;
-		}
 
+		if (mag != 0.f) { direction /= mag; }
 		MoveCharacter(direction);
 	}
 
