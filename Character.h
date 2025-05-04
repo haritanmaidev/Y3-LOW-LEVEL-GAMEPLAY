@@ -18,7 +18,7 @@ public:
 
 	//Class Functions
 	virtual void TakeDamage(int& damage);
-	virtual void Move(const sf::Vector2f& direction);
+	virtual void MoveCharacter(const sf::Vector2f& direction);
 	virtual void Die();
 
 protected:

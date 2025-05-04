@@ -34,7 +34,7 @@ void PlayerCharacter::TakeDamage(int& damage)
 	Character::TakeDamage(damage);
 }
 
-void PlayerCharacter::Move(const sf::Vector2f& direction)
+void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
 	sprite.move(direction * speed);
 }

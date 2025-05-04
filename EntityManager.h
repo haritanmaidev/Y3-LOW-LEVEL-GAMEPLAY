@@ -7,7 +7,6 @@
 
 class EntityManager
 {
-
 public:
 	EntityManager()
 	{
@@ -65,7 +64,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
-		auto newCharacter = std::make_unique<EnemyCharacter>(position);
+		auto newCharacter = std::make_unique<EnemyCharacter>(position, Player.get());
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
 	}
@@ -89,8 +88,8 @@ public:
 	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
-		Add(std::unique_ptr<Projectile>(projectile.release()), ProjectileList);
-		//Add(std::move(projectile), ProjectileList);
+		//Add(std::unique_ptr<Projectile>(projectile.release()), ProjectileList);
+		Add(std::move(projectile), ProjectileList);
 		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
 	}
 
@@ -102,6 +101,7 @@ public:
 	}
 
 	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
+
 	void RenderAllProjectiles(sf::RenderWindow& window){ RenderAll(ProjectileList, window); }
 
 	//==================================:::::|||||[ALL GAME OBJECTS][ALL GAME OBJECTS][ALL GAME OBJECTS]|||||:::::==================================//
@@ -143,10 +143,8 @@ private:
 
 	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
 	{
-		//ASK: Is it better to keep this here or in InputHandler?
-		//TO-DO: Use PlayerCharacter class instead of Sprite here!
 		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
-			sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
+							sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
 
 		return sf::Vector2f(cos(angle), sin(angle));
 	}

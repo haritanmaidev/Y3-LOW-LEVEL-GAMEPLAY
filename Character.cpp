@@ -21,7 +21,7 @@ void Character::TakeDamage(int& damage)
 	if (health <= 0) Die();
 }
 
-void Character::Move(const sf::Vector2f& direction)
+void Character::MoveCharacter(const sf::Vector2f& direction)
 {
 	sprite.move(direction * speed);
 }
