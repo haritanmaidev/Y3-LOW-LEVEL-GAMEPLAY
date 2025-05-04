@@ -11,9 +11,9 @@ class InputHandler
 {
 public:
 	void Update(sf::Sprite& characterRef, sf::Sprite& projectileRef);
-	void MoveCharacter(PlayerCharacter& character);
+	void MoveCharacter(Character& character);
 	//ASK: Should these be const?
-	void FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed, float& deltaTime);
+	void FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed);
 
 	sf::Vector2f direction = sf::Vector2f(0, 0);
 	sf::Vector2f velocity = sf::Vector2f(0, 0);

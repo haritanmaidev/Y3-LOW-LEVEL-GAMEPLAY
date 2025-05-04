@@ -69,6 +69,7 @@ public:
 			}
 		}
 
+		//std::cout << "Texture loaded!" << std::endl;
 		return true;
 	}
 

@@ -15,12 +15,6 @@ int main()
 	EntityManager entityManager;
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
-    //Characterd
-    //sf::Texture character;
-    //const sf::Image LoadSprite("assets/walk.png");
-    //bool result = character.loadFromImage(LoadSprite, false, sf::IntRect({ 10, 10 }, {45, 45}));
-    //sf::Sprite mainCharacter(character);
-
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
     float deltaTime = 0;
@@ -36,15 +30,11 @@ int main()
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
             //Do physics
-            //mainCharacter.setPosition(mainCharacter.getPosition() + sf::Vector2f{ 1.f, 1.f });
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             entityManager.UpdateAllProjectiles();
-            entityManager.UpdateAllCharacters(window, inputHandler, deltaTime);
-            //entityManager.UpdateAllCharacters();
-
-            //BorderCollisionCheck(mainCharacter);
-
+            entityManager.UpdateAllEntities();
+            entityManager.UpdateAllCharacters(window, inputHandler);
             /*for (int i = 0; i < objects.size(); i++)
             {
                 for (int j = i + 1; j < objects.size(); j++)
@@ -61,12 +51,11 @@ int main()
                 window.close();
         }
 
-        //[[[DRAWING ON WINDOW]]]||||:--------------------------------------------------------------------------
+        //-------------------------------------:||||[[[[DRAWING ON WINDOW]]]||||:-------------------------------------
         window.clear();
-        //window.draw(mainCharacter);
-        //entityManager.RenderAllCharacters(window);
 		entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);
+		//entityManager.RenderAllEntities(window);
         window.display();
     }
 }

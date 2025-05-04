@@ -5,11 +5,118 @@
 #include "InputHandler.h"
 #include "EnemyCharacter.h"
 
-class Character;
-class PlayerCharacter;
-
 class EntityManager
 {
+
+public:
+	EntityManager()
+	{
+		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
+
+		SpawnEnemyCharacter(sf::Vector2f(800.f, 200.f));
+		SpawnEnemyCharacter(sf::Vector2f(800.f, 375.f));
+		SpawnEnemyCharacter(sf::Vector2f(800.f, 550.f));
+	}
+
+	~EntityManager() = default;
+
+	template <typename T> void Add(std::unique_ptr<T> && entity, std::vector<std::unique_ptr<T>>& list)
+	{
+		list.push_back(std::move(entity));
+	}
+
+	template <typename T> void UpdateAll(std::vector<std::unique_ptr<T>>& list)
+	{
+		for (auto& entity : list)
+		{
+			entity->Update();
+		}
+	}
+
+	template <typename T> void RenderAll(std::vector<std::unique_ptr<T>>& list, sf::RenderWindow& window)
+	{
+		for (auto& entity : list)
+		{
+			entity->Render(window);
+		}
+	}
+
+	//==================================:::::|||||[CHARACTER STUFF][CHARACTER STUFF][CHARACTER STUFF]|||||:::::==================================//
+	//ASK: This function is called in SpawnPlayer which passes this a PlayerCharacter rvalue, so this means, even if the types are different, as long as its RVALUE, it works?
+	//Character* AddCharacter(std::unique_ptr<Character> character) { Add(std::move(character), CharacterList); }
+
+	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player)
+	{ 
+		Add(std::unique_ptr<Character>(player.release()), CharacterList);
+	}
+
+	//NOTE: Current not used since I'm focusing on Singleplayer functionality
+	void SpawnPlayerCharacter(const sf::Vector2f& position)
+	{
+		auto newCharacter = std::make_unique<PlayerCharacter>(position);
+		newCharacter->SetActive(true);
+		AddPlayerToCharacterList(newCharacter);
+	}
+
+	void AddEnemyToCharacterList(std::unique_ptr<EnemyCharacter>& enemy)
+	{
+		Add(std::unique_ptr<Character>(enemy.release()), CharacterList);
+	}
+
+	void SpawnEnemyCharacter(const sf::Vector2f& position)
+	{
+		auto newCharacter = std::make_unique<EnemyCharacter>(position);
+		newCharacter->SetActive(true);
+		AddEnemyToCharacterList(newCharacter);
+	}
+
+	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler)
+	{
+		UpdateAll(CharacterList);
+
+		inputHandler.MoveCharacter(*Player);
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 10.f);
+
+		BorderCollisionCheck(Player->GetSprite());
+	}
+
+	void RenderAllCharacters(sf::RenderWindow& window)
+	{
+		RenderAll(CharacterList, window);
+		Player->Render(window);
+	}
+
+	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
+	void AddProjectile(std::unique_ptr<Projectile> projectile)
+	{
+		Add(std::unique_ptr<Projectile>(projectile.release()), ProjectileList);
+		//Add(std::move(projectile), ProjectileList);
+		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
+	}
+
+	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
+	{
+		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
+		newProjectile->SetActive(true);
+		AddProjectile(std::move(newProjectile));
+	}
+
+	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
+	void RenderAllProjectiles(sf::RenderWindow& window){ RenderAll(ProjectileList, window); }
+
+	//==================================:::::|||||[ALL GAME OBJECTS][ALL GAME OBJECTS][ALL GAME OBJECTS]|||||:::::==================================//
+	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
+
+	void UpdateAllEntities() { UpdateAll(GameObjectList); }
+
+	void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
+
+private:
+	std::unique_ptr <PlayerCharacter> Player;
+	std::vector<std::unique_ptr<GameObject>> GameObjectList;
+	std::vector<std::unique_ptr<Character>> CharacterList;
+	std::vector<std::unique_ptr<Projectile>> ProjectileList;
+
 	void BorderCollisionCheck(sf::Sprite& mainCharacter)
 	{
 		//Right Collision
@@ -43,101 +150,4 @@ class EntityManager
 
 		return sf::Vector2f(cos(angle), sin(angle));
 	}
-
-public:
-	EntityManager()
-	{
-		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
-	}
-
-	~EntityManager() = default;
-
-	template <typename T> void Add(std::unique_ptr<T> && entity, std::vector<std::unique_ptr<T>>& list)
-	{
-		list.push_back(std::move(entity));
-	}
-
-	template <typename T> void UpdateAll(std::vector<std::unique_ptr<T>>& list)
-	{
-		for (auto& entity : list)
-		{
-			entity->Update();
-		}
-	}
-
-	template <typename T> void RenderAll(std::vector<std::unique_ptr<T>>& list, sf::RenderWindow& window)
-	{
-		for (auto& entity : list)
-		{
-			entity->Render(window);
-		}
-	}
-
-	//==================================:::::|||||[CHARACTER STUFF]|||||:::::==================================//
-	Character* AddCharacter(std::unique_ptr<Character> character) { Add(std::move(character), CharacterList); }
-
-	void AddToPlayerCharacterList(std::unique_ptr<PlayerCharacter>& player)
-	{ 
-		Add(std::unique_ptr<Character>(player.release()), CharacterList);
-	}
-
-	void AddEnemyCharacterToList(std::unique_ptr<EnemyCharacter>& enemy)
-	{
-		Add(std::unique_ptr<Character>(enemy.release()), CharacterList);
-	}
-
-	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler, float deltaTime)
-	{
-		UpdateAll(CharacterList);
-
-		inputHandler.MoveCharacter(*Player);
-		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 10.f, deltaTime);
-
-		BorderCollisionCheck(Player->GetSprite());
-	}
-
-	void RenderAllCharacters(sf::RenderWindow& window)
-	{
-		RenderAll(CharacterList, window);
-		Player->Render(window);
-	}
-
-	void SpawnPlayerCharacter(const sf::Vector2f& position)
-	{
-		auto newCharacter = std::make_unique<PlayerCharacter>(position);
-		newCharacter->SetActive(true);
-		AddCharacter(std::move(newCharacter));
-	}
-
-
-	//==================================:::::|||||[PROJECTILE STUFF]|||||:::::==================================//
-	void AddProjectile(std::unique_ptr<Projectile> projectile)
-	{
-		Add(std::move(projectile), ProjectileList);
-		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
-	}
-
-	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
-	void RenderAllProjectiles(sf::RenderWindow& window){ RenderAll(ProjectileList, window); }
-
-	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
-	{
-		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
-		newProjectile->SetActive(true);
-		AddProjectile(std::move(newProjectile));
-	}
-
-	//==================================:::::|||||[ALL GAME OBJECTS]|||||:::::==================================//
-	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
-
-	void UpdateAllEntities() { UpdateAll(GameObjectList); }
-
-	void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
-
-
-private:
-	std::unique_ptr <PlayerCharacter> Player;
-	std::vector<std::unique_ptr<GameObject>> GameObjectList;
-	std::vector<std::unique_ptr<Character>> CharacterList;
-	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 };
