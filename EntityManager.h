@@ -69,13 +69,24 @@ public:
 		AddEnemyToCharacterList(newCharacter);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
+	
+	void EnemySpawner() 
+	{
+		spawnTimer += 0.1f;
+		std::cout << "Spawn Timer = " << spawnTimer << std::endl;
+		if (spawnRate < spawnTimer)
+		{
+			SpawnEnemyCharacter(sf::Vector2f(800.f, rand() % 1000));
+			spawnTimer = 0.f;
+		}
+	}
 
 	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler)
 	{
 		UpdateAll(CharacterList);
 
 		inputHandler.MoveCharacter(*Player);
-		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 10.f);
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
 		BorderCollisionCheck(Player->GetSprite());
 	}
@@ -117,6 +128,9 @@ private:
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
+
+	float spawnTimer = 0.f;
+	float spawnRate = 5.f;
 
 	void BorderCollisionCheck(sf::Sprite& mainCharacter)
 	{

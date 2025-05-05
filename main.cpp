@@ -35,6 +35,8 @@ int main()
             entityManager.UpdateAllProjectiles();
             entityManager.UpdateAllEntities();
             entityManager.UpdateAllCharacters(window, inputHandler);
+            entityManager.EnemySpawner();
+
             /*for (int i = 0; i < objects.size(); i++)
             {
                 for (int j = i + 1; j < objects.size(); j++)
@@ -53,9 +55,9 @@ int main()
 
         //-------------------------------------:||||[[[[DRAWING ON WINDOW]]]||||:-------------------------------------
         window.clear();
-		//entityManager.RenderAllProjectiles(window);
+		entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);
-		entityManager.RenderAllGameObjects(window);
+		//entityManager.RenderAllGameObjects(window);
         window.display();
     }
 }
