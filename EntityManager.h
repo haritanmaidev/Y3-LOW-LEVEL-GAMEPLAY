@@ -67,6 +67,7 @@ public:
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player);
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
+		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 
 	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler)
@@ -88,8 +89,8 @@ public:
 	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 	{
-		//Add(std::unique_ptr<Projectile>(projectile.release()), ProjectileList);
 		Add(std::move(projectile), ProjectileList);
+		//Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList);
 		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
 	}
 
@@ -109,7 +110,7 @@ public:
 
 	void UpdateAllEntities() { UpdateAll(GameObjectList); }
 
-	void RenderAllEntities(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
+	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
 private:
 	std::unique_ptr <PlayerCharacter> Player;

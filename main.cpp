@@ -53,9 +53,9 @@ int main()
 
         //-------------------------------------:||||[[[[DRAWING ON WINDOW]]]||||:-------------------------------------
         window.clear();
-		entityManager.RenderAllProjectiles(window);
+		//entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);
-		//entityManager.RenderAllEntities(window);
+		entityManager.RenderAllGameObjects(window);
         window.display();
     }
 }

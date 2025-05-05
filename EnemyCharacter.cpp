@@ -26,7 +26,7 @@ void EnemyCharacter::Update()
 	//std::cout << "Enemy Update is called!" << std::endl;
 	if (IsActive()) 
 	{
-		sf::Vector2f playerPosition = playerref.GetConstSprite().getPosition();
+		sf::Vector2f playerPosition = playerref.GetSpriteConst().getPosition();
 		sf::Vector2f enemyPosition = sprite.getPosition();
 		sf::Vector2f direction = playerPosition - enemyPosition;
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
