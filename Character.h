@@ -23,6 +23,7 @@ public:
 
 protected:
 	int health = 100;
+	int score = 0;
 	float speed = 10.f;
 	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
 };

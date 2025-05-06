@@ -7,7 +7,7 @@ class EnemyCharacter : public Character
 {
 public:
 	//Constructor & Destructor
-	EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player);
+	EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir);
 	~EnemyCharacter() = default;
 
 	//Override Functions
@@ -21,4 +21,5 @@ public:
 private:
 	const PlayerCharacter& playerref;
 	float detectionRadius = 300.f;
+	sf::Vector2f travelDir = sf::Vector2f(0.f, 0.f);
 };

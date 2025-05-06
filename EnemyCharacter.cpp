@@ -1,8 +1,7 @@
 #include "EnemyCharacter.h"
 #include "PlayerCharacter.h"
 
-
-EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player) : Character(spawn), playerref(player)
+EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir) : Character(spawn), playerref(player), travelDir(randomDir)
 {
 	//sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if (LoadGameObjectTextureFromFile("assets/Cropped/BasicEnemy.png", std::nullopt))
@@ -39,7 +38,7 @@ void EnemyCharacter::Update()
 		else
 		{
 			//Move towards random Direction
-			//MoveCharacter(sf::Vector2f(rand() % 2 - 1, rand() % 2 - 1));
+			MoveCharacter(travelDir);
 		}
 	}
 }

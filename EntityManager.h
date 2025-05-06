@@ -4,6 +4,7 @@
 #include "PlayerCharacter.h"
 #include "InputHandler.h"
 #include "EnemyCharacter.h"
+#include <random>
 
 class EntityManager
 {
@@ -60,7 +61,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
-		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player);
+		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
@@ -71,13 +72,13 @@ public:
 		spawnTimer += 0.1f;
 		if (spawnRate < spawnTimer)
 		{
-			// Use floating-point division
-			float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 2.f * 3.14159f;
-			float distance = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 200.f;
-
-			sf::Vector2f spawnPosition = sf::Vector2f(800.f, static_cast<float>(rand() % 1000)) +
+			// Getting Random values between 0 and 1 and scaling them to desired proportion
+			float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+			float distance = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+			angle *= 2.f * 3.14f;
+			distance *= 200.f;
+			sf::Vector2f spawnPosition = sf::Vector2f(800.f, static_cast<float>(rand() % 1000)) + 
 										 sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
-
 			SpawnEnemyCharacter(spawnPosition);
 			spawnTimer = 0.f;
 		}
@@ -91,6 +92,14 @@ public:
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
 		BorderCollisionCheck(Player->GetSprite());
+
+		for (auto& character : CharacterList)
+		{
+			if (character->IsActive())
+			{
+				BorderCollisionCheck(character->GetSprite());
+			}
+		}
 	}
 
 	void RenderAllCharacters(sf::RenderWindow& window)
@@ -133,6 +142,31 @@ private:
 
 	float spawnTimer = 0.f;
 	float spawnRate = 5.f;
+	sf::Vector2f randomDirection = sf::Vector2f(GetRandomNumber(-1.f, 1.f), GetRandomNumber(-1.f, 1.f));
+
+	float GetRandomNumber(float a, float b)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_real_distribution<float> dis(a, b);
+		float randomNumber = dis(gen);
+		std::cout << "Random Number: " << randomNumber << std::endl;
+		return randomNumber;
+	}
+
+	sf::Vector2f GetRandomDirection(float a, float b) 
+	{
+		return sf::Vector2f(GetRandomNumber(a, b), GetRandomNumber(a, b));
+	}
+
+	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
+	{
+		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
+							sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
+
+		return sf::Vector2f(cos(angle), sin(angle));
+	}
+
 
 	void BorderCollisionCheck(sf::Sprite& mainCharacter)
 	{
@@ -156,13 +190,5 @@ private:
 		{
 			mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 - mainCharacter.getGlobalBounds().size.y));
 		}
-	}
-
-	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
-	{
-		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
-							sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
-
-		return sf::Vector2f(cos(angle), sin(angle));
 	}
 };
