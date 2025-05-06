@@ -10,7 +10,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		//sprite.setTextureRect(drawbox);
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
-		sprite.setScale(sf::Vector2f(1.f, 1.f));
+		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetActive(true);
 		speed = 2.f;
 	}
@@ -31,8 +31,16 @@ void EnemyCharacter::Update()
 		sf::Vector2f direction = playerPosition - enemyPosition;
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-		if (mag != 0.f) { direction /= mag; }
-		MoveCharacter(direction);
+		if(mag < detectionRadius && mag != 0.f)
+		{
+			direction /= mag;
+			MoveCharacter(direction);
+		}
+		else
+		{
+			//Move towards random Direction
+			//MoveCharacter(sf::Vector2f(rand() % 2 - 1, rand() % 2 - 1));
+		}
 	}
 
 }

@@ -20,4 +20,5 @@ public:
 
 private:
 	const PlayerCharacter& playerref;
+	float detectionRadius = 300.f;
 };

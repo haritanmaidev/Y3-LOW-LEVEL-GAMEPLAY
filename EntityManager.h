@@ -11,10 +11,6 @@ public:
 	EntityManager()
 	{
 		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
-
-		SpawnEnemyCharacter(sf::Vector2f(800.f, 200.f));
-		SpawnEnemyCharacter(sf::Vector2f(800.f, 375.f));
-		SpawnEnemyCharacter(sf::Vector2f(800.f, 550.f));
 	}
 
 	~EntityManager() = default;
@@ -73,10 +69,16 @@ public:
 	void EnemySpawner() 
 	{
 		spawnTimer += 0.1f;
-		std::cout << "Spawn Timer = " << spawnTimer << std::endl;
 		if (spawnRate < spawnTimer)
 		{
-			SpawnEnemyCharacter(sf::Vector2f(800.f, rand() % 1000));
+			// Use floating-point division
+			float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 2.f * 3.14159f;
+			float distance = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 200.f;
+
+			sf::Vector2f spawnPosition = sf::Vector2f(800.f, static_cast<float>(rand() % 1000)) +
+										 sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
+
+			SpawnEnemyCharacter(spawnPosition);
 			spawnTimer = 0.f;
 		}
 	}
