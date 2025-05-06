@@ -10,6 +10,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
+		SetTag("Enemy");
 		SetActive(true);
 		speed = 2.f;
 	}
@@ -38,50 +39,47 @@ void EnemyCharacter::Update()
 		else
 		{
 			//Move towards random Direction
-			MoveCharacter(travelDir);
+			MoveCharacter(velocity);
 		}
 	}
 }
 
-void EnemyCharacter::OnCollision(const sf::FloatRect& intersection)
+void EnemyCharacter::OnCollision()
 {
-	std::cout << "Player collided!" << std::endl;
-	//SetActive(false);
-	   // Get the current position of the enemy
+	std::cout << "Enemy got Collided!" << std::endl;
 	sf::Vector2f currentPosition = sprite.getPosition();
 
 	// Determine the direction to move based on the intersection
-	if (intersection.size.x > intersection.size.y)
-	{
-		// Vertical overlap: move up or down
-		if (currentPosition.y < intersection.size.y)
-		{
-			sprite.move(0.f, -intersection.size.y); // Move up
-		}
-		else
-		{
-			sprite.move(0.f, intersection.size.y); // Move down
-		}
-	}
-	else
-	{
-		// Horizontal overlap: move left or right
-		if (currentPosition.x < intersection.size.x)
-		{
-			sprite.move(-intersection.size.x, 0.f); // Move left
-		}
-		else
-		{
-			sprite.move(intersection.width, 0.f); // Move right
-		}
-	}
+	//if (intersection.size.x > intersection.size.y)
+	//{
+	//	// Vertical overlap: move up or down
+	//	if (currentPosition.y < intersection.size.y)
+	//	{
+	//		sprite.move(sf::Vector2f(0.f, -intersection.size.y)); // Move up
+	//	}
+	//	else
+	//	{
+	//		sprite.move(sf::Vector2f(0.f, intersection.size.y)); // Move down
+	//	}
+	//}
+	//else
+	//{
+	//	// Horizontal overlap: move left or right
+	//	if (currentPosition.x < intersection.size.x)
+	//	{
+	//		sprite.move(sf::Vector2f(-intersection.size.x, 0.f)); // Move left
+	//	}
+	//	else
+	//	{
+	//		sprite.move(sf::Vector2f(intersection.size.x, 0.f)); // Move right
+	//	}
+	//}
 }
 
 void EnemyCharacter::TakeDamage(int& damage)
 {
 	Character::TakeDamage(damage);
 }
-
 
 void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 {

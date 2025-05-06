@@ -63,6 +63,7 @@ public:
 	{
 		randomDirection = GetRandomDirection(-1.f, 1.f);
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
+		newCharacter->SetVelocity(randomDirection);
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
@@ -93,13 +94,13 @@ public:
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
 		//ASK: How can I make this work with Character foreach loop? Player throws an error throughout the script when moved in the memory due to AddPlayer... function
-		BorderCollisionCheck(Player->GetSprite());
+		BorderCollisionCheck(*Player);
 
 		for (auto& character : CharacterList)
 		{
 			if (character->IsActive())
 			{
-				BorderCollisionCheck(character->GetSprite());
+				BorderCollisionCheck(*character);
 			}
 		}
 	}
@@ -185,27 +186,46 @@ protected:
 		}
 	}
 
-	void BorderCollisionCheck(sf::Sprite& mainCharacter)
+	void BorderCollisionCheck(Character& mainCharacter)
 	{
+		//TODO: Makes this work with hitbox variable
+		//REFACTOR NOTE: COULD REFACTOR TO MAKE IT CLEANER!!
 		//Right Collision
-		if (mainCharacter.getPosition().x < 0)
+		if (mainCharacter.GetSprite().getPosition().x < 0)
 		{
-			mainCharacter.setPosition(sf::Vector2f(0, mainCharacter.getPosition().y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(0, mainCharacter.GetSprite().getPosition().y));
+			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
 		}
 		//Left Collision
-		if (mainCharacter.getPosition().x + mainCharacter.getGlobalBounds().size.x > 1000)
+		if (mainCharacter.GetSprite().getPosition().x + mainCharacter.GetSprite().getGlobalBounds().size.x > 1000)
 		{
-			mainCharacter.setPosition(sf::Vector2f(1000 - mainCharacter.getGlobalBounds().size.x, mainCharacter.getPosition().y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(1000 - mainCharacter.GetSprite().getGlobalBounds().size.x, mainCharacter.GetSprite().getPosition().y));
+			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
 		}
 		//Top Collision
-		if (mainCharacter.getPosition().y < 0)
+		if (mainCharacter.GetSprite().getPosition().y < 0)
 		{
-			mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 0));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 0));
+			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
 		}
 		//Bottom Collision
-		if (mainCharacter.getPosition().y + mainCharacter.getGlobalBounds().size.y > 1000)
+		if (mainCharacter.GetSprite().getPosition().y + mainCharacter.GetSprite().getGlobalBounds().size.y > 1000)
 		{
-			mainCharacter.setPosition(sf::Vector2f(mainCharacter.getPosition().x, 1000 - mainCharacter.getGlobalBounds().size.y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 1000 - mainCharacter.GetSprite().getGlobalBounds().size.y));
+			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
 		}
+	}
+
+	float clamp(float value, float min, float max)
+	{
+		if (value < min) return min;
+		if (value > max) return max;
+		return value;
+	}
+
+	int CheckCollisionYT(Character& C1, Character& C2)
+	{
+		//Find the closest point to C2 within C1
+		//float closestX = clamp(C2.GetPosition().x, C1.GetPosition().x, C1.GetPosition().x + C1.GetSprite().get)
 	}
 };

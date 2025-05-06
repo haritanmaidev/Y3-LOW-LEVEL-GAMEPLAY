@@ -33,6 +33,7 @@ void InputHandler::MoveCharacter(Character& character)
 		direction.x = character.GetSpeed();
 	}
 
+	//character.SetVelocity(direction);
 	velocity = direction;
 
 	//Normalize Speed for diagonal movement.
@@ -48,6 +49,7 @@ void InputHandler::MoveCharacter(Character& character)
 		lastDirection = direction;
 	}
 
+	//character.MoveCharacter(character.GetVelocity());
 	character.GetSprite().move(velocity);
 }
 

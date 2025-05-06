@@ -2,13 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-struct Transform
-{
-	sf::Vector2f position {0.f, 0.f};
-	sf::Vector2f scale {1.f, 1.f};
-	sf::Angle rotation = sf::Angle::Zero;
-};
-
 class GameObject
 {
 public:
@@ -29,27 +22,19 @@ public:
 	//Setters and Getters
 	void SetActive(bool status) { isActive = status; }
 	void SetTag(const std::string& newTag) { tag = newTag; }
-	void SetPosition(float x, float y) { transform.position = { x, y }; sprite.setPosition(transform.position); }
-	void SetScale(float x, float y) { transform.scale = { x, y }; sprite.setScale(transform.scale); }
-	void SetRotation(sf::Angle angle) { transform.rotation = angle; sprite.setRotation(transform.rotation); }
+	void SetPosition(float x, float y) { sprite.setPosition(sf::Vector2f(x , y)); }
+	void SetScale(float x, float y) { sprite.setScale(sf::Vector2f(x, y)); }
+	void SetRotation(sf::Angle angle) { sprite.setRotation(sf::Angle(angle)); }
 	void SetSpriteTexture(const sf::Texture& newTexture) { sprite.setTexture(newTexture); }
+	void SetVelocity(sf::Vector2f newVelocity) { velocity = newVelocity; }
 	bool IsActive() const { return isActive; }
 	const std::string& GetTag() const { return tag; }
-	sf::Vector2f GetPosition() const { return transform.position; }
-	sf::Vector2f GetScale() const { return transform.scale; }
-	sf::Angle GetRotation() const { return transform.rotation; }
-	Transform& GetTransform() { return transform; }
-	const Transform& GetTransform() const { return transform; }
+	sf::Vector2f GetPosition() { return sprite.getPosition(); }
+	sf::Vector2f GetScale() const { return sprite.getScale(); }
+	sf::Angle GetRotation() const { return sprite.getRotation(); }
 	sf::Sprite& GetSprite() { return sprite; }
 	const sf::Sprite& GetSpriteConst() const { return sprite; }
-
-	//Extra functions
-	void SyncTransformWithSprite()
-	{
-		transform.position = sprite.getPosition();
-		transform.scale = sprite.getScale();
-		transform.rotation = sprite.getRotation();
-	}
+	sf::Vector2f GetVelocity() const { return velocity; }
 
 	bool LoadGameObjectTextureFromFile(const std::string& filePath, const std::optional<sf::IntRect>& intrect)
 	{
@@ -76,8 +61,8 @@ public:
 
 protected:
 	//Class Variables
-	Transform transform;
 	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
+	sf::Vector2f velocity = sf::Vector2f(0.f, 0.f);
 	std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
 	sf::Sprite sprite = sf::Sprite(*texture);
 	//sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});
