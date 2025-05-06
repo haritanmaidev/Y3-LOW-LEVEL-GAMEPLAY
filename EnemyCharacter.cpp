@@ -42,7 +42,6 @@ void EnemyCharacter::Update()
 			//MoveCharacter(sf::Vector2f(rand() % 2 - 1, rand() % 2 - 1));
 		}
 	}
-
 }
 
 void EnemyCharacter::OnCollision()
