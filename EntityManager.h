@@ -61,6 +61,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
+		randomDirection = GetRandomDirection(-1.f, 1.f);
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
@@ -91,6 +92,7 @@ public:
 		inputHandler.MoveCharacter(*Player);
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
+		//ASK: How can I make this work with Character foreach loop? Player throws an error throughout the script when moved in the memory due to AddPlayer... function
 		BorderCollisionCheck(Player->GetSprite());
 
 		for (auto& character : CharacterList)
@@ -134,15 +136,15 @@ public:
 
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
-private:
+protected:
 	std::unique_ptr <PlayerCharacter> Player;
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 
+	sf::Vector2f randomDirection = sf::Vector2f(0, 0);
 	float spawnTimer = 0.f;
 	float spawnRate = 5.f;
-	sf::Vector2f randomDirection = sf::Vector2f(GetRandomNumber(-1.f, 1.f), GetRandomNumber(-1.f, 1.f));
 
 	float GetRandomNumber(float a, float b)
 	{
@@ -167,6 +169,21 @@ private:
 		return sf::Vector2f(cos(angle), sin(angle));
 	}
 
+	void CollisionCheck()
+	{
+		for (int i = 0; i < CharacterList.size(); i++)
+		{
+			for (int j = i + 1; j < CharacterList.size(); j++)
+			{
+				if (CharacterList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds()))
+				{
+					std::cout << "Collision Detected!" << std::endl;
+					CharacterList[i]->OnCollision();
+					CharacterList[j]->OnCollision();
+				}
+			}
+		}
+	}
 
 	void BorderCollisionCheck(sf::Sprite& mainCharacter)
 	{
