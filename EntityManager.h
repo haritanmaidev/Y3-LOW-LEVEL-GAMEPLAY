@@ -184,7 +184,7 @@ protected:
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 
 	float spawnTimer = 0.f;
-	float spawnRate = 5.f;
+	float spawnRate = 4.f;
 
 	float GetRandomNumber(float a, float b)
 	{
