@@ -46,8 +46,7 @@ void EnemyCharacter::Update()
 
 void EnemyCharacter::OnCollision()
 {
-	std::cout << "Enemy got Collided!" << std::endl;
-	sf::Vector2f currentPosition = sprite.getPosition();
+	Die();
 }
 
 void EnemyCharacter::TakeDamage(int& damage)
@@ -62,6 +61,6 @@ void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void EnemyCharacter::Die()
 {
+
 	SetActive(false);
-	std::cout << "Player is dead!" << std::endl;
 }

@@ -3,7 +3,6 @@
 #include "InputHandler.h"
 #include "EntityManager.h"
 #include "PlayerCharacter.h"
-
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -37,14 +36,6 @@ int main()
             entityManager.UpdateAllCharacters(window, inputHandler);
             entityManager.EnemySpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
-
-            /*for (int i = 0; i < objects.size(); i++)
-            {
-                for (int j = i + 1; j < objects.size(); j++)
-                {
-                    checkCollision(object[i], object[j]);
-                }
-            }*/
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         
@@ -54,7 +45,6 @@ int main()
                 window.close();
         }
 
-        //-------------------------------------:||||[[[[DRAWING ON WINDOW]]]||||:-------------------------------------
         window.clear();
 		entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);

@@ -28,7 +28,7 @@ public:
 	{
 		for (auto& entity : list)
 		{
-			entity->Update();
+			if(entity->IsActive()) entity->Update();
 		}
 	}
 
@@ -36,7 +36,7 @@ public:
 	{
 		for (auto& entity : list)
 		{
-			entity->Render(window);
+			if (entity->IsActive()) entity->Render(window);
 		}
 	}
 
@@ -122,10 +122,22 @@ public:
 			{
 				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds())) 
 				{
-					std::cout << "Projectile collided with Enemy!" << std::endl;
+					std::cout << "Projectile: " << i << "! Collided with Enemy: "<< j << std::endl;
 					ProjectileList[i]->OnCollision();
 					CharacterList[j]->OnCollision();
 				}
+			}
+		}
+	}
+
+	void RemoveEntityFromList()
+	{
+		for (int i = 0; i < ProjectileList.size(); i++)
+		{
+			if (!ProjectileList[i]->IsActive())
+			{
+				ProjectileList.erase(ProjectileList.begin() + i);
+				std::cout << "GameObject: " << i << " removed from list!" << std::endl;
 			}
 		}
 	}

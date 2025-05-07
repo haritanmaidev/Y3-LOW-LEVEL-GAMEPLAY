@@ -32,7 +32,6 @@ public:
 
 	void OnCollision() override
 	{
-		std::cout << "Projectile collided!" << std::endl;
 	}
 
 private:
