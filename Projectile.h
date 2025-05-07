@@ -32,6 +32,8 @@ public:
 
 	void OnCollision() override
 	{
+		SetPosition(2000, 2000);
+		SetActive(false);
 	}
 
 private:

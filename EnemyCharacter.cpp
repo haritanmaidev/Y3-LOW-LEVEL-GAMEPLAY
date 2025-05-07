@@ -61,6 +61,6 @@ void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void EnemyCharacter::Die()
 {
-
+	SetPosition(-2000, 2000);
 	SetActive(false);
 }
