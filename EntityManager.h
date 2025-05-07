@@ -118,10 +118,11 @@ public:
 	{
 		for (int i = 0; i < ProjectileList.size(); i++)
 		{
-			for (int j = i + 1; j < CharacterList.size(); j++)
+			for (int j = 0; j < CharacterList.size(); j++)
 			{
 				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds())) 
 				{
+					std::cout << "Projectile collided with Enemy!" << std::endl;
 					ProjectileList[i]->OnCollision();
 					CharacterList[j]->OnCollision();
 				}
