@@ -64,7 +64,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
-		randomDirection = GetRandomDirection(-1.f, 1.f);
+		sf::Vector2f randomDirection = GetRandomDirection(-1.f, 1.f);
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
 		newCharacter->SetVelocity(randomDirection);
 		newCharacter->SetActive(true);
@@ -137,7 +137,16 @@ public:
 			if (!ProjectileList[i]->IsActive())
 			{
 				ProjectileList.erase(ProjectileList.begin() + i);
-				std::cout << "GameObject: " << i << " removed from list!" << std::endl;
+				std::cout << "Projectile: " << i << " removed from list!" << std::endl;
+			}
+		}
+
+		for(int i = 0; i < CharacterList.size();i++)
+		{
+			if(!CharacterList[i]->IsActive())
+			{
+				CharacterList.erase(CharacterList.begin() + i);
+				std::cout << "Character: " << i << " removed from list!" << std::endl;
 			}
 		}
 	}
@@ -174,7 +183,6 @@ protected:
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 
-	sf::Vector2f randomDirection = sf::Vector2f(0, 0);
 	float spawnTimer = 0.f;
 	float spawnRate = 5.f;
 

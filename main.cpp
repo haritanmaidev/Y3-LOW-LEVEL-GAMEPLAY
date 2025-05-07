@@ -36,6 +36,7 @@ int main()
             entityManager.UpdateAllCharacters(window, inputHandler);
             entityManager.EnemySpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
+            entityManager.RemoveEntityFromList();
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         
