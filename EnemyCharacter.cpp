@@ -48,32 +48,6 @@ void EnemyCharacter::OnCollision()
 {
 	std::cout << "Enemy got Collided!" << std::endl;
 	sf::Vector2f currentPosition = sprite.getPosition();
-
-	// Determine the direction to move based on the intersection
-	//if (intersection.size.x > intersection.size.y)
-	//{
-	//	// Vertical overlap: move up or down
-	//	if (currentPosition.y < intersection.size.y)
-	//	{
-	//		sprite.move(sf::Vector2f(0.f, -intersection.size.y)); // Move up
-	//	}
-	//	else
-	//	{
-	//		sprite.move(sf::Vector2f(0.f, intersection.size.y)); // Move down
-	//	}
-	//}
-	//else
-	//{
-	//	// Horizontal overlap: move left or right
-	//	if (currentPosition.x < intersection.size.x)
-	//	{
-	//		sprite.move(sf::Vector2f(-intersection.size.x, 0.f)); // Move left
-	//	}
-	//	else
-	//	{
-	//		sprite.move(sf::Vector2f(intersection.size.x, 0.f)); // Move right
-	//	}
-	//}
 }
 
 void EnemyCharacter::TakeDamage(int& damage)

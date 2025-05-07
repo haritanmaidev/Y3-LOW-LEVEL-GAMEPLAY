@@ -25,6 +25,7 @@ void PlayerCharacter::Update()
 void PlayerCharacter::OnCollision()
 {
 	std::cout << "Player collided!" << std::endl;
+
 	SetActive(false);
 }
 

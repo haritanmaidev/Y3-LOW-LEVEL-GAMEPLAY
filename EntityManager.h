@@ -12,6 +12,9 @@ public:
 	EntityManager()
 	{
 		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
+
+		//ASK: This crashes the game?
+		//SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
 	}
 
 	~EntityManager() = default;
@@ -38,8 +41,7 @@ public:
 	}
 
 	//==================================:::::|||||[CHARACTER STUFF][CHARACTER STUFF][CHARACTER STUFF]|||||:::::==================================//
-	//ASK: This function is called in SpawnPlayer which passes this a PlayerCharacter rvalue, so this means, even if the types are different, as long as its RVALUE, it works?
-	//Character* AddCharacter(std::unique_ptr<Character> character) { Add(std::move(character), CharacterList); }
+	Character& GetPlayer() { return *Player; }
 
 	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player)
 	{ 
@@ -51,6 +53,7 @@ public:
 	{
 		auto newCharacter = std::make_unique<PlayerCharacter>(position);
 		newCharacter->SetActive(true);
+		//PlayerPtr = newCharacter.get();
 		AddPlayerToCharacterList(newCharacter);
 	}
 
@@ -107,8 +110,23 @@ public:
 
 	void RenderAllCharacters(sf::RenderWindow& window)
 	{
-		RenderAll(CharacterList, window);
 		Player->Render(window);
+		RenderAll(CharacterList, window);
+	}
+
+	void ProjectileToEnemyCollisionCheck()
+	{
+		for (int i = 0; i < ProjectileList.size(); i++)
+		{
+			for (int j = i + 1; j < CharacterList.size(); j++)
+			{
+				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds())) 
+				{
+					ProjectileList[i]->OnCollision();
+					CharacterList[j]->OnCollision();
+				}
+			}
+		}
 	}
 
 	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
@@ -153,7 +171,6 @@ protected:
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<float> dis(a, b);
 		float randomNumber = dis(gen);
-		std::cout << "Random Number: " << randomNumber << std::endl;
 		return randomNumber;
 	}
 
@@ -168,22 +185,6 @@ protected:
 							sf::Mouse::getPosition(window).x - player.GetSprite().getPosition().x);
 
 		return sf::Vector2f(cos(angle), sin(angle));
-	}
-
-	void CollisionCheck()
-	{
-		for (int i = 0; i < CharacterList.size(); i++)
-		{
-			for (int j = i + 1; j < CharacterList.size(); j++)
-			{
-				if (CharacterList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds()))
-				{
-					std::cout << "Collision Detected!" << std::endl;
-					CharacterList[i]->OnCollision();
-					CharacterList[j]->OnCollision();
-				}
-			}
-		}
 	}
 
 	void BorderCollisionCheck(Character& mainCharacter)
@@ -214,18 +215,5 @@ protected:
 			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 1000 - mainCharacter.GetSprite().getGlobalBounds().size.y));
 			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
 		}
-	}
-
-	float clamp(float value, float min, float max)
-	{
-		if (value < min) return min;
-		if (value > max) return max;
-		return value;
-	}
-
-	int CheckCollisionYT(Character& C1, Character& C2)
-	{
-		//Find the closest point to C2 within C1
-		//float closestX = clamp(C2.GetPosition().x, C1.GetPosition().x, C1.GetPosition().x + C1.GetSprite().get)
 	}
 };
