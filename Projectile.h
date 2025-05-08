@@ -2,6 +2,7 @@
 #include "InputHandler.h"
 #include <iostream>
 #include "GameObject.h"
+#include <SFML/Audio.hpp>
 
 class Projectile : public GameObject
 {
@@ -15,7 +16,15 @@ public:
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setPosition(spawnPoint);
+
+		if (!buffer.loadFromFile("Audio/SpaceGunShot.wav"))
+		{
+			std::cout << "Sound didn't load!" << std::endl;
+			return;
+		}
+
 		SetTag("Projectile");
+		PlaySound();
 		SetActive(true);
 	}
 
@@ -33,8 +42,7 @@ public:
 
 	void OnCollision() override
 	{
-		SetPosition(2000, 2000);
-		SetActive(false);
+		Die();
 	}
 
 	void ProjectileBorderCheck()
@@ -43,8 +51,23 @@ public:
 		if (pos.x < 0 || pos.x > 1000 || pos.y < 0 || pos.y > 1000) { SetActive(false); }
 	}
 
+	void Die()
+	{
+		SetPosition(2000, 2000);
+		SetActive(false);
+	}
+
+	void PlaySound() 
+	{
+		sound.setVolume(40.f);
+		sound.play();
+	}
+
 private:
 	sf::Vector2f spawnPoint;
 	sf::Vector2f aimDirection;
 	float projectileSpeed = 1.0f;
+
+	sf::SoundBuffer buffer;
+	sf::Sound sound = sf::Sound(buffer);
 };

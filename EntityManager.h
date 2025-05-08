@@ -74,6 +74,8 @@ public:
 	
 	void EnemySpawner() 
 	{
+		static float spawnRate = 4.f;
+		static float spawnTimer = 0.f;
 		spawnTimer += 0.1f;
 		if (spawnRate < spawnTimer)
 		{
@@ -89,7 +91,7 @@ public:
 		}
 	}
 
-	void UpdateAllCharacters(sf::RenderWindow & window, InputHandler& inputHandler)
+	void UpdateAllCharacters(sf::RenderWindow& window, InputHandler& inputHandler)
 	{
 		UpdateAll(CharacterList);
 
@@ -137,7 +139,7 @@ public:
 			if (!ProjectileList[i]->IsActive())
 			{
 				ProjectileList.erase(ProjectileList.begin() + i);
-				std::cout << "Projectile: " << i << " removed from list!" << std::endl;
+				//std::cout << "Projectile: " << i << " removed from list!" << std::endl;
 			}
 		}
 
@@ -146,7 +148,7 @@ public:
 			if(!CharacterList[i]->IsActive())
 			{
 				CharacterList.erase(CharacterList.begin() + i);
-				std::cout << "Character: " << i << " removed from list!" << std::endl;
+				//std::cout << "Character: " << i << " removed from list!" << std::endl;
 			}
 		}
 	}
@@ -156,7 +158,7 @@ public:
 	{
 		Add(std::move(projectile), ProjectileList);
 		//Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList);
-		std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
+		//std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -182,9 +184,6 @@ protected:
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
-
-	float spawnTimer = 0.f;
-	float spawnRate = 4.f;
 
 	float GetRandomNumber(float a, float b)
 	{
