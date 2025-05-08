@@ -12,6 +12,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Enemy");
 		SetActive(true);
+		SoundManager::PlayEnemySpawnSound();
 		speed = 2.f;
 	}
 }
@@ -49,18 +50,19 @@ void EnemyCharacter::OnCollision()
 	Die();
 }
 
-void EnemyCharacter::TakeDamage(int& damage)
-{
-	Character::TakeDamage(damage);
-}
-
 void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
 	sprite.move(direction * speed);
 }
 
+void EnemyCharacter::TakeDamage(int& damage)
+{
+	Character::TakeDamage(damage);
+}
+
 void EnemyCharacter::Die()
 {
+	SoundManager::PlayEnemyHitSound();
 	SetPosition(-2000, 2000);
 	SetActive(false);
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "SoundManager.h"
 #include <iostream>
 
 class GameObject

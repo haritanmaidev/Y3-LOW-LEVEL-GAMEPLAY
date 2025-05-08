@@ -3,6 +3,7 @@
 #include "InputHandler.h"
 #include "EntityManager.h"
 #include "PlayerCharacter.h"
+#include "SoundManager.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -37,6 +38,7 @@ int main()
             entityManager.EnemySpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
             entityManager.RemoveEntityFromList();
+			SoundManager::CleanUpSounds();
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         

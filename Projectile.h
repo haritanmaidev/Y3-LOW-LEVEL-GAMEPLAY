@@ -24,8 +24,9 @@ public:
 		}
 
 		SetTag("Projectile");
-		PlaySound();
 		SetActive(true);
+		SoundManager::PlayProjectileSound();
+		//PlaySound();
 	}
 
 	//NOTE:Removing Awake is throwing me "Projectile can't instantiate abstract class" error
@@ -42,19 +43,14 @@ public:
 
 	void OnCollision() override
 	{
-		Die();
+		SetPosition(2000, 2000);
+		SetActive(false);
 	}
 
 	void ProjectileBorderCheck()
 	{
 		sf::Vector2f pos = sprite.getPosition();
 		if (pos.x < 0 || pos.x > 1000 || pos.y < 0 || pos.y > 1000) { SetActive(false); }
-	}
-
-	void Die()
-	{
-		SetPosition(2000, 2000);
-		SetActive(false);
 	}
 
 	void PlaySound() 
