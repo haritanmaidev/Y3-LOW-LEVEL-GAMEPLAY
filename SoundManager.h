@@ -21,12 +21,12 @@ public:
 
 	static void PlayProjectileSound()
 	{
-		PlaySound("Audio/SpaceGunShot.wav", 30.f);
+		PlaySound("Audio/GunFireBlop.wav", 25.f);
 	}
 
 	static void PlayEnemySpawnSound()
 	{
-		PlaySound("Audio/EnemySpawn.wav", 60.f);
+		PlaySound("Audio/EnemySpawn.wav", 40.f);
 	}
 
 	static void PlayEnemyHitSound()
