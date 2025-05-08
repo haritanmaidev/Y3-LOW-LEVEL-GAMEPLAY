@@ -12,8 +12,6 @@ Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn
 
 void Character::OnCollision()
 {
-	std::cout << "Character collided!" << std::endl;
-	SetActive(false);
 }
 
 void Character::TakeDamage(int damage)

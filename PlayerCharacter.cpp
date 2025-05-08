@@ -24,9 +24,7 @@ void PlayerCharacter::Update()
 
 void PlayerCharacter::OnCollision()
 {
-	std::cout << "Player collided!" << std::endl;
-
-	SetActive(false);
+	
 }
 
 void PlayerCharacter::TakeDamage(int damage)
@@ -36,11 +34,10 @@ void PlayerCharacter::TakeDamage(int damage)
 
 void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
-	sprite.move(direction * speed);
+	Character::MoveCharacter(direction);
 }
 
 void PlayerCharacter::Die()
 {
 	SetActive(false);
-	std::cout << "Player is dead!" << std::endl;
 }

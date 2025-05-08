@@ -1,5 +1,6 @@
 ﻿  Character.cpp
   EnemyCharacter.cpp
+  GameObject.cpp
   InputHandler.cpp
   PlayerCharacter.cpp
   main.cpp

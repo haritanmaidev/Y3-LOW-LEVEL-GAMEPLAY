@@ -26,12 +26,17 @@ public:
 
 	static void PlayEnemySpawnSound()
 	{
-		PlaySound("Audio/EnemySpawn.wav", 30.f);
+		PlaySound("Audio/EnemySpawn.wav", 60.f);
 	}
 
 	static void PlayEnemyHitSound()
 	{
-		PlaySound("Audio/BitExplosion.wav", 30.f);
+		PlaySound("Audio/EnemyHit.wav", 50.f);
+	}
+
+	static void PlayEnemyDeathSound()
+	{
+		PlaySound("Audio/EnemyDeath.wav", 60.f);
 	}
 
 	static void CleanUpSounds()

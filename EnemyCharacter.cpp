@@ -54,7 +54,7 @@ void EnemyCharacter::OnCollision()
 
 void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
-	sprite.move(direction * speed);
+	Character::MoveCharacter(direction);
 }
 
 void EnemyCharacter::TakeDamage(int damage)
@@ -64,6 +64,7 @@ void EnemyCharacter::TakeDamage(int damage)
 
 void EnemyCharacter::Die()
 {
+	SoundManager::PlayEnemyDeathSound();
 	UIManager::AddScore(score);
 	SetPosition(-2000, 2000);
 	SetActive(false);
