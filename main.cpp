@@ -11,7 +11,7 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-	UIManager::Init("Fonts/Arial.ttf");
+	UIManager::Init("Fonts/GODOFWAR.ttf");
 
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 

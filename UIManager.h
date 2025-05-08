@@ -10,7 +10,7 @@ public:
 			scoreText.setFont(font);
 			scoreText.setCharacterSize(40);
 			scoreText.setFillColor(sf::Color::White);
-			scoreText.setPosition(sf::Vector2f(15.f, 15.f));
+			scoreText.setPosition(sf::Vector2f(15.f, 0.f));
 		}
 	}
 
