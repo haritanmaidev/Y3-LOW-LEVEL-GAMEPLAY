@@ -1,5 +1,6 @@
 #include "EnemyCharacter.h"
 #include "PlayerCharacter.h"
+#include "UIManager.h"
 
 EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir) : Character(spawn), playerref(player), travelDir(randomDir)
 {
@@ -62,6 +63,7 @@ void EnemyCharacter::TakeDamage(int& damage)
 
 void EnemyCharacter::Die()
 {
+	UIManager::AddScore(100);
 	SoundManager::PlayEnemyHitSound();
 	SetPosition(-2000, 2000);
 	SetActive(false);

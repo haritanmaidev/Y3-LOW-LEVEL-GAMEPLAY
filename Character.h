@@ -15,6 +15,7 @@ public:
 	void SetSpeed(float newSpeed) { this->speed = newSpeed; }
 	int GetHealth() const { return health; }
 	float GetSpeed() const { return speed; }
+	int GetScore() const { return score; }
 
 	//Class Functions
 	virtual void TakeDamage(int& damage);

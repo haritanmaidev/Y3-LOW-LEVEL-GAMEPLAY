@@ -254,6 +254,7 @@
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\SFML\include\SFML\Audio\SoundFileFactory.inl" />

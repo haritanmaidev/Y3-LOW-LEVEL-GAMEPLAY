@@ -1,9 +1,7 @@
 #include <math.h>
-#include "Ellipse.h"
-#include "InputHandler.h"
 #include "EntityManager.h"
-#include "PlayerCharacter.h"
 #include "SoundManager.h"
+#include "UIManager.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -13,6 +11,8 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
+	UIManager::Init("Fonts/Arial.ttf");
+
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
     //Time Update
@@ -30,6 +30,7 @@ int main()
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
             //Do physics
+			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             entityManager.UpdateAllProjectiles();
@@ -38,7 +39,9 @@ int main()
             entityManager.EnemySpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
             entityManager.RemoveEntityFromList();
+
 			SoundManager::CleanUpSounds();
+			UIManager::Update();
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         
@@ -51,6 +54,7 @@ int main()
         window.clear();
 		entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);
+		UIManager::RenderUI(window);
 		//entityManager.RenderAllGameObjects(window);
         window.display();
     }
