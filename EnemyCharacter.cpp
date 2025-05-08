@@ -25,7 +25,8 @@ void EnemyCharacter::Awake()
 
 void EnemyCharacter::Update()
 {
-	//std::cout << "Enemy Update is called!" << std::endl;
+	Character::Update();
+
 	if (IsActive()) 
 	{
 		sf::Vector2f playerPosition = playerref.GetSpriteConst().getPosition();

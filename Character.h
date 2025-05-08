@@ -8,6 +8,7 @@ public:
 	~Character() = default;
 
 	//Override Functions
+	void Update() override;
 	void OnCollision() override;
 
 	//Inline Functions
@@ -20,11 +21,13 @@ public:
 	//Class Functions
 	virtual void TakeDamage(int damage);
 	virtual void MoveCharacter(const sf::Vector2f& direction);
+	virtual void SpriteFlash();
 	virtual void Die();
 
 protected:
 	int health = 3;
 	int score = 100;
 	float speed = 10.f;
+	bool isFlashing = false;
 	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
 };

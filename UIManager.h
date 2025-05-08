@@ -14,30 +14,13 @@ public:
 		}
 	}
 
-	static void Update()
-	{
-		scoreText.setString("Score: " + std::to_string(GetScore()));
-	}
-
-	static int GetScore()
-	{
-		return score;
-	}
-
-	static void AddScore(int points)
-	{
-		score += points;
-	}
-
-	static void SubtractScore(int points)
-	{
-		score -= points;
-	}
-
-	static void RenderUI(sf::RenderWindow& window)
-	{
-		window.draw(scoreText);
-	}
+	static void Update() { scoreText.setString("Score: " + std::to_string(GetScore())); }
+	static int GetScore() { return score; }
+	static void AddScore(int points){ score += points; }
+	static void SubtractScore(int points) { score -= points; }
+	static void ResetScore() { score = 0; }
+	static void RenderUI(sf::RenderWindow& window) { window.draw(scoreText);}
+	static void RenderHealthBars();
 
 private:
 	inline static int score = 0;

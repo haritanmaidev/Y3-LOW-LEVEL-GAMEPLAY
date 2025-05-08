@@ -19,6 +19,7 @@ void PlayerCharacter::Awake()
 
 void PlayerCharacter::Update()
 {
+	Character::Update();
 	std::cout << "Player Update is called!" << std::endl;
 }
 

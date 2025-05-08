@@ -10,19 +10,42 @@ Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn
 	sprite.setPosition(spawnPoint);
 }
 
+void Character::Update()
+{
+	if (isFlashing)
+	{
+		SpriteFlash();
+	}
+}
 void Character::OnCollision()
 {
-}
-
-void Character::TakeDamage(int damage)
-{
-	health -= damage;
-	if (health <= 0) Die();
 }
 
 void Character::MoveCharacter(const sf::Vector2f& direction)
 {
 	sprite.move(direction * speed);
+}
+
+void Character::TakeDamage(int damage)
+{
+	isFlashing = true;
+	sprite.setColor(sf::Color::Red);
+	health -= damage;
+	if (health <= 0) Die();
+}
+
+void Character::SpriteFlash()
+{
+	static float flashTime = 0.5f;
+	static float flashTimer = 0.f;
+	flashTimer += 0.1f;
+	if (flashTime < flashTimer)
+	{
+		std::cout << "Flashing!" << std::endl;
+		sprite.setColor(sf::Color::White);
+		flashTimer = 0.f;
+		isFlashing = false;
+	}
 }
 
 void Character::Die()
