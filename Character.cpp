@@ -16,7 +16,7 @@ void Character::OnCollision()
 	SetActive(false);
 }
 
-void Character::TakeDamage(int& damage)
+void Character::TakeDamage(int damage)
 {
 	health -= damage;
 	if (health <= 0) Die();
@@ -29,6 +29,4 @@ void Character::MoveCharacter(const sf::Vector2f& direction)
 
 void Character::Die()
 {
-	SetActive(false);
-	std::cout << "Character is dead!" << std::endl;
 }

@@ -18,13 +18,13 @@ public:
 	int GetScore() const { return score; }
 
 	//Class Functions
-	virtual void TakeDamage(int& damage);
+	virtual void TakeDamage(int damage);
 	virtual void MoveCharacter(const sf::Vector2f& direction);
 	virtual void Die();
 
 protected:
-	int health = 100;
-	int score = 0;
+	int health = 3;
+	int score = 100;
 	float speed = 10.f;
 	sf::Vector2f spawnPoint = sf::Vector2f(0.f, 0.f);
 };

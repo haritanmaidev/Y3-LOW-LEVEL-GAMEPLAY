@@ -15,7 +15,7 @@ public:
 	void OnCollision() override;
 	void Update() override;
 	void MoveCharacter(const sf::Vector2f& direction) override;
-	void TakeDamage(int& damage) override;
+	void TakeDamage(int damage) override;
 	void Die() override;
 
 private:

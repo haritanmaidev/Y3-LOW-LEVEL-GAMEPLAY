@@ -29,7 +29,7 @@ void PlayerCharacter::OnCollision()
 	SetActive(false);
 }
 
-void PlayerCharacter::TakeDamage(int& damage)
+void PlayerCharacter::TakeDamage(int damage)
 {
 	Character::TakeDamage(damage);
 }
