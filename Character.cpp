@@ -17,6 +17,7 @@ void Character::Update()
 		SpriteFlash();
 	}
 }
+
 void Character::OnCollision()
 {
 }

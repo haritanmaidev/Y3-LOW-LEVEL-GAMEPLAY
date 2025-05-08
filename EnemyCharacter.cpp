@@ -36,6 +36,7 @@ void EnemyCharacter::Update()
 
 		if(mag < detectionRadius && mag != 0.f)
 		{
+			//Move towards Player
 			direction /= mag;
 			MoveCharacter(direction);
 		}
@@ -49,7 +50,7 @@ void EnemyCharacter::Update()
 
 void EnemyCharacter::OnCollision()
 {
-	SoundManager::PlayEnemyHitSound();
+	SoundManager::PlayEnemyHurtSound();
 	TakeDamage(1);
 }
 

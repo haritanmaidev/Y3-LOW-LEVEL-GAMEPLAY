@@ -94,13 +94,14 @@ public:
 	void UpdateAllCharacters(sf::RenderWindow& window, InputHandler& inputHandler)
 	{
 		UpdateAll(CharacterList);
+		Player->Update();
 
 		inputHandler.MoveCharacter(*Player);
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
 		//ASK: How can I make this work with Character foreach loop? Player throws an error throughout the script when moved in the memory due to AddPlayer... function
+		
 		BorderCollisionCheck(*Player);
-
 		for (auto& character : CharacterList)
 		{
 			if (character->IsActive())
@@ -128,6 +129,19 @@ public:
 					ProjectileList[i]->OnCollision();
 					CharacterList[j]->OnCollision();
 				}
+			}
+		}
+	}
+
+	void PlayerToEnemyCollisionCheck()
+	{
+		for (int i = 0; i < CharacterList.size(); i++)
+		{
+			if (Player->GetSprite().getGlobalBounds().findIntersection(CharacterList[i]->GetSprite().getGlobalBounds()))
+			{
+				std::cout << "Player Collided with Enemy: " << i << std::endl;
+				Player->OnCollision();
+				CharacterList[i]->OnCollision();
 			}
 		}
 	}
@@ -210,7 +224,7 @@ protected:
 	void BorderCollisionCheck(Character& mainCharacter)
 	{
 		//TODO: Makes this work with hitbox variable
-		//REFACTOR NOTE: COULD REFACTOR TO MAKE IT CLEANER!!
+		//REFACTOR: COULD REFACTOR TO MAKE IT CLEANER!!
 		//Right Collision
 		if (mainCharacter.GetSprite().getPosition().x < 0)
 		{

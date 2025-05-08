@@ -25,17 +25,18 @@ void PlayerCharacter::Update()
 
 void PlayerCharacter::OnCollision()
 {
-	
-}
-
-void PlayerCharacter::TakeDamage(int damage)
-{
-	Character::TakeDamage(damage);
+	SoundManager::PlayPlayerHurtSound();
+	TakeDamage(1);
 }
 
 void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
 	Character::MoveCharacter(direction);
+}
+
+void PlayerCharacter::TakeDamage(int damage)
+{
+	Character::TakeDamage(damage);
 }
 
 void PlayerCharacter::Die()

@@ -38,6 +38,7 @@ int main()
             entityManager.UpdateAllCharacters(window, inputHandler);
             entityManager.EnemySpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
+			entityManager.PlayerToEnemyCollisionCheck();
             entityManager.RemoveEntityFromList();
 
 			SoundManager::CleanUpSounds();

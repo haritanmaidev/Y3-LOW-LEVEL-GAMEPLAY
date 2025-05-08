@@ -13,7 +13,8 @@ public:
 	virtual ~GameObject() = default;
 
 	//Pure functions
-	virtual void Awake() = 0;
+	//REFACTOR: REMOVE THIS
+	virtual void Awake() = 0; 
 	virtual void Update() = 0;
 	virtual void OnCollision() = 0;
 
