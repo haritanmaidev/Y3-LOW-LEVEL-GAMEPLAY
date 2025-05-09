@@ -1,5 +1,12 @@
-﻿  Character.cpp
-  EnemyCharacter.cpp
+﻿  EnemyHulk.cpp
+  HumanCharacter.cpp
+  InputHandler.cpp
+  main.cpp
+D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:             _Rep=__int64
+D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         ]
   Generating Code...
 sfml-graphics-s-d.lib(Transformable.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Transformable.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Texture.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Texture.obj)' or at ''; linking object as if no debug info
@@ -149,4 +156,4 @@ freetyped.lib(ftlzw.obj) : warning LNK4099: PDB '' was not found with 'freetyped
 freetyped.lib(ftdebug.obj) : warning LNK4099: PDB '' was not found with 'freetyped.lib(ftdebug.obj)' or at ''; linking object as if no debug info
 sfml-system-s-d.lib(FileInputStream.obj) : warning LNK4099: PDB '' was not found with 'sfml-system-s-d.lib(FileInputStream.obj)' or at ''; linking object as if no debug info
 sfml-system-s-d.lib(MemoryInputStream.obj) : warning LNK4099: PDB '' was not found with 'sfml-system-s-d.lib(MemoryInputStream.obj)' or at ''; linking object as if no debug info
-  LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

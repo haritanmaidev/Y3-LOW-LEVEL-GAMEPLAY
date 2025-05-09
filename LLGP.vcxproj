@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EnemyCharacter.cpp" />
+    <ClCompile Include="EnemyHulk.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HumanCharacter.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Ellipse.h" />
     <ClInclude Include="EnemyCharacter.h" />
+    <ClInclude Include="EnemyHulk.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HumanCharacter.h" />
