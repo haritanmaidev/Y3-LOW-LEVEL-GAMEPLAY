@@ -47,7 +47,7 @@ void EnemyHulk::OnCollision()
 
 void::EnemyHulk::TakeDamage(int damage)
 {
-
+	std::cout << "TakeDamage in EnemyHulk is called!" << std::endl;
 }
 
 void EnemyHulk::Die() 
