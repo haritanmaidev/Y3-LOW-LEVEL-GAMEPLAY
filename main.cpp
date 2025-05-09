@@ -38,8 +38,9 @@ int main()
             entityManager.UpdateAllCharacters(window, inputHandler);
 			//entityManager.UpdateAllHumans();
             entityManager.UpdateAllProjectiles();
-            entityManager.EnemySpawner(4.f);
             entityManager.HumanSpawner(8.f);
+            entityManager.EnemySpawner(4.f);
+            entityManager.EnemyHulkSpawner(5.f);
 			entityManager.PlayerToCharacterCollisionCheck();
 			entityManager.PlayerToHumanCollisionCheck();
             entityManager.ProjectileToCharacterCollisionCheck();

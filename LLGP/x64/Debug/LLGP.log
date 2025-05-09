@@ -1,15 +1,11 @@
-﻿  Character.cpp
-  EnemyCharacter.cpp
-  EnemyHulk.cpp
-  GameObject.cpp
+﻿  EnemyHulk.cpp
   HumanCharacter.cpp
   InputHandler.cpp
-  PlayerCharacter.cpp
   main.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         with
-D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         [
-D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:             _Rep=__int64
-D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:             _Rep=__int64
+D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         ]
   Generating Code...
-  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+  LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

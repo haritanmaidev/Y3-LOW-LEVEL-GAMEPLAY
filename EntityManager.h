@@ -5,6 +5,7 @@
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
 #include "HumanCharacter.h"
+#include "EnemyHulk.h"
 #include <random>
 
 class EntityManager
@@ -40,6 +41,8 @@ public:
 		}
 	}
 
+	//TO-DO: MAKE A TEMPLATE FUNCTION FOR SPAWNERS
+
 	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
 	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
 	
@@ -51,6 +54,8 @@ public:
 
 	void AddEnemyToCharacterList(std::unique_ptr<EnemyCharacter>& enemy) { Add(std::unique_ptr<Character>(enemy.release()), CharacterList); }
 
+	void AddEnemyHulkToCharacterList(std::unique_ptr<EnemyHulk>& hulk) { Add(std::unique_ptr<Character>(hulk.release()), CharacterList); }
+	
 	void AddProjectile(std::unique_ptr<Projectile> projectile)
 {
 		Add(std::move(projectile), ProjectileList);
@@ -87,7 +92,13 @@ public:
 
 	void SpawnEnemyHulk(const sf::Vector2f& position) 
 	{
-
+		static int HulkCount = 0;
+		if (HulkCount > 5) return;
+		sf::Vector2f randomDirection = GetRandomDirection(-1.f, 1.f);
+		auto newHulk = std::make_unique<EnemyHulk>(position, *Player, randomDirection, *this);
+		newHulk->SetVelocity(randomDirection);
+		AddEnemyHulkToCharacterList(newHulk);
+		HulkCount++;
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -122,6 +133,19 @@ public:
 			float locationY = GetRandomNumber(0, 1000);
 			sf::Vector2f spawnPosition = sf::Vector2f(800.f, locationY) + sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
 			SpawnEnemyCharacter(spawnPosition);
+			spawnTimer = 0.f;
+		}
+	}
+
+	void EnemyHulkSpawner(float&& rate) 
+	{
+		static float spawnRate = rate;
+		static float spawnTimer = 0.f;
+		spawnTimer += 0.1f;
+		if (spawnRate < spawnTimer)
+		{
+			sf::Vector2f spawnPosition = sf::Vector2f(GetRandomNumber(200, 600), GetRandomNumber(0, 400));
+			SpawnEnemyHulk(spawnPosition);
 			spawnTimer = 0.f;
 		}
 	}
