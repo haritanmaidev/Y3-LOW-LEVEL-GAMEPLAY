@@ -40,8 +40,13 @@ public:
 			if (entity->IsActive()) entity->Render(window);
 		}
 	}
+	
+	//template <typename T> void SpawnerGameObject(const sf::Vector2f& position, std::unique_ptr<T>&& clas) 
+	//{
 
-	//TO-DO: MAKE A TEMPLATE FUNCTION FOR SPAWNERS
+	//}
+
+	//TO-DO: MAKE A TEMPLATE FUNCTION FOR SPAWNERS AND SpawnGameObjectFunction
 
 	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
 	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
