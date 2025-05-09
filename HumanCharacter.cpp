@@ -57,6 +57,7 @@ void HumanCharacter::TakeDamage(int damage)
 	Character::TakeDamage(damage);
 }
 
+//Techically Rescue
 void HumanCharacter::Die()
 {
 	SoundManager::PlayHumanRescueSound();

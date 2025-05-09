@@ -29,9 +29,11 @@ void Character::MoveCharacter(const sf::Vector2f& direction)
 
 void Character::TakeDamage(int damage)
 {
+	if (health <= 0) return;
 	isFlashing = true;
 	sprite.setColor(sf::Color::Red);
 	health -= damage;
+	if (health <= 0) Die();
 }
 
 void Character::SpriteFlash()
@@ -45,7 +47,6 @@ void Character::SpriteFlash()
 		sprite.setColor(sf::Color::White);
 		flashTimer = 0.f;
 		isFlashing = false;
-		if (health <= 0) Die();
 	}
 }
 

@@ -29,9 +29,9 @@ void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void PlayerCharacter::OnCollision()
 {
+	TakeDamage(1);
 	SoundManager::PlayPlayerHurtSound();
 	UIManager::SubtractScore(100);
-	TakeDamage(1);
 }
 
 void PlayerCharacter::TakeDamage(int damage)
