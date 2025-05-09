@@ -13,8 +13,6 @@ public:
 	//Constructor & Destructor
 	EntityManager()
 	{
-		//Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
-		//ASK: This crashes the game?
 		SpawnPlayerCharacter(sf::Vector2f(500.f, 500.f));
 		SpawnHumanCharacter(GetRandomDirection(100, 500));
 	}
@@ -62,7 +60,6 @@ public:
 	//==================================:::::|||||[--- SPAWN & SPAWNER FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
-		//NOTE: Current not used since I'm focusing on Singleplayer functionality
 		auto newCharacter = std::make_unique<PlayerCharacter>(position);
 		newCharacter->SetActive(true);
 		Player = newCharacter.get();
@@ -73,8 +70,8 @@ public:
 	{
 		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
 		newHuman->SetActive(true);
-		//AddHuman(std::move(newHuman));
-		AddHumanToCharacterList(newHuman);
+		AddHuman(std::move(newHuman));
+		//AddHumanToCharacterList(newHuman);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 
@@ -86,6 +83,11 @@ public:
 		newCharacter->SetActive(true);
 		AddEnemyToCharacterList(newCharacter);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
+	}
+
+	void SpawnEnemyHulk(const sf::Vector2f& position) 
+	{
+
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -136,24 +138,24 @@ public:
 		}
 	}
 	
-	void PlayerToEnemyCollisionCheck()
+	void PlayerToCharacterCollisionCheck()
 	{
-		for (int i = 0; i < CharacterList.size(); i++)
+		for (int i = 1; i < CharacterList.size(); i++)
 		{
 			if (Player->GetSprite().getGlobalBounds().findIntersection(CharacterList[i]->GetSprite().getGlobalBounds()))
 			{
 				std::cout << "Player Collided with Enemy: " << i << std::endl;
-				//Player->OnCollision();
+				Player->OnCollision();
 				CharacterList[i]->OnCollision();
 			}
 		}
 	}
 	
-	void ProjectileToEnemyCollisionCheck()
+	void ProjectileToCharacterCollisionCheck()
 	{
 		for (int i = 0; i < ProjectileList.size(); i++)
 		{
-			for (int j = 0; j < CharacterList.size(); j++)
+			for (int j = 1; j < CharacterList.size(); j++)
 			{
 				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds()))
 				{
@@ -259,7 +261,7 @@ public:
 	}
 
 protected:
-	PlayerCharacter * Player;
+	PlayerCharacter* Player;
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;

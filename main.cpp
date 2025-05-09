@@ -40,9 +40,9 @@ int main()
             entityManager.UpdateAllProjectiles();
             entityManager.EnemySpawner(4.f);
             entityManager.HumanSpawner(8.f);
-			//entityManager.PlayerToEnemyCollisionCheck();
+			entityManager.PlayerToCharacterCollisionCheck();
 			entityManager.PlayerToHumanCollisionCheck();
-            //entityManager.ProjectileToEnemyCollisionCheck();
+            entityManager.ProjectileToCharacterCollisionCheck();
             entityManager.RemoveEntityFromList();
 
 			SoundManager::CleanUpSounds();

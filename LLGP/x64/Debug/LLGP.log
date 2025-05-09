@@ -1,6 +1,10 @@
-﻿  EnemyHulk.cpp
+﻿  Character.cpp
+  EnemyCharacter.cpp
+  EnemyHulk.cpp
+  GameObject.cpp
   HumanCharacter.cpp
   InputHandler.cpp
+  PlayerCharacter.cpp
   main.cpp
 D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
 D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         with
@@ -8,26 +12,4 @@ D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:  
 D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:             _Rep=__int64
 D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         ]
   Generating Code...
-sfml-graphics-s-d.lib(Font.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Font.obj)' or at ''; linking object as if no debug info
-sfml-graphics-s-d.lib(Image.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Image.obj)' or at ''; linking object as if no debug info
-sfml-graphics-s-d.lib(Shader.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shader.obj)' or at ''; linking object as if no debug info
-sfml-graphics-s-d.lib(VertexArray.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(VertexArray.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(GlContext.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(GlContext.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(WindowBase.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowBase.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(WindowImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowImpl.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(InputImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(InputImpl.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(JoystickImpl.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(JoystickImpl.obj)' or at ''; linking object as if no debug info
-sfml-window-s-d.lib(WindowImplWin32.obj) : warning LNK4099: PDB '' was not found with 'sfml-window-s-d.lib(WindowImplWin32.obj)' or at ''; linking object as if no debug info
-sfml-system-s-d.lib(String.obj) : warning LNK4099: PDB '' was not found with 'sfml-system-s-d.lib(String.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(AudioDevice.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(AudioDevice.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(InputSoundFile.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(InputSoundFile.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundStream.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundStream.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileFactory.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileFactory.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileReaderFlac.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileReaderFlac.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileReaderMp3.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileReaderMp3.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileReaderOgg.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileReaderOgg.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileReaderWav.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileReaderWav.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileWriterFlac.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileWriterFlac.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileWriterOgg.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileWriterOgg.obj)' or at ''; linking object as if no debug info
-sfml-audio-s-d.lib(SoundFileWriterWav.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileWriterWav.obj)' or at ''; linking object as if no debug info
   LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
