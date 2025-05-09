@@ -2,7 +2,8 @@
 #include "PlayerCharacter.h"
 #include "UIManager.h"
 
-EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir) : Character(spawn), playerref(player), travelDir(randomDir)
+EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir) 
+: Character(spawn), playerref(player), travelDir(randomDir)
 {
 	//sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if (LoadGameObjectTextureFromFile("assets/Cropped/BasicEnemy.png", std::nullopt))
@@ -12,7 +13,6 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Enemy");
-		SetActive(true);
 		SoundManager::PlayEnemySpawnSound();
 		speed = 2.f;
 	}
@@ -29,9 +29,9 @@ void EnemyCharacter::Update()
 
 	if (IsActive()) 
 	{
-		sf::Vector2f playerPosition = playerref.GetSpriteConst().getPosition();
-		sf::Vector2f enemyPosition = sprite.getPosition();
-		sf::Vector2f direction = playerPosition - enemyPosition;
+		static sf::Vector2f playerPosition = playerref.GetSpriteConst().getPosition();
+		sf::Vector2f position = sprite.getPosition();
+		sf::Vector2f direction = playerPosition - position;
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
 		if(mag < detectionRadius && mag != 0.f)
@@ -48,15 +48,15 @@ void EnemyCharacter::Update()
 	}
 }
 
+void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
+{
+	Character::MoveCharacter(direction);
+}
+
 void EnemyCharacter::OnCollision()
 {
 	SoundManager::PlayEnemyHurtSound();
 	TakeDamage(1);
-}
-
-void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
-{
-	Character::MoveCharacter(direction);
 }
 
 void EnemyCharacter::TakeDamage(int damage)

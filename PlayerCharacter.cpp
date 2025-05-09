@@ -1,4 +1,5 @@
 #include "PlayerCharacter.h"
+#include "UIManager.h"
 
 PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 {
@@ -9,7 +10,6 @@ PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(1.25f, 1.25f));
 		SetTag("Player");
-		SetActive(true);
 	}
 }
 
@@ -20,18 +20,18 @@ void PlayerCharacter::Awake()
 void PlayerCharacter::Update()
 {
 	Character::Update();
-	std::cout << "Player Update is called!" << std::endl;
-}
-
-void PlayerCharacter::OnCollision()
-{
-	SoundManager::PlayPlayerHurtSound();
-	TakeDamage(1);
 }
 
 void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 {
 	Character::MoveCharacter(direction);
+}
+
+void PlayerCharacter::OnCollision()
+{
+	SoundManager::PlayPlayerHurtSound();
+	UIManager::SubtractScore(100);
+	TakeDamage(1);
 }
 
 void PlayerCharacter::TakeDamage(int damage)

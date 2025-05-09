@@ -11,7 +11,7 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-	UIManager::Init("Fonts/GODOFWAR.ttf");
+	UIManager::InitScore("Fonts/GODOFWAR.ttf");
 
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
@@ -33,12 +33,15 @@ int main()
 			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
+            //entityManager.UpdateAllEntities();
             entityManager.UpdateAllProjectiles();
-            entityManager.UpdateAllEntities();
             entityManager.UpdateAllCharacters(window, inputHandler);
+			entityManager.UpdateAllHumans();
             entityManager.EnemySpawner();
+            entityManager.HumanSpawner();
             entityManager.ProjectileToEnemyCollisionCheck();
 			entityManager.PlayerToEnemyCollisionCheck();
+			entityManager.HumanToPlayerCollisionCheck();
             entityManager.RemoveEntityFromList();
 
 			SoundManager::CleanUpSounds();
@@ -55,6 +58,7 @@ int main()
         window.clear();
 		entityManager.RenderAllProjectiles(window);
         entityManager.RenderAllCharacters(window);
+		entityManager.RenderAllHumans(window);
 		UIManager::RenderUI(window);
 		//entityManager.RenderAllGameObjects(window);
         window.display();

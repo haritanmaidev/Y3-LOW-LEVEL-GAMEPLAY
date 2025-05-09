@@ -1,9 +1,10 @@
 #pragma once
+#include "InputHandler.h"
 #include "GameObject.h"
 #include "Projectile.h"
 #include "PlayerCharacter.h"
-#include "InputHandler.h"
 #include "EnemyCharacter.h"
+#include "HumanCharacter.h"
 #include <random>
 
 class EntityManager
@@ -12,6 +13,8 @@ public:
 	EntityManager()
 	{
 		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
+
+		SpawnHumanCharacter(GetRandomDirection(100, 500));
 
 		//ASK: This crashes the game?
 		//SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
@@ -80,20 +83,72 @@ public:
 		if (spawnRate < spawnTimer)
 		{
 			// Getting Random values between 0 and 1 and scaling them to desired proportion
-			float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-			float distance = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-			angle *= 2.f * 3.14f;
-			distance *= 200.f;
-			sf::Vector2f spawnPosition = sf::Vector2f(800.f, static_cast<float>(rand() % 1000)) + 
+			float angle = GetRandomNumber(0,360);
+			float distance = GetRandomNumber(0,200);
+			sf::Vector2f spawnPosition = sf::Vector2f(800.f, GetRandomNumber(0, 1000)) + 
 										 sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
 			SpawnEnemyCharacter(spawnPosition);
 			spawnTimer = 0.f;
 		}
 	}
 
+	void AddHuman(std::unique_ptr<HumanCharacter>&& human) 
+	{
+		Add(std::move(human), HumanList);
+	}
+
+	void AddHumanCharacterToCharacterList(std::unique_ptr<HumanCharacter>& human)
+	{
+		Add(std::unique_ptr<Character>(human.release()), CharacterList);
+	}
+
+	void SpawnHumanCharacter(const sf::Vector2f& position)
+	{
+		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
+		newHuman->SetActive(true);
+		AddHuman(std::move(newHuman));
+		//AddHumanCharacterToCharacterList(newCharacter);
+		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
+	}
+
+	void HumanSpawner() 
+	{
+		static float spawnRate = 6.f;
+		static float spawnTimer = 0.f;
+		spawnTimer += 0.1f;
+		if (spawnRate < spawnTimer)
+		{
+			sf::Vector2f spawnPosition = sf::Vector2f(GetRandomNumber(500, 999), GetRandomNumber(0, 999));
+			SpawnHumanCharacter(spawnPosition);
+			spawnTimer = 0.f;
+		}
+	}
+
+	void UpdateAllHumans() 
+	{
+		UpdateAll(HumanList);
+	}
+
+	void RenderAllHumans(sf::RenderWindow& window)
+	{
+		RenderAll(HumanList, window);
+	}
+
+	void HumanToPlayerCollisionCheck()
+	{
+		for (int i = 0; i < HumanList.size(); i++)
+		{
+			if (Player->GetSprite().getGlobalBounds().findIntersection(HumanList[i]->GetSprite().getGlobalBounds()))
+			{
+				HumanList[i]->OnCollision();
+			}
+		}
+	}
+
 	void UpdateAllCharacters(sf::RenderWindow& window, InputHandler& inputHandler)
 	{
 		UpdateAll(CharacterList);
+		//UpdateAll(HumanList);
 		Player->Update();
 
 		inputHandler.MoveCharacter(*Player);
@@ -165,6 +220,15 @@ public:
 				//std::cout << "Character: " << i << " removed from list!" << std::endl;
 			}
 		}
+
+		for (int i = 0; i < HumanList.size(); i++)
+		{
+			if (!HumanList[i]->IsActive())
+			{
+				HumanList.erase(HumanList.begin() + i);
+				//std::cout << "Human: " << i << " removed from list!" << std::endl;
+			}
+		}
 	}
 
 	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
@@ -193,13 +257,7 @@ public:
 
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
-protected:
-	std::unique_ptr <PlayerCharacter> Player;
-	std::vector<std::unique_ptr<GameObject>> GameObjectList;
-	std::vector<std::unique_ptr<Character>> CharacterList;
-	std::vector<std::unique_ptr<Projectile>> ProjectileList;
-
-	float GetRandomNumber(float a, float b)
+	float GetRandomNumber(float a, float b) const
 	{
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -208,10 +266,19 @@ protected:
 		return randomNumber;
 	}
 
-	sf::Vector2f GetRandomDirection(float a, float b) 
+	sf::Vector2f GetRandomDirection(float a, float b) const
 	{
 		return sf::Vector2f(GetRandomNumber(a, b), GetRandomNumber(a, b));
 	}
+
+protected:
+	std::unique_ptr <PlayerCharacter> Player;
+	std::vector<std::unique_ptr<GameObject>> GameObjectList;
+	std::vector<std::unique_ptr<Character>> CharacterList;
+	std::vector<std::unique_ptr<Projectile>> ProjectileList;
+	std::vector<std::unique_ptr<HumanCharacter>> HumanList;
+
+
 
 	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
 	{

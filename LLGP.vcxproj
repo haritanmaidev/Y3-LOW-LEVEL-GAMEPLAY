@@ -139,6 +139,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="HumanCharacter.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HumanCharacter.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="packages\SFML\include\SFML\Audio.hpp" />
     <ClInclude Include="packages\SFML\include\SFML\Audio\AudioResource.hpp" />

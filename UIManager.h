@@ -3,7 +3,7 @@
 class UIManager
 {
 public:
-	static void Init(const std::string& fontPath)
+	static void InitScore(const std::string& fontPath)
 	{
 		if (font.openFromFile(fontPath))
 		{
@@ -20,7 +20,6 @@ public:
 	static void SubtractScore(int points) { score -= points; }
 	static void ResetScore() { score = 0; }
 	static void RenderUI(sf::RenderWindow& window) { window.draw(scoreText);}
-	static void RenderHealthBars();
 
 private:
 	inline static int score = 0;
