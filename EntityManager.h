@@ -75,9 +75,9 @@ public:
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 	
-	void EnemySpawner() 
+	void EnemySpawner(float&& rate) 
 	{
-		static float spawnRate = 4.f;
+		static float spawnRate = rate;
 		static float spawnTimer = 0.f;
 		spawnTimer += 0.1f;
 		if (spawnRate < spawnTimer)
@@ -111,9 +111,9 @@ public:
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 
-	void HumanSpawner() 
+	void HumanSpawner(float&& rate)
 	{
-		static float spawnRate = 6.f;
+		static float spawnRate = rate;
 		static float spawnTimer = 0.f;
 		spawnTimer += 0.1f;
 		if (spawnRate < spawnTimer)
@@ -162,6 +162,13 @@ public:
 			if (character->IsActive())
 			{
 				BorderCollisionCheck(*character);
+			}
+		}
+		for (auto& human : HumanList)
+		{
+			if (human->IsActive())
+			{
+				BorderCollisionCheck(*human);
 			}
 		}
 	}

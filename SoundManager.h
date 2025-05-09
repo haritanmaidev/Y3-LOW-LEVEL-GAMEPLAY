@@ -5,7 +5,7 @@
 class SoundManager
 {
 public:
-	static void PlaySound(const std::string& filepath, float volume = 50.f)
+	static void PlaySound(const std::string& filepath, float volume)
 	{
 		//NOTE: Making shared to ensure buffer is active as long as any object uses it
 		std::shared_ptr<sf::SoundBuffer> buffer = std::make_shared<sf::SoundBuffer>();
@@ -19,12 +19,26 @@ public:
 		Sounds.push_back(std::make_pair(std::move(sound), buffer));
 	}
 
+	static void PlayMusic(const std::string& filepath, float volume) 
+	{
+		if (!Music.openFromFile(filepath))
+		{
+			std::cout << "Music didn't load!" << std::endl;
+			//return false;
+		}
+		Music.setLooping(true);
+		Music.setVolume(volume);
+		Music.play();
+		//return true;
+	}
+
 	static void PlayPlayerHurtSound() { PlaySound("Audio/PlayerHurt.wav", 15.f); }
 	static void PlayProjectileSound() { PlaySound("Audio/GunFireBlop.wav", 25.f); }
-	static void PlayEnemySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 40.f); }
-	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHit.wav", 50.f); }
-	static void PlayEnemyDeathSound() { PlaySound("Audio/EnemyDeath.wav", 60.f);}
-	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 65.f); }
+	static void PlayEnemySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 30.f); }
+	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHit.wav", 40.f); }
+	static void PlayEnemyDeathSound() { PlaySound("Audio/EnemyDeath.wav", 50.f);}
+	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 55.f); }
+	static void PlayBackgroundMusic() { PlayMusic("Audio/GameMusic.ogg", 40.f); }
 
 	static void CleanUpSounds()
 	{
@@ -40,4 +54,7 @@ public:
 
 private:
 	inline static std::vector<std::pair<std::unique_ptr<sf::Sound>, std::shared_ptr<sf::SoundBuffer>>> Sounds;
+	inline static sf::Music Music;
+	//inline static std::unique_ptr<sf::Music> Music;
+
 };

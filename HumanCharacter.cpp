@@ -27,7 +27,8 @@ void HumanCharacter::Update()
 	if (IsActive())
 	{
 		randomMoveTimer += 0.1f;
-		if (randomMoveTimer > 2.f) // Move randomly every 2 seconds
+		static float randomMoveRate = 10.f;
+		if (randomMoveTimer > randomMoveRate)
 		{
 			randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
 			MoveCharacter(randomDirection);
@@ -38,7 +39,6 @@ void HumanCharacter::Update()
 			MoveCharacter(randomDirection);
 		}
 	}
-
 }
 
 void HumanCharacter::MoveCharacter(const sf::Vector2f& direction)
@@ -48,7 +48,6 @@ void HumanCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void HumanCharacter::OnCollision()
 {
-	SoundManager::PlayHumanRescueSound();
 	Die();
 	//TakeDamage(1);
 }
@@ -60,7 +59,7 @@ void HumanCharacter::TakeDamage(int damage)
 
 void HumanCharacter::Die()
 {
-	SoundManager::PlayEnemyDeathSound();
+	SoundManager::PlayHumanRescueSound();
 	UIManager::AddScore(score);
 	SetActive(false);
 }

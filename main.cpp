@@ -12,6 +12,7 @@ int main()
     InputHandler inputHandler;
 	EntityManager entityManager;
 	UIManager::InitScore("Fonts/GODOFWAR.ttf");
+	SoundManager::PlayBackgroundMusic();
 
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
@@ -37,8 +38,8 @@ int main()
             entityManager.UpdateAllProjectiles();
             entityManager.UpdateAllCharacters(window, inputHandler);
 			entityManager.UpdateAllHumans();
-            entityManager.EnemySpawner();
-            entityManager.HumanSpawner();
+            entityManager.EnemySpawner(4.f);
+            entityManager.HumanSpawner(8.f);
             entityManager.ProjectileToEnemyCollisionCheck();
 			entityManager.PlayerToEnemyCollisionCheck();
 			entityManager.HumanToPlayerCollisionCheck();

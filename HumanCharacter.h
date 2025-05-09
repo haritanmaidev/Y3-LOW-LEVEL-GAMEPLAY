@@ -18,13 +18,9 @@ public:
 	void TakeDamage(int damage) override;	
 	void Die() override;
 
-	//Class Functions
-	bool isRescued() const { return rescued; }
-
 private:
-	bool rescued = false;
-	float randomMoveTimer = 0.f;
 	const EntityManager& entityManager;
+	float randomMoveTimer = 0.f;
 	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
 };
 

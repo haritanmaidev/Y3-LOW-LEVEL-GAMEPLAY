@@ -3,7 +3,7 @@
 #include "UIManager.h"
 
 EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir) 
-: Character(spawn), playerref(player), travelDir(randomDir)
+: Character(spawn), PlayerRef(player), travelDir(randomDir)
 {
 	//sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
 	if (LoadGameObjectTextureFromFile("assets/Cropped/BasicEnemy.png", std::nullopt))
@@ -15,6 +15,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		SetTag("Enemy");
 		SoundManager::PlayEnemySpawnSound();
 		speed = 2.f;
+		health = 2;
 	}
 }
 
@@ -29,7 +30,7 @@ void EnemyCharacter::Update()
 
 	if (IsActive()) 
 	{
-		static sf::Vector2f playerPosition = playerref.GetSpriteConst().getPosition();
+		sf::Vector2f playerPosition = PlayerRef.GetPosition();
 		sf::Vector2f position = sprite.getPosition();
 		sf::Vector2f direction = playerPosition - position;
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);

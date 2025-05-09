@@ -31,7 +31,7 @@ public:
 	void SetVelocity(sf::Vector2f newVelocity) { velocity = newVelocity; }
 	bool IsActive() const { return isActive; }
 	const std::string& GetTag() const { return tag; }
-	sf::Vector2f GetPosition() { return sprite.getPosition(); }
+	const sf::Vector2f GetPosition() const { return sprite.getPosition(); }
 	sf::Vector2f GetScale() const { return sprite.getScale(); }
 	sf::Angle GetRotation() const { return sprite.getRotation(); }
 	sf::Sprite& GetSprite() { return sprite; }

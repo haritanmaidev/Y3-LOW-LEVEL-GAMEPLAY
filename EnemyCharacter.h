@@ -19,7 +19,7 @@ public:
 	void Die() override;
 
 private:
-	const PlayerCharacter& playerref;
+	const PlayerCharacter& PlayerRef;
 	float detectionRadius = 300.f;
 	sf::Vector2f travelDir = sf::Vector2f(0.f, 0.f);
 };

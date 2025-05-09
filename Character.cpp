@@ -32,12 +32,11 @@ void Character::TakeDamage(int damage)
 	isFlashing = true;
 	sprite.setColor(sf::Color::Red);
 	health -= damage;
-	if (health <= 0) Die();
 }
 
 void Character::SpriteFlash()
 {
-	static float flashTime = 0.5f;
+	static float flashTime = 0.3f;
 	static float flashTimer = 0.f;
 	flashTimer += 0.1f;
 	if (flashTime < flashTimer)
@@ -46,6 +45,7 @@ void Character::SpriteFlash()
 		sprite.setColor(sf::Color::White);
 		flashTimer = 0.f;
 		isFlashing = false;
+		if (health <= 0) Die();
 	}
 }
 
