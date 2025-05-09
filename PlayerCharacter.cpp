@@ -8,7 +8,7 @@ PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 	{
 		sprite.setTextureRect(drawbox);
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
-		sprite.setScale(sf::Vector2f(1.25f, 1.25f));
+		sprite.setScale(sf::Vector2f(2.25f, 2.25f));
 		SetTag("Player");
 	}
 }
@@ -29,9 +29,9 @@ void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void PlayerCharacter::OnCollision()
 {
-	TakeDamage(1);
+	//TakeDamage(1);
 	SoundManager::PlayPlayerHurtSound();
-	UIManager::SubtractScore(100);
+	//UIManager::SubtractScore(100);
 }
 
 void PlayerCharacter::TakeDamage(int damage)

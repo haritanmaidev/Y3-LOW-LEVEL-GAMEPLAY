@@ -10,18 +10,17 @@
 class EntityManager
 {
 public:
+	//Constructor & Destructor
 	EntityManager()
 	{
-		Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
-
-		SpawnHumanCharacter(GetRandomDirection(100, 500));
-
+		//Player = std::make_unique<PlayerCharacter>(sf::Vector2f(100.f, 100.f));
 		//ASK: This crashes the game?
-		//SpawnPlayerCharacter(sf::Vector2f(100.f, 100.f));
+		SpawnPlayerCharacter(sf::Vector2f(500.f, 500.f));
+		SpawnHumanCharacter(GetRandomDirection(100, 500));
 	}
-
 	~EntityManager() = default;
 
+	//==================================:::::|||||[--- TEMPLATE FUNCTIONS ---]|||||:::::==================================//
 	template <typename T> void Add(std::unique_ptr<T> && entity, std::vector<std::unique_ptr<T>>& list)
 	{
 		list.push_back(std::move(entity));
@@ -43,26 +42,40 @@ public:
 		}
 	}
 
-	//==================================:::::|||||[CHARACTER STUFF][CHARACTER STUFF][CHARACTER STUFF]|||||:::::==================================//
-	Character& GetPlayer() { return *Player; }
+	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
+	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
+	
+	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player) { Add(std::unique_ptr<Character>(player.release()), CharacterList); }
 
-	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player)
-	{ 
-		Add(std::unique_ptr<Character>(player.release()), CharacterList);
+	void AddHuman(std::unique_ptr<HumanCharacter>&& human) { Add(std::move(human), HumanList); }
+
+	void AddHumanToCharacterList(std::unique_ptr<HumanCharacter>& human) { Add(std::unique_ptr<Character>(human.release()), CharacterList); }
+
+	void AddEnemyToCharacterList(std::unique_ptr<EnemyCharacter>& enemy) { Add(std::unique_ptr<Character>(enemy.release()), CharacterList); }
+
+	void AddProjectile(std::unique_ptr<Projectile> projectile)
+{
+		Add(std::move(projectile), ProjectileList);
+		//Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList);
 	}
 
-	//NOTE: Current not used since I'm focusing on Singleplayer functionality
+	//==================================:::::|||||[--- SPAWN & SPAWNER FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
+		//NOTE: Current not used since I'm focusing on Singleplayer functionality
 		auto newCharacter = std::make_unique<PlayerCharacter>(position);
 		newCharacter->SetActive(true);
-		//PlayerPtr = newCharacter.get();
+		Player = newCharacter.get();
 		AddPlayerToCharacterList(newCharacter);
 	}
 
-	void AddEnemyToCharacterList(std::unique_ptr<EnemyCharacter>& enemy)
+	void SpawnHumanCharacter(const sf::Vector2f& position)
 	{
-		Add(std::unique_ptr<Character>(enemy.release()), CharacterList);
+		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
+		newHuman->SetActive(true);
+		//AddHuman(std::move(newHuman));
+		AddHumanToCharacterList(newHuman);
+		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
@@ -74,41 +87,12 @@ public:
 		AddEnemyToCharacterList(newCharacter);
 		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
-	
-	void EnemySpawner(float&& rate) 
-	{
-		static float spawnRate = rate;
-		static float spawnTimer = 0.f;
-		spawnTimer += 0.1f;
-		if (spawnRate < spawnTimer)
-		{
-			// Getting Random values between 0 and 1 and scaling them to desired proportion
-			float angle = GetRandomNumber(0,360);
-			float distance = GetRandomNumber(0,200);
-			sf::Vector2f spawnPosition = sf::Vector2f(800.f, GetRandomNumber(0, 1000)) + 
-										 sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
-			SpawnEnemyCharacter(spawnPosition);
-			spawnTimer = 0.f;
-		}
-	}
 
-	void AddHuman(std::unique_ptr<HumanCharacter>&& human) 
+	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
-		Add(std::move(human), HumanList);
-	}
-
-	void AddHumanCharacterToCharacterList(std::unique_ptr<HumanCharacter>& human)
-	{
-		Add(std::unique_ptr<Character>(human.release()), CharacterList);
-	}
-
-	void SpawnHumanCharacter(const sf::Vector2f& position)
-	{
-		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
-		newHuman->SetActive(true);
-		AddHuman(std::move(newHuman));
-		//AddHumanCharacterToCharacterList(newCharacter);
-		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
+		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
+		newProjectile->SetActive(true);
+		AddProjectile(std::move(newProjectile));
 	}
 
 	void HumanSpawner(float&& rate)
@@ -124,17 +108,24 @@ public:
 		}
 	}
 
-	void UpdateAllHumans() 
+	void EnemySpawner(float&& rate)
 	{
-		UpdateAll(HumanList);
+		static float spawnRate = rate;
+		static float spawnTimer = 0.f;
+		spawnTimer += 0.1f;
+		if (spawnRate < spawnTimer)
+		{
+			float angle = GetRandomNumber(0, 360);
+			float distance = GetRandomNumber(0, 200);
+			float locationY = GetRandomNumber(0, 1000);
+			sf::Vector2f spawnPosition = sf::Vector2f(800.f, locationY) + sf::Vector2f(cos(angle) * distance, sin(angle) * distance);
+			SpawnEnemyCharacter(spawnPosition);
+			spawnTimer = 0.f;
+		}
 	}
 
-	void RenderAllHumans(sf::RenderWindow& window)
-	{
-		RenderAll(HumanList, window);
-	}
-
-	void HumanToPlayerCollisionCheck()
+	//==================================:::::|||||[--- COLLISION FUNCTIONS ---]|||||:::::==================================//
+	void PlayerToHumanCollisionCheck()
 	{
 		for (int i = 0; i < HumanList.size(); i++)
 		{
@@ -144,18 +135,50 @@ public:
 			}
 		}
 	}
+	
+	void PlayerToEnemyCollisionCheck()
+	{
+		for (int i = 0; i < CharacterList.size(); i++)
+		{
+			if (Player->GetSprite().getGlobalBounds().findIntersection(CharacterList[i]->GetSprite().getGlobalBounds()))
+			{
+				std::cout << "Player Collided with Enemy: " << i << std::endl;
+				//Player->OnCollision();
+				CharacterList[i]->OnCollision();
+			}
+		}
+	}
+	
+	void ProjectileToEnemyCollisionCheck()
+	{
+		for (int i = 0; i < ProjectileList.size(); i++)
+		{
+			for (int j = 0; j < CharacterList.size(); j++)
+			{
+				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds()))
+				{
+					std::cout << "Projectile: " << i << "! Collided with Enemy: " << j << std::endl;
+					ProjectileList[i]->OnCollision();
+					CharacterList[j]->OnCollision();
+				}
+			}
+		}
+	}
+
+	//==================================:::::|||||[--- UPDATE FUNCTIONS ---]|||||:::::==================================//
+	void UpdateAllEntities() { UpdateAll(GameObjectList); }
+
+	void UpdateAllHumans() { UpdateAll(HumanList); }
 
 	void UpdateAllCharacters(sf::RenderWindow& window, InputHandler& inputHandler)
 	{
 		UpdateAll(CharacterList);
-		//UpdateAll(HumanList);
-		Player->Update();
+		UpdateAll(HumanList);
 
-		inputHandler.MoveCharacter(*Player);
+		inputHandler.MoveCharacter(GetPlayer());
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
 
 		//ASK: How can I make this work with Character foreach loop? Player throws an error throughout the script when moved in the memory due to AddPlayer... function
-		
 		BorderCollisionCheck(*Player);
 		for (auto& character : CharacterList)
 		{
@@ -173,40 +196,23 @@ public:
 		}
 	}
 
+	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
+
+	//==================================:::::|||||[--- RENDER FUNCTIONS ---]|||||:::::==================================//
+	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
+
 	void RenderAllCharacters(sf::RenderWindow& window)
 	{
-		Player->Render(window);
 		RenderAll(CharacterList, window);
+		RenderAll(HumanList, window);
 	}
 
-	void ProjectileToEnemyCollisionCheck()
-	{
-		for (int i = 0; i < ProjectileList.size(); i++)
-		{
-			for (int j = 0; j < CharacterList.size(); j++)
-			{
-				if (ProjectileList[i]->GetSprite().getGlobalBounds().findIntersection(CharacterList[j]->GetSprite().getGlobalBounds())) 
-				{
-					std::cout << "Projectile: " << i << "! Collided with Enemy: "<< j << std::endl;
-					ProjectileList[i]->OnCollision();
-					CharacterList[j]->OnCollision();
-				}
-			}
-		}
-	}
+	void RenderAllHumans(sf::RenderWindow& window) { RenderAll(HumanList, window); }
 
-	void PlayerToEnemyCollisionCheck()
-	{
-		for (int i = 0; i < CharacterList.size(); i++)
-		{
-			if (Player->GetSprite().getGlobalBounds().findIntersection(CharacterList[i]->GetSprite().getGlobalBounds()))
-			{
-				std::cout << "Player Collided with Enemy: " << i << std::endl;
-				Player->OnCollision();
-				CharacterList[i]->OnCollision();
-			}
-		}
-	}
+	void RenderAllProjectiles(sf::RenderWindow& window) { RenderAll(ProjectileList, window); }
+
+	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
+	Character& GetPlayer() { return *Player; }
 
 	void RemoveEntityFromList()
 	{
@@ -238,32 +244,6 @@ public:
 		}
 	}
 
-	//==================================:::::|||||[PROJECTILE STUFF][PROJECTILE STUFF][PROJECTILE STUFF]|||||:::::==================================//
-	void AddProjectile(std::unique_ptr<Projectile> projectile)
-	{
-		Add(std::move(projectile), ProjectileList);
-		//Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList);
-		//std::cout << "Projectile List Length = " << ProjectileList.size() << std::endl;
-	}
-
-	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
-	{
-		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
-		newProjectile->SetActive(true);
-		AddProjectile(std::move(newProjectile));
-	}
-
-	void UpdateAllProjectiles() { UpdateAll(ProjectileList); }
-
-	void RenderAllProjectiles(sf::RenderWindow& window){ RenderAll(ProjectileList, window); }
-
-	//==================================:::::|||||[ALL GAME OBJECTS][ALL GAME OBJECTS][ALL GAME OBJECTS]|||||:::::==================================//
-	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
-
-	void UpdateAllEntities() { UpdateAll(GameObjectList); }
-
-	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
-
 	float GetRandomNumber(float a, float b) const
 	{
 		std::random_device rd;
@@ -279,14 +259,13 @@ public:
 	}
 
 protected:
-	std::unique_ptr <PlayerCharacter> Player;
+	PlayerCharacter * Player;
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 	std::vector<std::unique_ptr<Character>> CharacterList;
 	std::vector<std::unique_ptr<Projectile>> ProjectileList;
 	std::vector<std::unique_ptr<HumanCharacter>> HumanList;
 
-
-
+private:
 	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
 	{
 		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
@@ -297,8 +276,7 @@ protected:
 
 	void BorderCollisionCheck(Character& mainCharacter)
 	{
-		//TODO: Makes this work with hitbox variable
-		//REFACTOR: COULD REFACTOR TO MAKE IT CLEANER!!
+		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
 		if (mainCharacter.GetSprite().getPosition().x < 0)
 		{

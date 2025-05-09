@@ -35,14 +35,14 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             //entityManager.UpdateAllEntities();
-            entityManager.UpdateAllProjectiles();
             entityManager.UpdateAllCharacters(window, inputHandler);
-			entityManager.UpdateAllHumans();
+			//entityManager.UpdateAllHumans();
+            entityManager.UpdateAllProjectiles();
             entityManager.EnemySpawner(4.f);
             entityManager.HumanSpawner(8.f);
-            entityManager.ProjectileToEnemyCollisionCheck();
-			entityManager.PlayerToEnemyCollisionCheck();
-			entityManager.HumanToPlayerCollisionCheck();
+			//entityManager.PlayerToEnemyCollisionCheck();
+			entityManager.PlayerToHumanCollisionCheck();
+            //entityManager.ProjectileToEnemyCollisionCheck();
             entityManager.RemoveEntityFromList();
 
 			SoundManager::CleanUpSounds();
