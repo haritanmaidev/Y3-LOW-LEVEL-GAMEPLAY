@@ -30,7 +30,6 @@ void PlayerCharacter::OnCollision(const std::string& tag)
 	{
 		TakeDamage(1);
 	}
-
 	else if (tag == "EnemyHulk")
 	{
 		TakeDamage(1);

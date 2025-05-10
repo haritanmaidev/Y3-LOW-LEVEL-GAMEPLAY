@@ -195,6 +195,7 @@ public:
 
 	float GetRandomNumber(float a, float b) const
 	{
+		//This function is completely from an online source, as I saw no other way to achieve this
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<float> dis(a, b);

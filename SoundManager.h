@@ -24,12 +24,10 @@ public:
 		if (!Music.openFromFile(filepath))
 		{
 			std::cout << "Music didn't load!" << std::endl;
-			//return false;
 		}
 		Music.setLooping(true);
 		Music.setVolume(volume);
 		Music.play();
-		//return true;
 	}
 
 	static void PlaySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 50.f); }
@@ -56,6 +54,4 @@ public:
 private:
 	inline static std::vector<std::pair<std::unique_ptr<sf::Sound>, std::shared_ptr<sf::SoundBuffer>>> Sounds;
 	inline static sf::Music Music;
-	//inline static std::unique_ptr<sf::Music> Music;
-
 };

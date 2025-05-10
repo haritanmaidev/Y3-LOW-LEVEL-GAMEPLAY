@@ -22,4 +22,3 @@ private:
 	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
 	float randomMoveTimer = 0.f;
 };
-

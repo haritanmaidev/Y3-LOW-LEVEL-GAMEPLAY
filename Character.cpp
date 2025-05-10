@@ -51,6 +51,7 @@ void Character::SpriteFlash()
 
 void Character::Die()
 {
+	if(!IsActive()) return;
 	SetActive(false);
-	std::cout << "Character is dead!" << std::endl;
+	std::cout << "GameObject is dead!" << std::endl;
 }

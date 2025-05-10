@@ -12,7 +12,6 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		SetTag("Human");
 		speed = 2.f;
 		score = 500;
-		health = 1;
 		randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
 	}
 }
