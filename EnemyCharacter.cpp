@@ -54,7 +54,7 @@ void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 	Character::MoveCharacter(direction);
 }
 
-void EnemyCharacter::OnCollision()
+void EnemyCharacter::OnCollision(const std::string& tag)
 {
 	SoundManager::PlayEnemyHurtSound();
 	TakeDamage(1);

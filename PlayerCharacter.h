@@ -11,7 +11,7 @@ public:
 	void Awake() override;
 	void Update() override;
 	void MoveCharacter(const sf::Vector2f& direction) override;
-	void OnCollision() override;
+	void OnCollision(const std::string& tag) override;
 	void TakeDamage(int damage) override;
 	void Die() override;
 

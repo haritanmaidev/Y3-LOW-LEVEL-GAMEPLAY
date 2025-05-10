@@ -1,4 +1,5 @@
 ﻿  EnemyHulk.cpp
+  GameObject.cpp
   HumanCharacter.cpp
   InputHandler.cpp
   main.cpp

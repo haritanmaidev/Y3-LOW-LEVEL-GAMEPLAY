@@ -42,7 +42,7 @@ void EnemyHulk::MoveCharacter(const sf::Vector2f& direction)
 	Character::MoveCharacter(direction);
 }
 
-void EnemyHulk::OnCollision() 
+void EnemyHulk::OnCollision(const std::string& tag)
 {
 	SoundManager::PlayEnemyHitSound();
 }

@@ -16,7 +16,7 @@ public:
 	//REFACTOR: REMOVE THIS
 	virtual void Awake() = 0; 
 	virtual void Update() = 0;
-	virtual void OnCollision() = 0;
+	virtual void OnCollision(const std::string& tag) = 0;
 
 	//NOTE:Make this Render virtual if I wanna do particle effects for certain classes!
 	void Render(sf::RenderWindow &window) { window.draw(sprite); }

@@ -9,7 +9,7 @@ public:
 
 	//Override Functions
 	void Update() override;
-	void OnCollision() override;
+	void OnCollision(const std::string& tag) override;
 
 	//Inline Functions
 	void SetHealth(int newHealth) { this->health = newHealth; }

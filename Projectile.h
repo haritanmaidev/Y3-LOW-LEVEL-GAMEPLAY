@@ -33,7 +33,7 @@ public:
 		//std::cout << "ProjectileList's Update is called!" << std::endl;
 	}
 
-	void OnCollision() override
+	void OnCollision(const std::string& tag) override
 	{
 		SetPosition(2000, 2000);
 		SetActive(false);

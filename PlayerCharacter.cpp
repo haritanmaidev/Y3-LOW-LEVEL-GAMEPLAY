@@ -27,7 +27,7 @@ void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 	Character::MoveCharacter(direction);
 }
 
-void PlayerCharacter::OnCollision()
+void PlayerCharacter::OnCollision(const std::string& tag)
 {
 	//TakeDamage(1);
 	SoundManager::PlayPlayerHurtSound();

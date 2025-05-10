@@ -46,7 +46,7 @@ void HumanCharacter::MoveCharacter(const sf::Vector2f& direction)
 	Character::MoveCharacter(direction);
 }
 
-void HumanCharacter::OnCollision()
+void HumanCharacter::OnCollision(const std::string& tag)
 {
 	Die();
 	//TakeDamage(1);

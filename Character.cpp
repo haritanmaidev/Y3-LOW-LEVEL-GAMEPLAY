@@ -23,7 +23,7 @@ void Character::MoveCharacter(const sf::Vector2f& direction)
 	sprite.move(direction * speed);
 }
 
-void Character::OnCollision()
+void Character::OnCollision(const std::string& tag)
 {
 }
 

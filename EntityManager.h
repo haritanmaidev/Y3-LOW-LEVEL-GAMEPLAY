@@ -160,8 +160,8 @@ public:
 			{
 				if (i != j && GameObjectList[i]->GetSprite().getGlobalBounds().findIntersection(GameObjectList[j]->GetSprite().getGlobalBounds()))
 				{
-					GameObjectList[i]->OnCollision();
-					GameObjectList[j]->OnCollision();
+					GameObjectList[i]->OnCollision(GameObjectList[j]->GetTag());
+					GameObjectList[j]->OnCollision(GameObjectList[j]->GetTag());
 				}
 			}
 		}
@@ -225,6 +225,8 @@ private:
 
 	void BorderCollisionCheck(GameObject& mainCharacter)
 	{
+		if (mainCharacter.GetTag() == "Projectile") return;
+
 		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
 		if (mainCharacter.GetSprite().getPosition().x < 0)
