@@ -3,13 +3,6 @@
 #include "EntityManager.h"
 #include <iostream>
 
-void InputHandler::Update(sf::Sprite &characterRef, sf::Sprite& projectileRef)
-{
-	//ASK: Is this the right way to do this?
-	//MoveCharacter(characterRef);
-	//FireProjectile();
-}	
-
 void InputHandler::MoveCharacter(Character& character)
 {
 	//Resetting direction to 0 since this runs every frame. To stop the character movement when no inputs pressed
@@ -48,6 +41,9 @@ void InputHandler::MoveCharacter(Character& character)
 	{
 		lastDirection = direction;
 	}
+
+	sf::Vector2f pos = character.GetPosition();
+	std::cout << "Character Position: ( X = " << pos.x << ", Y = " << pos.y << ")" << std::endl;
 
 	//character.MoveCharacter(character.GetVelocity());
 	character.GetSprite().move(velocity);

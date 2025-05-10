@@ -8,6 +8,7 @@ Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn
 	sprite.setScale(sf::Vector2f(.25f, .25f));
 	sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 	sprite.setPosition(spawnPoint);
+
 }
 
 void Character::Update()

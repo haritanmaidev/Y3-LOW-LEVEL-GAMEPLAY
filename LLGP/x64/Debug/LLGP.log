@@ -1,11 +1,32 @@
-﻿  EnemyHulk.cpp
-  HumanCharacter.cpp
-  InputHandler.cpp
-  main.cpp
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         with
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         [
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:             _Rep=__int64
-D:\Repo\LOW-LEVEL-GAMEPLAY\main.cpp(28,125): warning C4244:         ]
-  Generating Code...
+﻿  PlayerCharacter.cpp
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,50): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,50): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,50): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,50): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,50): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,40): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,40): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,40): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(10,40): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,97): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,97): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,97): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,97): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,97): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,65): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,65): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,65): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(20,65): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,54): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,54): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,54): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,54): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,54): warning C4244:         ]
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,44): warning C4244:         with
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,44): warning C4244:         [
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,44): warning C4244:             T=float
+D:\Repo\LOW-LEVEL-GAMEPLAY\UIManager.h(21,44): warning C4244:         ]
   LLGP.vcxproj -> D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

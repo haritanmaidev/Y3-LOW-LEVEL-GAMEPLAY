@@ -68,7 +68,7 @@ protected:
 	std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
 	sf::Sprite sprite = sf::Sprite(*texture);
 	//sf::IntRect drawbox = sf::IntRect({0, 0}, {0, 0});
-	sf::IntRect hitbox = sf::IntRect({0, 0} , {0, 0});
+	sf::IntRect hitbox = sf::IntRect({0, 0} , {10, 10});
 	std::string tag;
 	int id = 0;
 	bool isActive = true;

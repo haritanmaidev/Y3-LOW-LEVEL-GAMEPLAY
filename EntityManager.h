@@ -51,9 +51,9 @@ public:
 	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
 	void AddEntity(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
 	
-	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player) { Add(std::unique_ptr<Character>(player.release()), CharacterList); }
-
 	void AddHuman(std::unique_ptr<HumanCharacter>&& human) { Add(std::move(human), HumanList); }
+
+	void AddPlayerToCharacterList(std::unique_ptr<PlayerCharacter>& player) { Add(std::unique_ptr<Character>(player.release()), CharacterList); }
 
 	void AddHumanToCharacterList(std::unique_ptr<HumanCharacter>& human) { Add(std::unique_ptr<Character>(human.release()), CharacterList); }
 
@@ -74,6 +74,7 @@ public:
 		newCharacter->SetActive(true);
 		Player = newCharacter.get();
 		AddPlayerToCharacterList(newCharacter);
+		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
 	}
 
 	void SpawnHumanCharacter(const sf::Vector2f& position)
@@ -82,7 +83,7 @@ public:
 		newHuman->SetActive(true);
 		AddHuman(std::move(newHuman));
 		//AddHumanToCharacterList(newHuman);
-		//Add(std::unique_ptr<GameObject>(newCharacter.release()), GameObjectList);
+		//Add(std::unique_ptr<GameObject>(newHuman.release()), GameObjectList);
 	}
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
@@ -309,27 +310,27 @@ private:
 	{
 		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
-		if (mainCharacter.GetSprite().getPosition().x < 0)
+		if (mainCharacter.GetSprite().getPosition().x < 125)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(0, mainCharacter.GetSprite().getPosition().y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(125, mainCharacter.GetSprite().getPosition().y));
 			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
 		}
 		//Left Collision
-		if (mainCharacter.GetSprite().getPosition().x + mainCharacter.GetSprite().getGlobalBounds().size.x > 1000)
+		if (mainCharacter.GetSprite().getPosition().x + mainCharacter.GetSprite().getGlobalBounds().size.x > 875)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(1000 - mainCharacter.GetSprite().getGlobalBounds().size.x, mainCharacter.GetSprite().getPosition().y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(875 - mainCharacter.GetSprite().getGlobalBounds().size.x, mainCharacter.GetSprite().getPosition().y));
 			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
 		}
 		//Top Collision
-		if (mainCharacter.GetSprite().getPosition().y < 0)
+		if (mainCharacter.GetSprite().getPosition().y < 125)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 0));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 125));
 			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
 		}
 		//Bottom Collision
-		if (mainCharacter.GetSprite().getPosition().y + mainCharacter.GetSprite().getGlobalBounds().size.y > 1000)
+		if (mainCharacter.GetSprite().getPosition().y + mainCharacter.GetSprite().getGlobalBounds().size.y > 875)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 1000 - mainCharacter.GetSprite().getGlobalBounds().size.y));
+			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 875 - mainCharacter.GetSprite().getGlobalBounds().size.y));
 			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
 		}
 	}

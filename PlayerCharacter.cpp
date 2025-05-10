@@ -3,10 +3,11 @@
 
 PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 {
-	sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
-	if(LoadGameObjectTextureFromFile("assets/walk.png", drawbox))
+	//sf::IntRect drawbox = sf::IntRect({ 8, 8 }, { 24, 38 });
+	if(LoadGameObjectTextureFromFile("assets/Cropped/Human.png", std::nullopt))
 	{
-		sprite.setTextureRect(drawbox);
+		//sprite.setTextureRect(drawbox);
+		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(2.25f, 2.25f));
 		SetTag("Player");

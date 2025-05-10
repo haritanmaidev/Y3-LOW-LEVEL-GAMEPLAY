@@ -2,19 +2,19 @@
 #include "EntityManager.h"
 #include "SoundManager.h"
 #include "UIManager.h"
-#define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 1000
 
 void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite);
 
 int main()
 {
+    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
     InputHandler inputHandler;
 	EntityManager entityManager;
-	UIManager::InitScore("Fonts/GODOFWAR.ttf");
+    UIManager::InitBorder(WINDOW_WIDTH, WINDOW_HEIGHT);
+	UIManager::InitScore("Fonts/GODOFWAR.ttf", WINDOW_WIDTH, WINDOW_HEIGHT);
 	SoundManager::PlayBackgroundMusic();
-
-    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
 
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -63,6 +63,7 @@ int main()
 		entityManager.RenderAllHumans(window);
 		UIManager::RenderUI(window);
 		//entityManager.RenderAllGameObjects(window);
+        DrawDebugLines(window, entityManager.GetPlayer().GetSprite());
         window.display();
     }
 }
