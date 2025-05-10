@@ -13,8 +13,6 @@ public:
 	virtual ~GameObject() = default;
 
 	//Pure functions
-	//REFACTOR: REMOVE THIS
-	virtual void Awake() = 0; 
 	virtual void Update() = 0;
 	virtual void OnCollision(const std::string& tag) = 0;
 

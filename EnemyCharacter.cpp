@@ -13,15 +13,10 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Enemy");
-		SoundManager::PlaySpawnSound();
 		speed = 2.f;
 		health = 2;
+		MaxHealth = health;
 	}
-}
-
-void EnemyCharacter::Awake()
-{
-
 }
 
 void EnemyCharacter::Update()
@@ -56,12 +51,21 @@ void EnemyCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void EnemyCharacter::OnCollision(const std::string& tag)
 {
-	SoundManager::PlayEnemyHurtSound();
-	TakeDamage(1);
+	if (tag == "Player") 
+	{
+		TakeDamage(1);
+	}
+	else if (tag == "Projectile")
+	{
+		TakeDamage(1);
+		std::cout << "Enemy collided with: " << tag << std::endl;
+		std::cout << "Current Health: " << health << std::endl;
+	}
 }
 
 void EnemyCharacter::TakeDamage(int damage)
 {
+	SoundManager::PlayEnemyHurtSound();
 	Character::TakeDamage(damage);
 }
 
@@ -70,5 +74,5 @@ void EnemyCharacter::Die()
 	SoundManager::PlayEnemyDeathSound();
 	UIManager::AddScore(score);
 	SetPosition(-2000, 2000);
-	SetActive(false);
+	Character::Die();
 }

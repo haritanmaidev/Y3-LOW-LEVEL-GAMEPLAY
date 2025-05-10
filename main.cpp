@@ -34,9 +34,10 @@ int main()
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
             entityManager.UpdateAllEntities(window, inputHandler);
-            entityManager.HumanSpawner(8.f);
-            entityManager.EnemySpawner(4.f);
-            entityManager.EnemyHulkSpawner(5.f);
+			entityManager.GameObjectListCollisionCheck();
+            //entityManager.HumanSpawner(18.f);
+            entityManager.EnemySpawner(14.f);
+            entityManager.EnemyHulkSpawner(15.f);
             entityManager.RemoveEntityFromList();
 			SoundManager::CleanUpSounds();
 			UIManager::Update();

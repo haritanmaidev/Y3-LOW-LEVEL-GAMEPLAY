@@ -26,6 +26,7 @@ public:
 
 protected:
 	int health = 3;
+	int MaxHealth = 0;
 	int score = 100;
 	float speed = 10.f;
 	bool isFlashing = false;

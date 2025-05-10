@@ -32,8 +32,8 @@ public:
 		//return true;
 	}
 
-	static void PlayPlayerHurtSound() { PlaySound("Audio/PlayerHurt.wav", 15.f); }
 	static void PlaySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 50.f); }
+	static void PlayPlayerHurtSound() { PlaySound("Audio/PlayerHurt.wav", 15.f); }
 	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 65.f); }
 	static void PlayEnemyHitSound() { PlaySound("Audio/EnemyHit2.wav", 70.f); }
 	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHurt.wav", 60.f); }

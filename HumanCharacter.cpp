@@ -10,16 +10,11 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Human");
-		SetActive(true);
-		SoundManager::PlaySpawnSound();
 		speed = 2.f;
 		score = 500;
+		health = 1;
 		randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
 	}
-}
-
-void HumanCharacter::Awake()
-{
 }
 
 void HumanCharacter::Update()
@@ -48,8 +43,14 @@ void HumanCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void HumanCharacter::OnCollision(const std::string& tag)
 {
-	Die();
-	//TakeDamage(1);
+	if (tag == "Player")
+	{
+		Rescue();
+	}
+	else if (tag == "EnemyHulk")
+	{
+		TakeDamage(1);
+	}
 }
 
 void HumanCharacter::TakeDamage(int damage)
@@ -60,7 +61,15 @@ void HumanCharacter::TakeDamage(int damage)
 //Techically Rescue
 void HumanCharacter::Die()
 {
+	//SoundManager::PlayHumanHurtSound();
+	SoundManager::PlayPlayerHurtSound();
+	UIManager::SubtractScore(score);
+	Character::Die();
+}
+
+void HumanCharacter::Rescue() 
+{
 	SoundManager::PlayHumanRescueSound();
 	UIManager::AddScore(score);
-	SetActive(false);
+	Character::Die();
 }

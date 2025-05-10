@@ -2,12 +2,11 @@
 
 Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn)
 {
-	//sf::IntRect drawbox = sf::IntRect({ 0 , 0 }, { 0 , 0 });
 	LoadGameObjectTextureFromFile("assets/errorcharacter.png", std::nullopt);
-	//hitbox.findIntersection()
 	sprite.setScale(sf::Vector2f(.25f, .25f));
 	sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 	sprite.setPosition(spawnPoint);
+	MaxHealth = health;
 }
 
 void Character::Update()
@@ -29,11 +28,11 @@ void Character::OnCollision(const std::string& tag)
 
 void Character::TakeDamage(int damage)
 {
-	if (health <= 0) return;
+	//if (health < 0) return; //Safety measure since I ran into getting like 20 collisions in half a second.
 	isFlashing = true;
 	sprite.setColor(sf::Color::Red);
 	health -= damage;
-	if (health <= 0) Die();
+	if (health <= 0 || damage >= MaxHealth) Die(); //Instant kill if damage is very high
 }
 
 void Character::SpriteFlash()
@@ -52,4 +51,6 @@ void Character::SpriteFlash()
 
 void Character::Die()
 {
+	SetActive(false);
+	std::cout << "Character is dead!" << std::endl;
 }

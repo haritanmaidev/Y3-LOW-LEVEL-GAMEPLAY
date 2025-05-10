@@ -8,7 +8,6 @@ public:
 	~PlayerCharacter() = default;
 
 	//Override Functions
-	void Awake() override;
 	void Update() override;
 	void MoveCharacter(const sf::Vector2f& direction) override;
 	void OnCollision(const std::string& tag) override;

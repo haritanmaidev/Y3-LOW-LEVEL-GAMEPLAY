@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 #include <iostream>
 #include "GameObject.h"
-#include <SFML/Audio.hpp>
+#include "SoundManager.h"
 
 class Projectile : public GameObject
 {
@@ -21,11 +21,6 @@ public:
 		SetActive(true);
 	}
 
-	//NOTE:Removing Awake is throwing me "Projectile can't instantiate abstract class" error
-	void Awake() override
-	{
-	}
-
 	void Update() override
 	{
 		sprite.move(aimDirection * projectileSpeed);
@@ -35,14 +30,22 @@ public:
 
 	void OnCollision(const std::string& tag) override
 	{
-		SetPosition(2000, 2000);
-		SetActive(false);
+		if(tag == "Enemy")
+		{
+			std::cout << "Projectile collided with: " << tag << std::endl;
+			SetActive(false);
+		}
+		else if(tag == "EnemyHulk")
+		{
+			std::cout << "Projectile collided with: " << tag << std::endl;
+			SetActive(false);
+		}
 	}
 
 	void ProjectileBorderCheck()
 	{
 		sf::Vector2f pos = sprite.getPosition();
-		if (pos.x < 0 || pos.x > 1000 || pos.y < 0 || pos.y > 1000) { SetActive(false); }
+		if (pos.x < 0 || pos.x > 1000 || pos.y < 0 || pos.y > 1000) SetActive(false);
 	}
 
 private:

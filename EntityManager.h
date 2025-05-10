@@ -207,14 +207,10 @@ public:
 		return sf::Vector2f(GetRandomNumber(a, b), GetRandomNumber(a, b));
 	}
 
-protected:
+private:
 	PlayerCharacter* Player;
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
-	std::vector<std::unique_ptr<Character>> CharacterList;
-	std::vector<std::unique_ptr<Projectile>> ProjectileList;
-	std::vector<std::unique_ptr<HumanCharacter>> HumanList;
 
-private:
 	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)
 	{
 		float angle = atan2(sf::Mouse::getPosition(window).y - player.GetSprite().getPosition().y,
