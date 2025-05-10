@@ -11,7 +11,7 @@ EnemyHulk::EnemyHulk(const sf::Vector2f& spawn, const PlayerCharacter& player, s
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		SetScale(.15f, .15f);
 		SetTag("EnemyHulk");
-		SoundManager::PlayEnemySpawnSound();
+		SoundManager::PlaySpawnSound();
 		speed = 1.f;
 		health = 1000;
 		randomDirection = entityManager.GetRandomDirection(-1, 1);

@@ -30,22 +30,14 @@ int main()
         timeSinceLastPhysicsLoop += deltaTime;
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
-            //Do physics
 			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-            //entityManager.UpdateAllEntities();
-            entityManager.UpdateAllCharacters(window, inputHandler);
-			//entityManager.UpdateAllHumans();
-            entityManager.UpdateAllProjectiles();
+            entityManager.UpdateAllEntities(window, inputHandler);
             entityManager.HumanSpawner(8.f);
             entityManager.EnemySpawner(4.f);
             entityManager.EnemyHulkSpawner(5.f);
-			entityManager.PlayerToCharacterCollisionCheck();
-			entityManager.PlayerToHumanCollisionCheck();
-            entityManager.ProjectileToCharacterCollisionCheck();
             entityManager.RemoveEntityFromList();
-
 			SoundManager::CleanUpSounds();
 			UIManager::Update();
         }
@@ -58,11 +50,8 @@ int main()
         }
 
         window.clear();
-		entityManager.RenderAllProjectiles(window);
-        entityManager.RenderAllCharacters(window);
-		entityManager.RenderAllHumans(window);
 		UIManager::RenderUI(window);
-		//entityManager.RenderAllGameObjects(window);
+		entityManager.RenderAllGameObjects(window);
         window.display();
     }
 }

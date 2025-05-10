@@ -33,12 +33,12 @@ public:
 	}
 
 	static void PlayPlayerHurtSound() { PlaySound("Audio/PlayerHurt.wav", 15.f); }
-	static void PlayProjectileSound() { PlaySound("Audio/GunFireBlop.wav", 35.f); }
-	static void PlayEnemySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 50.f); }
+	static void PlaySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 50.f); }
+	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 65.f); }
+	static void PlayEnemyHitSound() { PlaySound("Audio/EnemyHit2.wav", 70.f); }
 	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHurt.wav", 60.f); }
 	static void PlayEnemyDeathSound() { PlaySound("Audio/EnemyDeath.wav", 70.f);}
-	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 65.f); }
-	static void PlayEnemyHitSound() { PlaySound("Audio/EnemyHit.wav", 60.f); }
+	static void PlayProjectileSound() { PlaySound("Audio/GunFireBlop.wav", 35.f); }
 	static void PlayBackgroundMusic() { PlayMusic("Audio/GameMusic.ogg", 85.f); }
 
 	static void CleanUpSounds()

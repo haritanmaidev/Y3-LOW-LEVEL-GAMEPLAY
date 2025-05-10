@@ -11,7 +11,7 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Human");
 		SetActive(true);
-		SoundManager::PlayEnemySpawnSound();
+		SoundManager::PlaySpawnSound();
 		speed = 2.f;
 		score = 500;
 		randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);

@@ -13,7 +13,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Enemy");
-		SoundManager::PlayEnemySpawnSound();
+		SoundManager::PlaySpawnSound();
 		speed = 2.f;
 		health = 2;
 	}
