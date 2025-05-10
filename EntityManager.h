@@ -188,7 +188,7 @@ public:
 			if (!GameObjectList[i]->IsActive())
 			{
 				GameObjectList.erase(GameObjectList.begin() + i);
-				//std::cout << "GameObject: " << i << " removed from list!" << std::endl;
+				std::cout << "GameObject: " << i << " removed from list!" << std::endl;
 			}
 		}
 	}
@@ -220,34 +220,37 @@ private:
 		return sf::Vector2f(cos(angle), sin(angle));
 	}
 
-	void BorderCollisionCheck(GameObject& mainCharacter)
+	void BorderCollisionCheck(GameObject& object)
 	{
-		if (mainCharacter.GetTag() == "Projectile") return;
 
 		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
-		if (mainCharacter.GetSprite().getPosition().x < 0)
+		if (object.GetSprite().getPosition().x < 0)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(0, mainCharacter.GetSprite().getPosition().y));
-			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
+			object.GetSprite().setPosition(sf::Vector2f(0, object.GetSprite().getPosition().y));
+			object.SetVelocity(sf::Vector2f(-object.GetVelocity().x, object.GetVelocity().y));
+			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}
 		//Left Collision
-		if (mainCharacter.GetSprite().getPosition().x + mainCharacter.GetSprite().getGlobalBounds().size.x > 1000)
+		if (object.GetSprite().getPosition().x + object.GetSprite().getGlobalBounds().size.x > 1000)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(1000 - mainCharacter.GetSprite().getGlobalBounds().size.x, mainCharacter.GetSprite().getPosition().y));
-			mainCharacter.SetVelocity(sf::Vector2f(-mainCharacter.GetVelocity().x, mainCharacter.GetVelocity().y));
+			object.GetSprite().setPosition(sf::Vector2f(1000 - object.GetSprite().getGlobalBounds().size.x, object.GetSprite().getPosition().y));
+			object.SetVelocity(sf::Vector2f(-object.GetVelocity().x, object.GetVelocity().y));
+			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}
 		//Top Collision
-		if (mainCharacter.GetSprite().getPosition().y < 0)
+		if (object.GetSprite().getPosition().y < 0)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 0));
-			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
+			object.GetSprite().setPosition(sf::Vector2f(object.GetSprite().getPosition().x, 0));
+			object.SetVelocity(sf::Vector2f(object.GetVelocity().x, -object.GetVelocity().y));
+			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}
 		//Bottom Collision
-		if (mainCharacter.GetSprite().getPosition().y + mainCharacter.GetSprite().getGlobalBounds().size.y > 1000)
+		if (object.GetSprite().getPosition().y + object.GetSprite().getGlobalBounds().size.y > 1000)
 		{
-			mainCharacter.GetSprite().setPosition(sf::Vector2f(mainCharacter.GetSprite().getPosition().x, 1000 - mainCharacter.GetSprite().getGlobalBounds().size.y));
-			mainCharacter.SetVelocity(sf::Vector2f(mainCharacter.GetVelocity().x, -mainCharacter.GetVelocity().y));
+			object.GetSprite().setPosition(sf::Vector2f(object.GetSprite().getPosition().x, 1000 - object.GetSprite().getGlobalBounds().size.y));
+			object.SetVelocity(sf::Vector2f(object.GetVelocity().x, -object.GetVelocity().y));
+			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}
 	}
 };

@@ -26,13 +26,20 @@ void Character::OnCollision(const std::string& tag)
 {
 }
 
-void Character::TakeDamage(int damage)
+void Character::TakeDamage(int damage, const std::string& damageBy)
 {
 	//if (health < 0) return; //Safety measure since I ran into getting like 20 collisions in half a second.
 	isFlashing = true;
 	sprite.setColor(sf::Color::Red);
 	health -= damage;
-	if (health <= 0 || damage >= MaxHealth) Die(); //Instant kill if damage is very high
+	if (health <= 0 || damage >= MaxHealth) Die(damageBy); //Instant kill if damage is very high
+}
+
+void Character::Die(const std::string& killedBy)
+{
+	if(!IsActive()) return;
+	SetActive(false);
+	std::cout << "GameObject is dead!" << std::endl;
 }
 
 void Character::SpriteFlash()
@@ -47,11 +54,4 @@ void Character::SpriteFlash()
 		flashTimer = 0.f;
 		isFlashing = false;
 	}
-}
-
-void Character::Die()
-{
-	if(!IsActive()) return;
-	SetActive(false);
-	std::cout << "GameObject is dead!" << std::endl;
 }

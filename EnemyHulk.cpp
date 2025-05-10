@@ -57,11 +57,11 @@ void EnemyHulk::OnCollision(const std::string& tag)
 	}
 }
 
-void::EnemyHulk::TakeDamage(int damage)
+void::EnemyHulk::TakeDamage(int damage, const std::string& damageBy)
 {
 }
 
-void EnemyHulk::Die() 
+void EnemyHulk::Die(const std::string& killedBy)
 {
 
 }

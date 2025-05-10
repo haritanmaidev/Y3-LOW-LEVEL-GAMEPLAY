@@ -19,10 +19,10 @@ public:
 	int GetScore() const { return score; }
 
 	//Class Functions
-	virtual void TakeDamage(int damage);
+	virtual void TakeDamage(int damage, const std::string& damageBy);
 	virtual void MoveCharacter(const sf::Vector2f& direction);
+	virtual void Die(const std::string& killedBy);
 	virtual void SpriteFlash();
-	virtual void Die();
 
 protected:
 	int health = 3;

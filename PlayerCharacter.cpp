@@ -28,23 +28,23 @@ void PlayerCharacter::OnCollision(const std::string& tag)
 {
 	if (tag == "Enemy")
 	{
-		TakeDamage(1);
+		TakeDamage(1, "Enemy");
 	}
 	else if (tag == "EnemyHulk")
 	{
-		TakeDamage(1);
+		TakeDamage(1, "EnemyHulk");
 	}
 }
 
-void PlayerCharacter::TakeDamage(int damage)
+void PlayerCharacter::TakeDamage(int damage, const std::string& damageBy)
 {
-	Character::TakeDamage(damage);
 	SoundManager::PlayPlayerHurtSound();
+	Character::TakeDamage(damage, damageBy);
 }
 
-void PlayerCharacter::Die()
+void PlayerCharacter::Die(const std::string& killedBy)
 {
 	UIManager::SubtractScore(1000);
 	//SoundManager::PlayPlayerDeathSound();
-	Character::Die();
+	Character::Die(killedBy);
 }

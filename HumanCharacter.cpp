@@ -12,6 +12,7 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		SetTag("Human");
 		speed = 2.f;
 		score = 500;
+		health = 1;
 		randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
 	}
 }
@@ -44,31 +45,33 @@ void HumanCharacter::OnCollision(const std::string& tag)
 {
 	if (tag == "Player")
 	{
-		Rescue();
+		TakeDamage(1, "Player");
 	}
 	else if (tag == "EnemyHulk")
 	{
-		TakeDamage(1);
+		TakeDamage(1, "EnemyHulk");
 	}
 }
 
-void HumanCharacter::TakeDamage(int damage)
+void HumanCharacter::TakeDamage(int damage, const std::string& damageBy)
 {
-	Character::TakeDamage(damage);
+	Character::TakeDamage(damage, damageBy);
 }
 
 //Techically Rescue
-void HumanCharacter::Die()
+void HumanCharacter::Die(const std::string& killedBy)
 {
 	//SoundManager::PlayHumanHurtSound();
-	SoundManager::PlayPlayerHurtSound();
-	UIManager::SubtractScore(score);
-	Character::Die();
-}
+	if (killedBy == "EnemyHulk") 
+	{
+		SoundManager::PlayPlayerHurtSound();
+		UIManager::SubtractScore(score);
+	}
+	else if(killedBy == "Player")
+	{
+		SoundManager::PlayHumanRescueSound();
+		UIManager::AddScore(score);
+	}
 
-void HumanCharacter::Rescue() 
-{
-	SoundManager::PlayHumanRescueSound();
-	UIManager::AddScore(score);
-	Character::Die();
+	Character::Die(killedBy);
 }

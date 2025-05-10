@@ -14,8 +14,8 @@ public:
 	void Update() override;
 	void MoveCharacter(const sf::Vector2f& direction) override;
 	void OnCollision(const std::string& tag) override;
-	void TakeDamage(int damage) override;
-	void Die() override;
+	void TakeDamage(int damage, const std::string& damageBy) override;
+	void Die(const std::string& killedBy) override;
 
 private:
 	const PlayerCharacter& PlayerRef;

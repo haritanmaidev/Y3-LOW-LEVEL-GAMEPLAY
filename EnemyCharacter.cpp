@@ -16,6 +16,7 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		speed = 2.f;
 		health = 2;
 		MaxHealth = health;
+		score = 100;
 	}
 }
 
@@ -53,26 +54,25 @@ void EnemyCharacter::OnCollision(const std::string& tag)
 {
 	if (tag == "Player") 
 	{
-		TakeDamage(1);
+		TakeDamage(1, "Player");
 	}
 	else if (tag == "Projectile")
 	{
-		TakeDamage(1);
-		std::cout << "Enemy collided with: " << tag << std::endl;
-		std::cout << "Current Health: " << health << std::endl;
+		TakeDamage(1, "Projectile");
 	}
 }
 
-void EnemyCharacter::TakeDamage(int damage)
+void EnemyCharacter::TakeDamage(int damage, const std::string& damageBy)
 {
 	SoundManager::PlayEnemyHurtSound();
-	Character::TakeDamage(damage);
+	Character::TakeDamage(damage, damageBy);
 }
 
-void EnemyCharacter::Die()
+void EnemyCharacter::Die(const std::string& killedBy)
 {
-	SoundManager::PlayEnemyDeathSound();
-	UIManager::AddScore(score);
 	SetPosition(-2000, 2000);
-	Character::Die();
+	if (killedBy == "Projectile") UIManager::AddScore(score);
+	else if (killedBy == "Player") UIManager::SubtractScore(score);
+	SoundManager::PlayEnemyDeathSound();
+	Character::Die(killedBy);
 }
