@@ -2,7 +2,7 @@
 #include "EntityManager.h"
 #include "UIManager.h"
 
-WaveManager::WaveManager(EntityManager& entityManagerRef) : entityManager(entityManagerRef)
+WaveManager::WaveManager(EntityManager& entityManagerRef, const float& waveDelayRef) : entityManager(entityManagerRef), waveDelay(waveDelayRef)
 {
 	StartNextWave();
 }
@@ -30,36 +30,31 @@ void WaveManager::Update()
 		SpawnEntity();
 	}
 
-	//Check if all enemies are spawned and if none are active to start new wave
-	if (gruntsSpawned >= gruntsToSpawn && hulksSpawned >= hulksToSpawn)
+	//Check if all enemies are spawned and also if none are active before starting new wave
+	if (gruntsSpawned >= gruntsToSpawn && hulksSpawned >= hulksToSpawn && entityManager.AreEnemiesDead())
 	{
-		if (!entityManager.AreEnemiesActive()) 
-		{
-			StartNextWave();
-		}
+		StartNextWave();
 	}
 }
 
 void WaveManager::StartNextWave()
 {
 	std::cout << "StartNextWave called" << std::endl;
-	UIManager::IncrementWave();
 	int wave = UIManager::GetWave();
+	UIManager::DisplayWaveMessage(wave);
+	UIManager::IncrementWave();
 
-	isWaveActive = false;
 	isWaitingToSpawn = true;
+	isWaveActive = false;
 	waveDelayTimer = 0.f;
 	spawnIntervalTimer = 0.f;
 
 	gruntsSpawned = 0;
 	hulksSpawned = 0;
-	gruntsToSpawn = 5 + wave * 2;
+	gruntsToSpawn = 3 + wave * 2;
 	hulksToSpawn += (wave >= 3) ? (wave - 2) / 2 : 0;
-
-	UIManager::DisplayWaveMessage(wave);
 }
 
-//REASON: Easily exapandle
 void WaveManager::SpawnEntity()
 {
 	if (gruntsSpawned < gruntsToSpawn)

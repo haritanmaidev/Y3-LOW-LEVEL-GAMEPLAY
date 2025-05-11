@@ -20,6 +20,6 @@ public:
 	sf::Vector2f lastDirection = sf::Vector2f(1.f, 0);
 
 	bool isFiring = false;
-	float fireRate = 1.f;
+	float fireRate = 0.9f;
 	float time = 0.f;
 };

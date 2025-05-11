@@ -150,7 +150,7 @@ public:
 	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
 	Character& GetPlayer() { return *Player; }
 
-	bool AreEnemiesActive() const
+	bool AreEnemiesDead() const
 	{
 		int count = 0;
 		for (const auto& obj : GameObjectList)
@@ -158,7 +158,7 @@ public:
 			if (obj->IsActive()) 
 			{
 				const std::string& tag = obj->GetTag();
-				if (tag == "Enemy" || tag == "EnemyHulk" || tag == "EnemyBrain" || tag == "EnemyTank")
+				if (tag == "Enemy" || tag == "EnemyBrain" || tag == "EnemyTank")
 				{
 					count++;
 					return false;

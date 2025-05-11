@@ -12,7 +12,7 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
-	WaveManager waveManager(entityManager);
+	WaveManager waveManager(entityManager, UIManager::GetWaveDelayTime());
 	UIManager::InitText("Fonts/GODOFWAR.ttf");
 	SoundManager::PlayBackgroundMusic();
 

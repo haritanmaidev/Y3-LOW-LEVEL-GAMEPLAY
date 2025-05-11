@@ -3,10 +3,9 @@ class UIManager;
 class EntityManager;
 
 class WaveManager
-
 {
 public:
-	WaveManager(EntityManager& entityManagerRef);
+	WaveManager(EntityManager& entityManagerRef, const float& waveDelayRef);
 	~WaveManager() = default;
 
 	void Update();
