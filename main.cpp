@@ -14,7 +14,7 @@ int main()
 	EntityManager entityManager;
 	WaveManager waveManager(entityManager);
     waveManager.Init();
-	UIManager::InitScore("Fonts/GODOFWAR.ttf");
+	UIManager::InitText("Fonts/GODOFWAR.ttf");
 	SoundManager::PlayBackgroundMusic();
 
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");

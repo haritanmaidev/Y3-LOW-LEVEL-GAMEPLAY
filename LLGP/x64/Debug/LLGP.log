@@ -1,4 +1,7 @@
-﻿  WaveManager.cpp
+﻿  EnemyCharacter.cpp
+  HumanCharacter.cpp
+  PlayerCharacter.cpp
+  WaveManager.cpp
   main.cpp
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(31,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(31,125): warning C4244:         with

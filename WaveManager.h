@@ -1,5 +1,6 @@
 #pragma once
 #include "EntityManager.h"
+#include "UIManager.h"
 class EntityManager;
 class UIManager;
 
@@ -14,7 +15,8 @@ public:
 
 	void Init() 
 	{
-		currentWave = 1;
+		UIManager::IncrementWave();
+		//currentWave = 1;
 		enemiesToSpawn = 5;
 		spawnInterval = 0.5f;
 		spawnTimer = 0.f;
@@ -26,11 +28,8 @@ public:
 		if (!waveInProgress) return;
 
 		spawnTimer += 0.1f;
-		//std::cout << "Update running!: " << currentWave << std::endl;
-		//std::cout << "Spawn Timer: " << spawnTimer << std::endl;
 		if (spawnTimer >= spawnInterval && enemiesSpawned < enemiesToSpawn) 
 		{
-			std::cout << "if running!: " << currentWave << std::endl;
 			SpawnEnemy();
 			spawnTimer = 0.f;
 		}
@@ -38,18 +37,19 @@ public:
 		if (enemiesSpawned >= enemiesToSpawn && entityManager.GetLivingEnemyCount() == 0)
 		{
 			waveInProgress = false;
-			currentWave++;
+			UIManager::IncrementWave();
+			//currentWave++;
 			enemiesToSpawn += 5;
 			spawnInterval *= 0.9f;
 			waveInProgress = true;
 		}
 	}
 
-	int GetWave() const { return currentWave; }
+	//int GetWave() const { return currentWave; }
 
 private:
 	EntityManager& entityManager;
-	int currentWave = 1;
+	//int currentWave = 1;
 	int enemiesToSpawn = 5;
 	int enemiesSpawned = 0;
 	float spawnInterval = 0.5f;
@@ -58,14 +58,15 @@ private:
 
 	void SpawnEnemy() 
 	{
-		std::cout << "Spawning enemy at wave: " << currentWave << std::endl;
+		std::cout << "Spawning enemy at wave: " << UIManager::GetWave() << std::endl;
 		entityManager.SpawnEnemyCharacter(entityManager.GetRandomVector(200,200));
 		enemiesSpawned++;
 	}
 
 	void StartNextWave() 
 	{
-		currentWave++;
+		//currentWave++;
+		UIManager::IncrementWave();
 		enemiesToSpawn += 3;
 		enemiesSpawned = 0;
 		spawnTimer = 0.f;
