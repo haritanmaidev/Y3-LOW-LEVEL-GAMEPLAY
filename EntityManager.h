@@ -15,7 +15,6 @@ public:
 	EntityManager()
 	{
 		SpawnPlayerCharacter(sf::Vector2f(500.f, 500.f));
-		SpawnHumanCharacter(GetRandomVector(100, 500));
 	}
 	~EntityManager() = default;
 
@@ -44,11 +43,6 @@ public:
 			if (entity->IsActive()) entity->Render(window);
 		}
 	}
-	
-	//template <typename T> void SpawnerGameObject(const sf::Vector2f& position, std::unique_ptr<T>&& clas) 
-	//{
-
-	//}
 
 	//TO-DO: MAKE A TEMPLATE FUNCTION FOR SPAWNERS AND SpawnGameObjectFunction
 
@@ -65,11 +59,10 @@ public:
 	
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
-	//==================================:::::|||||[--- SPAWN & SPAWNER FUNCTIONS ---]|||||:::::==================================//
+	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
 		auto newCharacter = std::make_unique<PlayerCharacter>(position);
-		newCharacter->SetActive(true);
 		Player = newCharacter.get();
 		AddPlayerToGameObjectList(newCharacter);
 	}
@@ -77,7 +70,6 @@ public:
 	void SpawnHumanCharacter(const sf::Vector2f& position)
 	{
 		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
-		newHuman->SetActive(true);
 		AddHumanToGameObjectList(newHuman);
 	}
 
@@ -86,27 +78,31 @@ public:
 		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
 		newCharacter->SetVelocity(randomDirection);
-		newCharacter->SetActive(true);
 		AddEnemyGruntToGameObjectList(newCharacter);
 	}
 
 	void SpawnEnemyHulk(const sf::Vector2f& position) 
 	{
-		static int HulkCount = 0;
-		if (HulkCount > 5) return;
 		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
 		auto newHulk = std::make_unique<EnemyHulk>(position, *Player, randomDirection, *this);
 		newHulk->SetVelocity(randomDirection);
 		AddEnemyHulkToGameObjectList(newHulk);
-		HulkCount++;
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
-		newProjectile->SetActive(true);
 		AddProjectileToGameObjectList(std::move(newProjectile));
 	}
+
+	void UpdateAllEntities(sf::RenderWindow& window, InputHandler& inputHandler)
+	{
+		UpdateAll(GameObjectList);
+		inputHandler.MoveCharacter(GetPlayer());
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
+	}
+
+	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
 	//==================================:::::|||||[--- COLLISION FUNCTIONS ---]|||||:::::==================================//
 	void GameObjectListCollisionCheck() 
@@ -132,24 +128,13 @@ public:
 			if (!GameObjectList[i]->IsActive())
 			{
 				GameObjectList.erase(GameObjectList.begin() + i);
+				i--;
 				//std::cout << "GameObject: " << i << " removed from list!" << std::endl;
 			}
 		}
 	}
 
-	//==================================:::::|||||[--- UPDATE & RENDER FUNCTIONS ---]|||||:::::==================================//
-	void UpdateAllEntities(sf::RenderWindow& window, InputHandler& inputHandler)
-	{ 
-		UpdateAll(GameObjectList);
-		inputHandler.MoveCharacter(GetPlayer());
-		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
-	}
-
-	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
-
-	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
-	Character& GetPlayer() { return *Player; }
-
+	//==================================:::::|||||[--- WAVE SYSTEM RELATED FUNCTIONS ---]|||||:::::==================================//
 	bool AreEnemiesDead() const
 	{
 		int count = 0;
@@ -167,6 +152,35 @@ public:
 		}
 		return true;
 	}
+
+	void ResetScene() 
+	{
+		for (auto& obj : GameObjectList)
+		{
+			const std::string& tag = obj->GetTag();
+			if (tag == "EnemyHulk" || tag == "Human")
+			{
+				obj->SetActive(false);
+			}
+			else if (tag == "Player")
+			{
+				sf::Vector2f pos = sf::Vector2f(GetRandomNumber(450, 550), GetRandomNumber(550, 650));
+				obj->SetPosition(pos.x, pos.y);
+			}
+		}
+	}
+
+	void ClearAllExceptPlayer() 
+	{
+		for (auto& obj : GameObjectList)
+		{
+			const std::string tag = obj->GetTag();
+			if (tag != "Player") obj->SetActive(false);
+		}
+	}
+
+	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
+	Character& GetPlayer() { return *Player; }
 
 	float GetRandomNumber(float a, float b) const
 	{

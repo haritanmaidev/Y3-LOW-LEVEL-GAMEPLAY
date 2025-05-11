@@ -6,17 +6,16 @@
 class GameObject
 {
 public:
-	//Constructor
+	//Constructor & Destructor
 	GameObject();
-
-	//Destructor
 	virtual ~GameObject() = default;
 
 	//Pure functions
 	virtual void Update() = 0;
 	virtual void OnCollision(const std::string& tag) = 0;
+	//virtual void PlaySpawnAnimation() = 0;
 
-	//NOTE:Make this Render virtual if I wanna do particle effects for certain classes!
+	//Render function
 	void Render(sf::RenderWindow &window) { window.draw(sprite); }
 	
 	//Setters and Getters

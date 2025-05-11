@@ -40,6 +40,7 @@ void WaveManager::Update()
 void WaveManager::StartNextWave()
 {
 	std::cout << "StartNextWave called" << std::endl;
+	entityManager.ResetScene();
 	UIManager::IncrementWave();
 	UIManager::DisplayWaveMessage();
 
@@ -52,22 +53,34 @@ void WaveManager::StartNextWave()
 
 	gruntsSpawned = 0;
 	hulksSpawned = 0;
+	humansSpawned = 0;
+
 	gruntsToSpawn = 3 + wave * 2;
-	hulksToSpawn += (wave >= 3) ? (wave - 2) / 2 : 0;
+	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 0;
+	if(hulksToSpawn > 6) hulksToSpawn = 6;
+	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
 }
 
 void WaveManager::SpawnEntity()
 {
 	if (gruntsSpawned < gruntsToSpawn)
 	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(0, 200));
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 200));
 		entityManager.SpawnEnemyCharacter(pos);
 		gruntsSpawned++;
 	}
-	else if (hulksSpawned < hulksToSpawn)
+
+	if (hulksSpawned < hulksToSpawn)
 	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(0, 200));
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 200));
 		entityManager.SpawnEnemyHulk(pos);
 		hulksSpawned++;
+	}
+
+	if (humansSpawned < humansToSpawn) 
+	{
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(450, 750), entityManager.GetRandomNumber(10, 100));
+		entityManager.SpawnHumanCharacter(pos);
+		humansSpawned++;
 	}
 }
