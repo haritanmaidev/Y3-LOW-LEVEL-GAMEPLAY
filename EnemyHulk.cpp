@@ -13,7 +13,7 @@ EnemyHulk::EnemyHulk(const sf::Vector2f& spawn, const PlayerCharacter& player, s
 		SetTag("EnemyHulk");
 		speed = 1.f;
 		health = 1000;
-		randomDirection = entityManager.GetRandomDirection(-1, 1);
+		randomDirection = entityManager.GetRandomVector(-1, 1);
 	}
 }
 
@@ -25,7 +25,7 @@ void EnemyHulk::Update()
 		randomMoveTimer += 0.1f;
 		if (randomMoveTimer > randomMoveRate)
 		{
-			randomDirection = entityManager.GetRandomDirection(-3, 3);
+			randomDirection = entityManager.GetRandomVector(-3, 3);
 			MoveCharacter(randomDirection);
 			randomMoveTimer = 0.f;
 		}

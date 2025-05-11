@@ -13,7 +13,7 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		speed = 2.f;
 		score = 500;
 		health = 1;
-		randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
+		randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
 	}
 }
 
@@ -25,7 +25,7 @@ void HumanCharacter::Update()
 		static float randomMoveRate = 10.f;
 		if (randomMoveTimer > randomMoveRate)
 		{
-			randomDirection = entityManager.GetRandomDirection(-1.f, 1.f);
+			randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
 			MoveCharacter(randomDirection);
 			randomMoveTimer = 0.f;
 		}

@@ -2,6 +2,7 @@
 #include "EntityManager.h"
 #include "SoundManager.h"
 #include "UIManager.h"
+#include "WaveManager.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -11,6 +12,8 @@ int main()
 {
     InputHandler inputHandler;
 	EntityManager entityManager;
+	WaveManager waveManager(entityManager);
+    waveManager.Init();
 	UIManager::InitScore("Fonts/GODOFWAR.ttf");
 	SoundManager::PlayBackgroundMusic();
 
@@ -36,11 +39,12 @@ int main()
             entityManager.UpdateAllEntities(window, inputHandler);
 			entityManager.GameObjectListCollisionCheck();
             //entityManager.HumanSpawner(18.f);
-            entityManager.EnemySpawner(14.f);
-            entityManager.EnemyHulkSpawner(15.f);
+            //entityManager.EnemySpawner(14.f);
+            //entityManager.EnemyHulkSpawner(15.f);
             entityManager.RemoveEntityFromList();
 			SoundManager::CleanUpSounds();
 			UIManager::Update();
+			waveManager.Update();
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         

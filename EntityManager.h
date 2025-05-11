@@ -15,7 +15,7 @@ public:
 	EntityManager()
 	{
 		SpawnPlayerCharacter(sf::Vector2f(500.f, 500.f));
-		SpawnHumanCharacter(GetRandomDirection(100, 500));
+		SpawnHumanCharacter(GetRandomVector(100, 500));
 	}
 	~EntityManager() = default;
 
@@ -84,7 +84,7 @@ public:
 
 	void SpawnEnemyCharacter(const sf::Vector2f& position)
 	{
-		sf::Vector2f randomDirection = GetRandomDirection(-1.f, 1.f);
+		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
 		auto newCharacter = std::make_unique<EnemyCharacter>(position, *Player, randomDirection);
 		newCharacter->SetVelocity(randomDirection);
 		newCharacter->SetActive(true);
@@ -95,7 +95,7 @@ public:
 	{
 		static int HulkCount = 0;
 		if (HulkCount > 5) return;
-		sf::Vector2f randomDirection = GetRandomDirection(-1.f, 1.f);
+		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
 		auto newHulk = std::make_unique<EnemyHulk>(position, *Player, randomDirection, *this);
 		newHulk->SetVelocity(randomDirection);
 		AddEnemyHulkToGameObjectList(newHulk);
@@ -203,9 +203,22 @@ public:
 		return randomNumber;
 	}
 
-	sf::Vector2f GetRandomDirection(float a, float b) const
+	sf::Vector2f GetRandomVector(float a, float b) const
 	{
 		return sf::Vector2f(GetRandomNumber(a, b), GetRandomNumber(a, b));
+	}
+
+	int GetLivingEnemyCount() const
+	{
+		int count = 0;
+		for (const auto& obj : GameObjectList)
+		{
+			if (obj->IsActive() && obj->GetTag() == "Enemy")
+			{
+				count++;
+			}
+		}
+		return count;
 	}
 
 private:
