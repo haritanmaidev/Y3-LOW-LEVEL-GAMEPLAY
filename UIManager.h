@@ -14,7 +14,7 @@ public:
 			waveText.setFont(font);
 			waveText.setCharacterSize(30);
 			waveText.setFillColor(sf::Color::White);
-			waveText.setPosition(sf::Vector2f(10.f, 0.f));
+			waveText.setPosition(sf::Vector2f(800.f, 0.f));
 
 			waveMessage.setFont(font);
 			waveMessage.setCharacterSize(50);
