@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="WaveManager.cpp" />
+    <ClCompile Include="WaveSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -261,6 +262,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WaveManager.h" />
+    <ClInclude Include="WaveSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\SFML\include\SFML\Audio\SoundFileFactory.inl" />

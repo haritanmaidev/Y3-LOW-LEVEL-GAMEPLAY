@@ -30,12 +30,12 @@ public:
 	{
 		if(tag == "Enemy")
 		{
-			std::cout << "Projectile collided with: " << tag << std::endl;
+			//std::cout << "Projectile collided with: " << tag << std::endl;
 			SetActive(false);
 		}
 		else if(tag == "EnemyHulk")
 		{
-			std::cout << "Projectile collided with: " << tag << std::endl;
+			//std::cout << "Projectile collided with: " << tag << std::endl;
 			SetActive(false);
 		}
 	}

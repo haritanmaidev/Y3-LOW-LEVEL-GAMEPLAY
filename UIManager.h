@@ -15,6 +15,11 @@ public:
 			waveText.setCharacterSize(30);
 			waveText.setFillColor(sf::Color::White);
 			waveText.setPosition(sf::Vector2f(10.f, 0.f));
+
+			waveMessage.setFont(font);
+			waveMessage.setCharacterSize(60);
+			waveMessage.setFillColor(sf::Color::White);
+			waveMessage.setPosition(sf::Vector2f(350.f, 200.f));
 		}
 	}
 
@@ -22,13 +27,27 @@ public:
 	{ 
 		scoreText.setString("Score: " + std::to_string(GetScore()));
 		waveText.setString("Wave: " + std::to_string(GetWave()));
+
+		if (isWaveMessageActive) 
+		{
+			waveMessageTimer -= 0.1f;
+			if (waveMessageTimer <= 0.f) isWaveMessageActive = false;
+		}
 	}
 
 	static void RenderUI(sf::RenderWindow& window)
 	{
 		window.draw(scoreText);
 		window.draw(waveText);
+		if(isWaveMessageActive) window.draw(waveMessage);
 	}	
+
+	static void DisplayWaveMessage(int waveNum) 
+	{
+		waveMessage.setString("WAVE " + std::to_string(waveNum) + " IS STARTING!!!");
+		waveMessageTimer = 2.0f;
+		
+	}
 
 	static int GetScore() { return score; }
 	static void AddScore(int points){ score += points; }
@@ -42,7 +61,12 @@ public:
 private:
 	inline static int score = 0;
 	inline static int wave = 0;
+
 	inline static sf::Font font;
 	inline static sf::Text scoreText = sf::Text(font);
 	inline static sf::Text waveText = sf::Text(font);
+
+	inline static sf::Text waveMessage = sf::Text(font);
+	inline static bool isWaveMessageActive = false;
+	inline static float waveMessageTimer = 0.f;
 };

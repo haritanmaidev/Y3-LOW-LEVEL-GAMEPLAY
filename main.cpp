@@ -13,7 +13,6 @@ int main()
     InputHandler inputHandler;
 	EntityManager entityManager;
 	WaveManager waveManager(entityManager);
-    waveManager.Init();
 	UIManager::InitText("Fonts/GODOFWAR.ttf");
 	SoundManager::PlayBackgroundMusic();
 
@@ -36,15 +35,13 @@ int main()
 			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-            entityManager.UpdateAllEntities(window, inputHandler);
 			entityManager.GameObjectListCollisionCheck();
-            //entityManager.HumanSpawner(18.f);
-            //entityManager.EnemySpawner(14.f);
-            //entityManager.EnemyHulkSpawner(15.f);
+            entityManager.UpdateAllEntities(window, inputHandler);
             entityManager.RemoveEntityFromList();
+			waveManager.Update();
 			SoundManager::CleanUpSounds();
 			UIManager::Update();
-			waveManager.Update();
+
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
         

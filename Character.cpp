@@ -39,7 +39,6 @@ void Character::Die(const std::string& killedBy)
 {
 	if(!IsActive()) return;
 	SetActive(false);
-	std::cout << "GameObject is dead!" << std::endl;
 }
 
 void Character::SpriteFlash()
@@ -49,7 +48,6 @@ void Character::SpriteFlash()
 	flashTimer += 0.1f;
 	if (flashTime < flashTimer)
 	{
-		std::cout << "Flashing!" << std::endl;
 		sprite.setColor(sf::Color::White);
 		flashTimer = 0.f;
 		isFlashing = false;

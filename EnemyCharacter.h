@@ -19,6 +19,6 @@ public:
 
 private:
 	const PlayerCharacter& PlayerRef;
-	float detectionRadius = 300.f;
+	float detectionRadius = 500.f;
 	sf::Vector2f travelDir = sf::Vector2f(0.f, 0.f);
 };
