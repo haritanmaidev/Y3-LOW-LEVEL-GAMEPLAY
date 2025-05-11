@@ -42,9 +42,9 @@ public:
 		if(isWaveMessageActive) { window.draw(waveMessage); }
 	}	
 
-	static void DisplayWaveMessage(int waveNum) 
+	static void DisplayWaveMessage() 
 	{
-		waveMessage.setString("WAVE " + std::to_string(waveNum) + " IS STARTING!!!");
+		waveMessage.setString("WAVE " + std::to_string(wave) + " IS STARTING!!!");
 		waveMessageTimer = 0.f;
 		isWaveMessageActive = true;
 	}

@@ -40,9 +40,10 @@ void WaveManager::Update()
 void WaveManager::StartNextWave()
 {
 	std::cout << "StartNextWave called" << std::endl;
-	int wave = UIManager::GetWave();
-	UIManager::DisplayWaveMessage(wave);
 	UIManager::IncrementWave();
+	UIManager::DisplayWaveMessage();
+
+	int wave = UIManager::GetWave();
 
 	isWaitingToSpawn = true;
 	isWaveActive = false;
