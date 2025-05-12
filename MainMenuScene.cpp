@@ -5,7 +5,7 @@ MainMenuScene::MainMenuScene()
     if (font.openFromFile("Fonts/GODOFWAR.ttf")) 
     {
         titleText.setFont(font);
-        titleText.setString("CODING GLADIATOR");
+        titleText.setString("ROBOTRON: 2025");
         titleText.setCharacterSize(50);
         titleText.setPosition(sf::Vector2f(200.f, 200.f));
 
@@ -25,7 +25,7 @@ void MainMenuScene::HandleInput(sf::RenderWindow& window)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
         isFinished = true;
-        nextScene = "Game";
+        nextScene = "GameScene";
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
     {

@@ -3,18 +3,28 @@
 #include "SoundManager.h"
 #include "UIManager.h"
 #include "WaveManager.h"
+#include "SceneManager.h"
+#include "MainMenuScene.h"
+#include "GameScene.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
 int main()
 {
+    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR");
+	UIManager::Init("Fonts/GODOFWAR.ttf");
+    //SoundManager::PlayBackgroundMenuMusic();
+
+    //Game Systems
     InputHandler inputHandler;
 	EntityManager entityManager;
 	WaveManager waveManager(entityManager, UIManager::GetWaveDelayTime());
-	UIManager::Init("Fonts/GODOFWAR.ttf");
-	SoundManager::PlayBackgroundMusic();
 
-    sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR!");
+     //Scene Management
+    SceneManager sceneManager;
+    sceneManager.AddScene("MainMenu", std::make_unique<MainMenuScene>());
+    sceneManager.AddScene("GameScene", std::make_unique<GameScene>(window, inputHandler, entityManager, waveManager));
+    sceneManager.SwitchTo("MainMenu");
 
     //Time Update
     std::chrono::steady_clock::time_point lastTime = std::chrono::steady_clock::now();
@@ -34,13 +44,8 @@ int main()
 			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
-			entityManager.GameObjectListCollisionCheck();
-            entityManager.UpdateAllEntities(window, inputHandler);
-            entityManager.RemoveEntityFromList();
-			waveManager.Update();
-			SoundManager::CleanUpSounds();
-			UIManager::Update();
-
+			sceneManager.HandleInput(window);
+			sceneManager.Update();
         }
         /*--------------------------------:||||[[[UPDATE FUNCTIONALITY]]]||||:--------------------------------*/
         
@@ -51,8 +56,7 @@ int main()
         }
 
         window.clear();
-		UIManager::RenderUI(window);
-		entityManager.RenderAllGameObjects(window);
+		sceneManager.Render(window);
         window.display();
     }
 }

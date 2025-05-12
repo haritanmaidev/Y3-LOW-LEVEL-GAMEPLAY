@@ -7,7 +7,7 @@ public:
 		if (font.openFromFile(fontPath))
 		{
 			healthBar.setSize(sf::Vector2f(200.f, 20.f));
-			healthBar.setFillColor(sf::Color(255.f, 0, 0, 50.f));
+			healthBar.setFillColor(sf::Color(255, 0, 0, 50));
 			healthBar.setPosition(sf::Vector2f(15.f, 10.f));
 			healthBar.setOutlineColor(sf::Color::White);
 			healthBar.setOutlineThickness(2.f);
@@ -85,7 +85,7 @@ public:
 		waveMessageTimer = 0.f;
 		isWaveMessageActive = true;
 	}
-
+	
 private:
 	inline static int lives = 3;
 	inline static int currentHealth = 100;

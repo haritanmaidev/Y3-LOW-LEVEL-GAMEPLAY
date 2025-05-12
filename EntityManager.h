@@ -118,7 +118,6 @@ public:
 		}
 	}
 
-	//Placed this in collisions section as it's closely related
 	void RemoveEntityFromList()
 	{
 		for (int i = 0; i < GameObjectList.size(); i++)
