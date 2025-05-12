@@ -4,7 +4,6 @@
 #include "EntityManager.h"
 #include "WaveManager.h"
 
-
 GameScene::GameScene(sf::RenderWindow& windowRef, InputHandler& inputRef, EntityManager& entityManRef, WaveManager& waveRef)
 : window(windowRef), inputHandler(inputRef), entityManager(entityManRef), waveManager(waveRef)
 {

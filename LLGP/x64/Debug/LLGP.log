@@ -1,10 +1,7 @@
-﻿  EnemyCharacter.cpp
-  EnemyHulk.cpp
-  GameScene.cpp
-  HumanCharacter.cpp
-  InputHandler.cpp
-  PlayerCharacter.cpp
-  WaveManager.cpp
+﻿  GameScene.cpp
+  MainMenuScene.cpp
+  Scene.cpp
+  SceneManager.cpp
   main.cpp
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(38,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(38,125): warning C4244:         with

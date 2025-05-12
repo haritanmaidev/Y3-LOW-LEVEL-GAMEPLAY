@@ -20,7 +20,7 @@ int main()
 	EntityManager entityManager;
 	WaveManager waveManager(entityManager, UIManager::GetWaveDelayTime());
 
-     //Scene Management
+    //Scene Management
     SceneManager sceneManager;
     sceneManager.AddScene("MainMenu", std::make_unique<MainMenuScene>());
     sceneManager.AddScene("GameScene", std::make_unique<GameScene>(window, inputHandler, entityManager, waveManager));
@@ -31,23 +31,21 @@ int main()
     float deltaTime = 0;
     float timeSinceLastPhysicsLoop = 0.0f;
     float physicsTimeStep = 20000;
-   
+  
     while (window.isOpen())
     {
-        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
+        /*--------------------------------||||:[[[FIXED UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
             //DO UPDATE HERE!
-			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
-
 			sceneManager.HandleInput(window);
 			sceneManager.Update();
         }
-        /*--------------------------------:||||[[[UPDATE FUNCTIONALITY]]]||||:--------------------------------*/
+        /*--------------------------------:||||[[[FIXED UPDATE FUNCTIONALITY]]]||||:--------------------------------*/
         
         while (const std::optional event = window.pollEvent())
         {
