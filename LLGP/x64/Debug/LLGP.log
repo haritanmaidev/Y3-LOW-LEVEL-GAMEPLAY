@@ -1,4 +1,7 @@
 ﻿  EnemyCharacter.cpp
+  EnemyHulk.cpp
+  HumanCharacter.cpp
+  InputHandler.cpp
   PlayerCharacter.cpp
   WaveManager.cpp
   main.cpp

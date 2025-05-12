@@ -37,7 +37,6 @@ void Character::TakeDamage(int damage, const std::string& damageBy)
 
 void Character::Die(const std::string& killedBy)
 {
-	if(!IsActive()) return;
 	SetActive(false);
 }
 

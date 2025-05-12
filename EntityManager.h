@@ -14,7 +14,7 @@ public:
 	//Constructor & Destructor
 	EntityManager()
 	{
-		SpawnPlayerCharacter(sf::Vector2f(500.f, 500.f));
+		SpawnPlayerCharacter(sf::Vector2f(500.f, 750.f));
 	}
 	~EntityManager() = default;
 
@@ -43,8 +43,6 @@ public:
 			if (entity->IsActive()) entity->Render(window);
 		}
 	}
-
-	//TO-DO: MAKE A TEMPLATE FUNCTION FOR SPAWNERS AND SpawnGameObjectFunction
 
 	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
 	void AddGameObjectToGameObjectList(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }

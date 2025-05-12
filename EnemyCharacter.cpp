@@ -71,8 +71,16 @@ void EnemyCharacter::TakeDamage(int damage, const std::string& damageBy)
 void EnemyCharacter::Die(const std::string& killedBy)
 {
 	SetPosition(-2000, 2000);
-	if (killedBy == "Projectile") UIManager::AddScore(score);
-	else if (killedBy == "Player") UIManager::SubtractScore(score);
+
+	if (killedBy == "Projectile") 
+	{
+		UIManager::AddScore(score);
+	}
+	else if (killedBy == "Player")
+	{
+		UIManager::SubtractScore(score);
+	}
+
 	SoundManager::PlayEnemyDeathSound();
 	Character::Die(killedBy);
 }

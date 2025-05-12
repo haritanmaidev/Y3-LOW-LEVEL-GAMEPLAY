@@ -1,5 +1,7 @@
 #pragma once
 #include "Character.h"
+#include "UIManager.h"
+
 class PlayerCharacter : public Character
 {
 public:
@@ -15,11 +17,17 @@ public:
 	void Die(const std::string& damageBy) override;
 
 	//Class Functions
-	void AddScore(int points) { this->score += points; }
-	void SetScore(int newScore) { this->score = newScore; }
+	int GetLives() const { return lives; }
+	void SetLives(int newLives) 
+	{ 
+		lives = newLives;
+		UIManager::SetLives(lives);
+	}
 
 private:
-	int score = 0;
-	sf::Vector2f PlayerSpawnPoint = sf::Vector2f(0.f, 0.f);
+	int lives = 3;
+	int playerHealth = 100;
+	int playerMaxHealth = 100;
+	sf::Vector2f PlayerSpawnPoint = sf::Vector2f(500.f, 800.f);
 };
 
