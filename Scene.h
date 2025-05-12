@@ -4,12 +4,20 @@
 class Scene
 {
 public:
-	virtual ~Scene() = default;
+	~Scene() = default;
+	//virtual void Init();
 
+	//Pure Functions
 	virtual void HandleInput(sf::RenderWindow& window) = 0;
 	virtual void Update() = 0;
 	virtual void Render(sf::RenderWindow& window) = 0;
-	virtual bool IsFinsihed() const { return false; }
-	virtual std::string NextScene() const { return ""; }
+
+	//Class Functions
+	bool IsFinished() const { return isFinished; }
+	std::string NextScene() const { return nextScene; }
+
+protected:
+	bool isFinished = false;
+	std::string nextScene = "";
 };
 

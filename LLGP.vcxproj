@@ -143,7 +143,9 @@
     <ClCompile Include="HumanCharacter.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="WaveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +157,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HumanCharacter.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="packages\SFML\include\SFML\Audio.hpp" />
     <ClInclude Include="packages\SFML\include\SFML\Audio\AudioResource.hpp" />
     <ClInclude Include="packages\SFML\include\SFML\Audio\Export.hpp" />
@@ -258,6 +261,7 @@
     <ClInclude Include="packages\SFML\include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WaveManager.h" />

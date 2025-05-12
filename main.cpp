@@ -6,8 +6,6 @@
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
-void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite);
-
 int main()
 {
     InputHandler inputHandler;
@@ -26,12 +24,13 @@ int main()
    
     while (window.isOpen())
     {
-        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY - START]]]:||||--------------------------------*/
+        /*--------------------------------||||:[[[UPDATE FUNCTIONALITY]]]:||||--------------------------------*/
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - lastTime).count();
         lastTime = std::chrono::steady_clock::now();
         timeSinceLastPhysicsLoop += deltaTime;
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
+            //DO UPDATE HERE!
 			//std::cout << "Time Since Last Physics Loop: " << timeSinceLastPhysicsLoop << std::endl;
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 
@@ -43,7 +42,7 @@ int main()
 			UIManager::Update();
 
         }
-        /*--------------------------------:||||[[[UPDATE FUNCTIONALITY - END]]]||||:--------------------------------*/
+        /*--------------------------------:||||[[[UPDATE FUNCTIONALITY]]]||||:--------------------------------*/
         
         while (const std::optional event = window.pollEvent())
         {
@@ -56,19 +55,4 @@ int main()
 		entityManager.RenderAllGameObjects(window);
         window.display();
     }
-}
-
-void DrawDebugLines(sf::RenderWindow& window, const sf::Sprite& sprite) {
-    sf::IntRect textureRect = sprite.getTextureRect();
-
-    sf::RectangleShape debugRect;
-    debugRect.setSize(sf::Vector2f(static_cast<float>(textureRect.size.x), static_cast<float>(textureRect.size.y)));
-    debugRect.setPosition(sprite.getPosition());
-    debugRect.setOrigin(sprite.getOrigin());
-    debugRect.setScale(sprite.getScale());
-    debugRect.setOutlineColor(sf::Color::Red);
-    debugRect.setOutlineThickness(1.0f);
-    debugRect.setFillColor(sf::Color::Transparent);
-
-    window.draw(debugRect);
 }

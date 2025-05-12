@@ -60,6 +60,7 @@ void PlayerCharacter::Die(const std::string& killedBy)
 		SetPosition(PlayerSpawnPoint.x , PlayerSpawnPoint.y);
 		//SoundManager::PlayPlayerDeathSound();
 		UIManager::SetLives(lives);
+		UIManager::SetHealthValues(playerHealth, playerMaxHealth);
 		UIManager::SubtractScore(1000);
 	}
 	else 
