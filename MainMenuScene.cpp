@@ -6,18 +6,21 @@ MainMenuScene::MainMenuScene()
     {
         titleText.setFont(font);
         titleText.setString("ROBOTRON: 2025");
-        titleText.setCharacterSize(50);
-        titleText.setPosition(sf::Vector2f(200.f, 200.f));
+        titleText.setCharacterSize(85);
+        titleText.setPosition(sf::Vector2f(500.f, 70.f));
+		titleText.setOrigin(sf::Vector2f(titleText.getGlobalBounds().size.x / 2.f, titleText.getGlobalBounds().size.y / 2.f));
 
         startText.setFont(font);
         startText.setString("Press [ENTER] to Start");
         startText.setCharacterSize(30);
-        startText.setPosition(sf::Vector2f(250.f, 300.f));
-
+        startText.setPosition(sf::Vector2f(500.f, 590.f));
+		startText.setOrigin(sf::Vector2f(startText.getGlobalBounds().size.x / 2.f, startText.getGlobalBounds().size.y / 2.f));
+       
         exitText.setFont(font);
         exitText.setString("Press [ESC] to Quit");
         exitText.setCharacterSize(30);
-        exitText.setPosition(sf::Vector2f(250.f, 350.f));
+        exitText.setPosition(sf::Vector2f(500.f, 650.f));
+		exitText.setOrigin(sf::Vector2f(exitText.getGlobalBounds().size.x / 2.f, exitText.getGlobalBounds().size.y / 2.f));
     }
 }
 

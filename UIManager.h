@@ -24,12 +24,12 @@ public:
 			scoreText.setFont(font);
 			scoreText.setCharacterSize(30);
 			scoreText.setFillColor(sf::Color::White);
-			scoreText.setPosition(sf::Vector2f(405.f, 0.f));
+			scoreText.setPosition(sf::Vector2f(790.f, 0.f));
 
 			waveText.setFont(font);
 			waveText.setCharacterSize(30);
 			waveText.setFillColor(sf::Color::White);
-			waveText.setPosition(sf::Vector2f(800.f, 0.f));
+			waveText.setPosition(sf::Vector2f(415.f, 0.f));
 			waveMessageText.setFont(font);
 			waveMessageText.setCharacterSize(50);
 			waveMessageText.setFillColor(sf::Color::White);
@@ -63,22 +63,29 @@ public:
 		if (isWaveMessageActive) { window.draw(waveMessageText); }
 	}
 
+	//Health Stuff
 	static void SetLives(int livesCount) { lives = livesCount; }
-	static int GetScore() { return score; }
-	static void AddScore(int points){ score += points; }
-	static void SubtractScore(int points) { score -= points; }
-	static void ResetScore() { score = 0; }
-	static int GetWave() { return wave; }
-	static void IncrementWave() { wave++; }
-	static void ResetWave() { wave = 0; }
-	static float GetWaveDelayTime() { return waveMessageInterval; }
-
 	static void SetHealthValues(int playerCurrentHealth, int playerMaxHealth)
 	{
 		currentHealth = playerCurrentHealth;
 		maxHealth = playerMaxHealth;
 	}
 
+	//Score Stuff
+	static int GetScore() { return score; }
+	static void ResetScore() { score = 0; }
+	static void SubtractScore(int points) { score -= points; }
+	static void AddScore(int points)
+	{
+		score += points;
+		if (score >= 9999) scoreText.setPosition(sf::Vector2f(775.f, 0.f));
+	}
+
+	//Wave Stuff
+	static int GetWave() { return wave; }
+	static float GetWaveDelayTime() { return waveMessageInterval; }
+	static void ResetWave() { wave = 0; }
+	static void IncrementWave() { wave++; }
 	static void DisplayWaveMessage()
 	{
 		waveMessageText.setString("WAVE " + std::to_string(wave) + " IS STARTING!!!");
@@ -96,10 +103,10 @@ private:
 	inline static float waveMessageTimer = 0.f;
 	inline static float waveMessageInterval = 5.f;
 	inline static sf::Font font;
+	inline static sf::Text livesCountText = sf::Text(font);
 	inline static sf::Text scoreText = sf::Text(font);
 	inline static sf::Text waveText = sf::Text(font);
 	inline static sf::Text waveMessageText = sf::Text(font);
-	inline static sf::Text livesCountText = sf::Text(font);
 	inline static sf::RectangleShape healthBar;
 	inline static sf::RectangleShape healthBarFill;
 };
