@@ -18,11 +18,6 @@ public:
 
 	//Class Functions
 	int GetLives() const { return lives; }
-	void SetLives(int newLives) 
-	{ 
-		lives = newLives;
-		UIManager::SetLives(lives);
-	}
 
 private:
 	int lives = 3;
@@ -30,4 +25,3 @@ private:
 	int playerMaxHealth = 100;
 	sf::Vector2f PlayerSpawnPoint = sf::Vector2f(500.f, 800.f);
 };
-

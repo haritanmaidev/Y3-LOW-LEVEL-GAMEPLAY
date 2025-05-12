@@ -55,6 +55,7 @@ void PlayerCharacter::Die(const std::string& killedBy)
 
 	if (lives > 0) 
 	{
+		//Respawn Logic
 		playerHealth = playerMaxHealth;
 		SetPosition(PlayerSpawnPoint.x , PlayerSpawnPoint.y);
 		//SoundManager::PlayPlayerDeathSound();

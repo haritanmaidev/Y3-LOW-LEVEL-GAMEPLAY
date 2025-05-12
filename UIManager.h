@@ -7,13 +7,13 @@ public:
 		if (font.openFromFile(fontPath))
 		{
 			healthBar.setSize(sf::Vector2f(200.f, 20.f));
-			healthBar.setFillColor(sf::Color::Red);
+			healthBar.setFillColor(sf::Color(255.f, 0, 0, 50.f));
 			healthBar.setPosition(sf::Vector2f(15.f, 10.f));
 			healthBar.setOutlineColor(sf::Color::White);
 			healthBar.setOutlineThickness(2.f);
 
 			healthBarFill.setSize(sf::Vector2f(200.f, 20.f));
-			healthBarFill.setFillColor(sf::Color::Green);
+			healthBarFill.setFillColor(sf::Color(0, 255, 30));
 			healthBarFill.setPosition(sf::Vector2f(15.f, 10.f));
 
 			livesCountText.setCharacterSize(30);
@@ -63,23 +63,22 @@ public:
 		if (isWaveMessageActive) { window.draw(waveMessageText); }
 	}
 
+	static void SetLives(int livesCount) { lives = livesCount; }
+	static int GetScore() { return score; }
+	static void AddScore(int points){ score += points; }
+	static void SubtractScore(int points) { score -= points; }
+	static void ResetScore() { score = 0; }
+	static int GetWave() { return wave; }
+	static void IncrementWave() { wave++; }
+	static void ResetWave() { wave = 0; }
+	static float GetWaveDelayTime() { return waveMessageInterval; }
+
 	static void SetHealthValues(int playerCurrentHealth, int playerMaxHealth)
 	{
 		currentHealth = playerCurrentHealth;
 		maxHealth = playerMaxHealth;
 	}
 
-	static void SetLives(int livesCount) { lives = livesCount; }
-
-	static int GetScore() { return score; }
-	static void AddScore(int points){ score += points; }
-	static void SubtractScore(int points) { score -= points; }
-	static void ResetScore() { score = 0; }
-
-	static int GetWave() { return wave; }
-	static void IncrementWave() { wave++; }
-	static void ResetWave() { wave = 0; }
-	static float GetWaveDelayTime() { return waveMessageInterval; }
 	static void DisplayWaveMessage()
 	{
 		waveMessageText.setString("WAVE " + std::to_string(wave) + " IS STARTING!!!");
