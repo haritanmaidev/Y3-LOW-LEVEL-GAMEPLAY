@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "ProjectileEnforcer.h"
 #include "ProjectileSnake.h"
+#include "ProjectileShell.h"
 #include "PlayerCharacter.h"
 #include "HumanCharacter.h"
 #include "EnemyHulk.h"
@@ -66,6 +67,8 @@ public:
 	void AddProjectileSnakeToGameObjectList(std::unique_ptr<ProjectileSnake> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
 	void AddProjectileEnforcerToGameObjectList(std::unique_ptr<ProjectileEnforcer> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
+
+	void AddProjectileShellToGameObjectList(std::unique_ptr<ProjectileShell> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
 	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
@@ -137,6 +140,12 @@ public:
 	{
 		auto newProjectile = std::make_unique<ProjectileEnforcer>(position, direction, speed, *Player);
 		AddProjectileEnforcerToGameObjectList(std::move(newProjectile));
+	}
+
+	void SpawnProjectileShell(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
+	{
+		auto newProjectile = std::make_unique<ProjectileShell>(position, direction, speed);
+		AddProjectileShellToGameObjectList(std::move(newProjectile));
 	}
 
 	void UpdateAllEntities(sf::RenderWindow& window, InputHandler& inputHandler)

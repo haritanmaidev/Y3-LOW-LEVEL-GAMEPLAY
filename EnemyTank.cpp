@@ -33,7 +33,7 @@ void EnemyTank::Update()
 	static float fireRate = 10.5f;
 	if (fireTimer > fireRate)
 	{
-		entityManager.SpawnProjectileEnforcer(sprite.getPosition(), direction, 4.f);
+		entityManager.SpawnProjectileShell(sprite.getPosition(), direction, 10.f);
 		fireTimer = 0.f;
 	}
 }

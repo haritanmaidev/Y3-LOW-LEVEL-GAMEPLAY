@@ -28,15 +28,15 @@ void PlayerCharacter::OnCollision(const std::string& tag)
 {
 	if (tag == "Enemy" || tag == "ProjectileEnforcer" || tag == "ProjectileSnake")
 	{
-		TakeDamage(5, "Enemy");
+		TakeDamage(10, "Enemy");
 	}
-	else if (tag == "EnemyHulk")
+	else if (tag == "EnemyHulk" || tag == "EnemyTank" || tag == "HumanCorrupted")
 	{
-		TakeDamage(10, "EnemyHulk");
+		TakeDamage(20, "EnemyHulk");
 	}
-	else if (tag == "HumanCorrupted") 
+	else if (tag == "ProjectileShell") 
 	{
-		TakeDamage(10, "HumanCorrupted");
+		TakeDamage(30, "ProjectileShell");
 	}
 }
 

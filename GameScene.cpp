@@ -27,7 +27,7 @@ void GameScene::HandleInput(sf::RenderWindow& window)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
 	{
-		waveManager.StartNextWave();
+		//waveManager.StartNextWave();
 	}
 }
 
