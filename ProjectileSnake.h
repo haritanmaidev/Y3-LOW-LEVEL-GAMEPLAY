@@ -10,35 +10,42 @@ class ProjectileSnake : public GameObject
 public:
 	//ASK: Should these be const?
 	ProjectileSnake(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed, const PlayerCharacter& playerRef)
-	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed), player(playerRef)
+	: GameObject(), spawnPoint(spawn), direction(aimDir), projectileSpeed(projSpeed), player(playerRef)
 	{
 		if (LoadGameObjectTextureFromFile("assets/Cropped/ProjectileSnake.png", std::nullopt))
 		{
 			sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
-			sprite.setScale(sf::Vector2f(.1f, .1f));
+			sprite.setScale(sf::Vector2f(.08f, .05f));
 			sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 			sprite.setPosition(spawnPoint);
 			SoundManager::PlayProjectileSound();
 			SetTag("ProjectileSnake");
-			aimDirection = aimDir;
+			direction = aimDir;
 		}
 	}
 
 	void Update() override
 	{
-		sf::Vector2f dir = player.GetPositionConst() - sprite.getPosition();
-		float mag = std::sqrt(dir.x * dir.x + dir.y * dir.y);
-		if (mag != 0.f) { dir /= mag; }
+		wiggleTimer += 0.1f;
+		if (wiggleTimer > wiggleRate)
+		{
+			direction = player.GetPositionConst() - sprite.getPosition();
 
-		sf::Vector2f perpendicular = { -dir.y, dir.x };
-		float wiggleMax = 0.1f;
-		//float wiggle = entityManager.GetRandomNumber(-wiggleMax, wiggleMax);
+			float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+			if (mag != 0.f) { direction /= mag; }
 
-		//dir += perpendicular * wiggle;
-		mag = std::sqrt(dir.x * dir.x + dir.y * dir.y);
-		if (mag != 0.f) { dir /= mag; }
+			sf::Vector2f perpendicular = { -direction.y, direction.x };
+			//float wiggle = entityManager.GetRandomNumber(-wiggleMax, wiggleMax);
+			float wiggleMax = 1.5f;
+			float wiggle = ((std::rand() % 201) - 100) / 100.0f * wiggleMax;
+			direction += perpendicular * wiggle;
 
-		sprite.move(dir * projectileSpeed);
+			mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+			if (mag != 0.f) { direction /= mag; }
+			wiggleTimer = 0.f;
+		}
+
+		sprite.move(direction * projectileSpeed);
 	}
 
 	void OnCollision(const std::string& tag) override
@@ -60,6 +67,8 @@ public:
 private:
 	const PlayerCharacter& player;
 	sf::Vector2f spawnPoint;
-	sf::Vector2f aimDirection;
-	float projectileSpeed = 1.f;
+	sf::Vector2f direction;
+	float projectileSpeed = 0.5f;
+	float wiggleRate = 2.f;
+	float wiggleTimer = 0.f;
 };

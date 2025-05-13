@@ -17,7 +17,7 @@ public:
 	void Die(const std::string& taggedBy) override;
 
 private:
-	 EntityManager& entityManager;
+	EntityManager& entityManager;
 	const PlayerCharacter& PlayerRef;
 	float fireRate = 5.5f;
 	float fireTimer = 0.f;

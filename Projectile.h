@@ -49,6 +49,10 @@ public:
 		{
 			SetActive(false);
 		}
+		else if (tag == "ProjectileSnake") 
+		{
+			SetActive(false);
+		}
 	}
 
 
