@@ -18,7 +18,7 @@ public:
 
 private:
 	EntityManager& entityManager;
-	const PlayerCharacter& PlayerRef;
+	const PlayerCharacter& playerRef;
 	float fireRate = 5.5f;
 	float fireTimer = 0.f;
 	float detectionRadius = 500.f;

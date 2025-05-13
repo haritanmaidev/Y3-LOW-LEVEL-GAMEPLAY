@@ -13,7 +13,7 @@ void GameScene::Init()
 	UIManager::ResetScore();
 	UIManager::ResetWave();
 	UIManager::ResetHealth();
-	entityManager.SpawnPlayerCharacter(sf::Vector2f(500.f, 750.f));
+	entityManager.SpawnPlayerCharacter(sf::Vector2f(700.f, 950.f));
 	waveManager.StartNextWave();	
 	isFinished = false;
 }
@@ -27,7 +27,7 @@ void GameScene::HandleInput(sf::RenderWindow& window)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
 	{
-		SoundManager::PlayBackgroundMusic();
+		waveManager.StartNextWave();
 	}
 }
 

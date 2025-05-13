@@ -23,6 +23,7 @@ private:
 	EntityManager& entityManager;
 	const PlayerCharacter& playerRef;
 	HumanCharacter* humanRef;
-	float fireRate = 5.5f;
 	float fireTimer = 0.f;
+	float randomMoveTimer = 0.f;
+	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
 };

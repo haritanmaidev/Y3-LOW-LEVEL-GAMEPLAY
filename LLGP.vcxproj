@@ -141,6 +141,7 @@
     <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="EnemyEnforcer.cpp" />
     <ClCompile Include="EnemyHulk.cpp" />
+    <ClCompile Include="EnemyTank.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="EnemyEnforcer.h" />
     <ClInclude Include="EnemyHulk.h" />
+    <ClInclude Include="EnemyTank.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverScene.h" />

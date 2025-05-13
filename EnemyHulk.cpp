@@ -22,10 +22,10 @@ void EnemyHulk::Update()
 	Character::Update();
 
 	randomMoveTimer += 0.1f;
+	static float randomMoveRate = 25.f;
 	if (randomMoveTimer > randomMoveRate)
 	{
 		randomDirection = entityManager.GetRandomVector(-3, 3);
-		MoveCharacter(randomDirection);
 		randomMoveTimer = 0.f;
 	}
 	else

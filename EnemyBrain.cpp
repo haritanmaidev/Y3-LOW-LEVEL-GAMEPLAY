@@ -11,7 +11,7 @@ EnemyBrain::EnemyBrain(const sf::Vector2f& spawn, const PlayerCharacter& player,
 		sprite.setScale(sf::Vector2f(.05f, .05f));
 		SetTag("EnemyBrain");
 		score = 500;
-		speed = 11.5f;
+		speed = 1.5f;
 		health = 3;
 		MaxHealth = health;
 		humanRef = entityManager.GetActiveHumanForBrain();
@@ -25,6 +25,19 @@ void EnemyBrain::Update()
 	if (humanRef == nullptr || humanRef->isCorrupt)
 	{
 		humanRef = entityManager.GetActiveHumanForBrain();
+
+		randomMoveTimer += 0.1f;
+		static float randomMoveRate = 10.f;
+		if (randomMoveTimer > randomMoveRate)
+		{
+			randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
+			MoveCharacter(randomDirection);
+			randomMoveTimer = 0.f;
+		}
+		else
+		{
+			MoveCharacter(randomDirection);
+		}
 	}
 	else if (humanRef) 
 	{
@@ -37,6 +50,7 @@ void EnemyBrain::Update()
 	}
 
 	fireTimer += 0.1f;
+	float fireRate = 10.5f;
 	if (fireTimer > fireRate)
 	{
 		sf::Vector2f playerPos = playerRef.GetPositionConst();

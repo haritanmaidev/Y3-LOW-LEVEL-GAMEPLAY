@@ -20,17 +20,13 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 
 void HumanCharacter::Update()
 {
-	//SpriteFlash();
-
 	if (!isCorrupt)
 	{
-		std::cout << "isnt corrupted" << std::endl;
 		randomMoveTimer += 0.1f;
-		static float randomMoveRate = 10.f;
+		static float randomMoveRate = 15.f;
 		if (randomMoveTimer > randomMoveRate)
 		{
 			randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
-			MoveCharacter(randomDirection);
 			randomMoveTimer = 0.f;
 		}
 		else 
@@ -40,8 +36,6 @@ void HumanCharacter::Update()
 	}
 	else 
 	{
-		std::cout << "is corrupted" << std::endl;
-
 		sf::Vector2f playerPos = player.GetPositionConst();
 		sf::Vector2f position = sprite.getPosition();
 		sf::Vector2f direction = playerPos - position;
@@ -49,9 +43,6 @@ void HumanCharacter::Update()
 		direction /= mag;
 
 		Character::MoveCharacter(direction);
-		//MoveCharacter();
-
-		//MoveCharacter(direction);
 	}
 }
 
@@ -87,7 +78,6 @@ void HumanCharacter::TakeDamage(int damage, const std::string& damageBy)
 	Character::TakeDamage(damage, damageBy);
 }
 
-//Techically Rescue
 void HumanCharacter::Die(const std::string& killedBy)
 {
 	//SoundManager::PlayHumanHurtSound();
@@ -100,6 +90,7 @@ void HumanCharacter::Die(const std::string& killedBy)
 	{
 		if (!isCorrupt)
 		{
+			//Rescue Family
 			UIManager::AddScore(score);
 			SoundManager::PlayHumanRescueSound();
 		}

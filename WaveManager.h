@@ -28,11 +28,13 @@ private:
 	int hulksSpawned = 0;
 	int brainsSpawned = 0;
 	int enforcersSpawned = 0;
+	int tanksSpawned = 0;
 
 	int humansToSpawn = 0;
 	int gruntsToSpawn = 0;
 	int hulksToSpawn = 0;
 	int brainsToSpawn = 0;
 	int enforcersToSpawn = 0;
+	int tanksToSpawn = 0;
 };
 

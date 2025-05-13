@@ -2,7 +2,7 @@
 #include "EntityManager.h"
 
 EnemyEnforcer::EnemyEnforcer(const sf::Vector2f& spawn, const PlayerCharacter& player, sf::Vector2f& randomDir, EntityManager& EntityManagerRef)
-: EnemyCharacter(spawn, player, randomDir), PlayerRef(player), entityManager(EntityManagerRef)
+: EnemyCharacter(spawn, player, randomDir), playerRef(player), entityManager(EntityManagerRef)
 {
 	if (LoadGameObjectTextureFromFile("assets/Cropped/EnemyEnforcer.png", std::nullopt))
 	{
@@ -21,7 +21,7 @@ void EnemyEnforcer::Update()
 {
 	Character::Update();
 
-	sf::Vector2f playerPosition = PlayerRef.GetPositionConst();
+	sf::Vector2f playerPosition = playerRef.GetPositionConst();
 	sf::Vector2f position = sprite.getPosition();
 	sf::Vector2f direction = playerPosition - position;
 	float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);

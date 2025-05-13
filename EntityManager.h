@@ -9,6 +9,7 @@
 #include "EnemyHulk.h"
 #include "EnemyBrain.h"
 #include "EnemyEnforcer.h"
+#include "EnemyTank.h"
 
 class EntityManager
 {
@@ -57,6 +58,8 @@ public:
 	void AddEnemyBrainToGameObjectList(std::unique_ptr<EnemyBrain>& brain) { Add(std::unique_ptr<GameObject>(brain.release()), GameObjectList); }
 
 	void AddEnemyEnforcerToGameObjectList(std::unique_ptr<EnemyEnforcer>& enforcer) { Add(std::unique_ptr<GameObject>(enforcer.release()), GameObjectList); }
+
+	void addEnemyTankToGameObjectList(std::unique_ptr<EnemyTank>& tank) { Add(std::unique_ptr<GameObject>(tank.release()), GameObjectList); }
 
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
@@ -110,6 +113,14 @@ public:
 		AddEnemyEnforcerToGameObjectList(newEnforcer);
 	}
 
+	void SpawnEnemyTank(const sf::Vector2f& position)
+	{
+		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
+		auto newTank = std::make_unique<EnemyTank>(position, *Player, randomDirection, *this);
+		newTank->SetVelocity(randomDirection);
+		addEnemyTankToGameObjectList(newTank);
+	}
+
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
@@ -132,7 +143,7 @@ public:
 	{
 		UpdateAll(GameObjectList);
 		inputHandler.MoveCharacter(GetPlayer());
-		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 20.f);
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 12.5f);
 	}
 
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
@@ -184,6 +195,14 @@ public:
 				if (tag == "Enemy" || tag == "EnemyEnforcer" || tag == "EnemyBrain" || tag == "EnemyTank")
 				{
 					return false;
+				}
+				else if(tag == "Human") 
+				{
+					HumanCharacter* human = dynamic_cast<HumanCharacter*>(obj.get());
+					if (human && human->isCorrupt)
+					{
+						return false;
+					}
 				}
 			}
 		}
