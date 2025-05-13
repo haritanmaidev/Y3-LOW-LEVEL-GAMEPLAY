@@ -42,7 +42,7 @@ void EnemyEnforcer::Update()
 	{
 		//REFACTOR: USE HOMING MISSLE LATER, MISSE WORTH IS 25 PTS
 		fireRate = entityManager.GetRandomNumber(5.5f, 6.5f);
-		entityManager.SpawnProjectile(sprite.getPosition(), direction, 8.f);
+		entityManager.SpawnProjectileEnforcer(sprite.getPosition(), direction, 4.f);
 		fireTimer = 0.f;
 	}
 }

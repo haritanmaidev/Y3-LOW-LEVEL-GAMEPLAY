@@ -440,6 +440,9 @@
     <ClInclude Include="EnemyEnforcer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileEnforcer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages\SFML\include\SFML\Audio\SoundFileFactory.inl">

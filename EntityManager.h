@@ -2,6 +2,7 @@
 #include "InputHandler.h"
 #include "GameObject.h"
 #include "Projectile.h"
+#include "ProjectileEnforcer.h"
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
 #include "HumanCharacter.h"
@@ -57,6 +58,8 @@ public:
 
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
+	void AddProjectileEnforcerToGameObjectList(std::unique_ptr<ProjectileEnforcer> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
+
 	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
@@ -99,6 +102,12 @@ public:
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		AddProjectileToGameObjectList(std::move(newProjectile));
+	}
+
+	void SpawnProjectileEnforcer(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
+	{
+		auto newProjectile = std::make_unique<ProjectileEnforcer>(position, direction, speed, *Player);
+		AddProjectileEnforcerToGameObjectList(std::move(newProjectile));
 	}
 
 	void UpdateAllEntities(sf::RenderWindow& window, InputHandler& inputHandler)
@@ -213,7 +222,6 @@ private:
 
 	void BorderCollisionCheck(GameObject& object)
 	{
-		if (!object.IsActive()) return;
 		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
 		if (object.GetSprite().getPosition().x < 0)
