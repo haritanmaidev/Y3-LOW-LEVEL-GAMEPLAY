@@ -1,7 +1,7 @@
 #pragma once
 #include "EnemyCharacter.h"
-
-class EntityManager;
+#include "EntityManager.h"
+//class EntityManager;
 
 class EnemyEnforcer : public EnemyCharacter
 {

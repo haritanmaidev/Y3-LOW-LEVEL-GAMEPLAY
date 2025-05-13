@@ -272,6 +272,7 @@
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileEnforcer.h" />
+    <ClInclude Include="ProjectileSnake.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SoundManager.h" />

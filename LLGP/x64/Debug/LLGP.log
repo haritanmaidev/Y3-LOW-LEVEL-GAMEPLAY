@@ -1,2 +1,122 @@
-﻿  HumanCharacter.cpp
-  LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe
+﻿  EnemyBrain.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'EnemyBrain.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EnemyBrain.h(4,7):
+      see declaration of 'EntityManager'
+  
+  EnemyEnforcer.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'EnemyEnforcer.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\InputHandler.h(8,7):
+      see declaration of 'EntityManager'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,56): error C2065: 'EnemyEnforcer': undeclared identifier
+  (compiling source file 'EnemyEnforcer.cpp')
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,45): error C2923: 'std::unique_ptr': 'EnemyEnforcer' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'EnemyEnforcer.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,56):
+      see declaration of 'EnemyEnforcer'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,45): error C2976: 'std::unique_ptr': too few template arguments
+  (compiling source file 'EnemyEnforcer.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3332,7):
+      see declaration of 'std::unique_ptr'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,72): error C2955: 'std::unique_ptr': use of class template requires template argument list
+  (compiling source file 'EnemyEnforcer.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3332,7):
+      see declaration of 'std::unique_ptr'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,125): error C2662: '_Get_deleter_pointer_type<_Ty,remove_reference<_Ty1>::type,void>::type std::unique_ptr<_Ty,_Dx>::release(void) noexcept': cannot convert 'this' pointer from 'std::unique_ptr' to 'std::unique_ptr<_Ty,_Dx> &'
+  (compiling source file 'EnemyEnforcer.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,116):
+      Reason: cannot convert from 'std::unique_ptr' to 'std::unique_ptr<_Ty,_Dx>'
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,116):
+      Conversion requires a second user-defined-conversion operator or constructor
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3437,26):
+      see declaration of 'std::unique_ptr<_Ty,_Dx>::release'
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,125):
+      while trying to match the argument list '()'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,84): error C2672: 'EntityManager::Add': no matching overloaded function found
+  (compiling source file 'EnemyEnforcer.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(23,29):
+      could be 'void EntityManager::Add(std::unique_ptr<_Ty,std::default_delete<_Ty>> &&,std::vector<std::unique_ptr<_Ty,std::default_delete<_Ty>>,std::allocator<std::unique_ptr<_Ty,std::default_delete<_Ty>>>> &)'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(110,39): error C2065: 'EnemyEnforcer': undeclared identifier
+  (compiling source file 'EnemyEnforcer.cpp')
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(110,27): error C2672: 'std::make_unique': no matching overloaded function found
+  (compiling source file 'EnemyEnforcer.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3604,6):
+      could be 'void std::make_unique(_Types ...)'
+          D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(110,39):
+          'std::make_unique': invalid template argument for '_Ty', type expected
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3598,57):
+      or       'std::unique_ptr<_Ty,std::default_delete<_Ty>> std::make_unique(const size_t)'
+          D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(110,39):
+          'std::make_unique': invalid template argument for '_Ty', type expected
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3593,57):
+      or       'std::unique_ptr<_Ty,std::default_delete<_Ty>> std::make_unique(_Types ...)'
+          D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(110,39):
+          'std::make_unique': invalid template argument for '_Ty', type expected
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(111,3): error C3536: 'newEnforcer': cannot be used before it is initialized
+  (compiling source file 'EnemyEnforcer.cpp')
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(112,3): error C2664: 'void EntityManager::AddEnemyEnforcerToGameObjectList(std::unique_ptr &)': cannot convert argument 1 from 'int' to 'std::unique_ptr &'
+  (compiling source file 'EnemyEnforcer.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(61,7):
+      see declaration of 'EntityManager::AddEnemyEnforcerToGameObjectList'
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EntityManager.h(112,3):
+      while trying to match the argument list '(int)'
+  
+  EnemyHulk.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'EnemyHulk.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\EnemyHulk.h(4,7):
+      see declaration of 'EntityManager'
+  
+  EntityManager.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'EntityManager.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\InputHandler.h(8,7):
+      see declaration of 'EntityManager'
+  
+  GameScene.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'GameScene.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\GameScene.h(4,7):
+      see declaration of 'EntityManager'
+  
+  HumanCharacter.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'HumanCharacter.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\HumanCharacter.h(4,7):
+      see declaration of 'EntityManager'
+  
+  InputHandler.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'InputHandler.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\InputHandler.h(8,7):
+      see declaration of 'EntityManager'
+  
+  main.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'main.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\InputHandler.h(8,7):
+      see declaration of 'EntityManager'
+  
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         with
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         [
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:             _Rep=__int64
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         ]
+  WaveManager.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\ProjectileSnake.h(35,18): error C2027: use of undefined type 'EntityManager'
+  (compiling source file 'WaveManager.cpp')
+      D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\WaveManager.h(3,7):
+      see declaration of 'EntityManager'
+  
+  Generating Code...

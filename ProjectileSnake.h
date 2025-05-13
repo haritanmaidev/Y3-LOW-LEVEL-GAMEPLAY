@@ -1,37 +1,44 @@
 #pragma once
-#include "InputHandler.h"
 #include <iostream>
-#include "GameObject.h"
+#include <cmath>
 #include "SoundManager.h"
+#include "PlayerCharacter.h"
+#include "EntityManager.h"
 
 class ProjectileSnake : public GameObject
 {
 public:
 	//ASK: Should these be const?
-	ProjectileSnake(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed, const PlayerCharacter& playerRef)
-	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed), player(playerRef)
+	ProjectileSnake(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed, const PlayerCharacter& playerRef, EntityManager& entityManRef)
+	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed), player(playerRef), entityManager(entityManRef)
 	{
-		if (LoadGameObjectTextureFromFile("assets/Cropped/BasicProjectile.png", std::nullopt))
+		if (LoadGameObjectTextureFromFile("assets/Cropped/ProjectileSnake.png", std::nullopt))
 		{
 			sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
-			sprite.setScale(sf::Vector2f(.25f, .25f));
+			sprite.setScale(sf::Vector2f(.1f, .1f));
 			sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 			sprite.setPosition(spawnPoint);
-			sprite.setColor(sf::Color::Red);
 			SoundManager::PlayProjectileSound();
 			SetTag("ProjectileSnake");
+			aimDirection = aimDir;
 		}
 	}
 
 	void Update() override
 	{
-		sf::Vector2f playerPosition = player.GetPositionConst();
-		sf::Vector2f position = sprite.getPosition();
-		sf::Vector2f direction = playerPosition - position;
-		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-		direction /= mag;
+		sf::Vector2f dir = player.GetPositionConst() - sprite.getPosition();
+		float mag = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+		if (mag != 0.f) { dir /= mag; }
 
-		sprite.move(direction * projectileSpeed);
+		sf::Vector2f perpendicular = { -dir.y, dir.x };
+		float wiggleMax = 0.1f;
+		float wiggle = entityManager.GetRandomNumber(-wiggleMax, wiggleMax);
+
+		dir += perpendicular * wiggle;
+		mag = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+		if (mag != 0.f) { dir /= mag; }
+
+		sprite.move(dir * projectileSpeed);
 	}
 
 	void OnCollision(const std::string& tag) override
@@ -51,6 +58,7 @@ public:
 	}
 
 private:
+	EntityManager& entityManager;
 	const PlayerCharacter& player;
 	sf::Vector2f spawnPoint;
 	sf::Vector2f aimDirection;

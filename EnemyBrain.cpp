@@ -45,7 +45,7 @@ void EnemyBrain::Update()
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 		direction /= mag;
 		fireRate = entityManager.GetRandomNumber(5.5f, 6.5f);
-		//entityManager.SpawnProjectileBrain(sprite.getPosition(), direction, 4.f);
+		entityManager.SpawnProjectileSnake(sprite.getPosition(), direction, 4.f);
 		fireTimer = 0.f;
 	}
 }

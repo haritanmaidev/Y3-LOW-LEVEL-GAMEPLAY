@@ -120,7 +120,7 @@ public:
 
 	void SpawnProjectileSnake(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
-		auto newProjectile = std::make_unique<ProjectileSnake>(position, direction, speed, *Player);
+		auto newProjectile = std::make_unique<ProjectileSnake>(position, direction, speed, *Player, *this);
 		AddProjectileSnakeToGameObjectList(std::move(newProjectile));
 	}
 

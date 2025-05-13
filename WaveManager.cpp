@@ -57,16 +57,18 @@ void WaveManager::StartNextWave()
 	brainsSpawned = 0;
 	enforcersSpawned = 0;
 
+	//Didn't want like 10000 if statements here so I made them shorter and readable :)
 	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
 	gruntsToSpawn = 3 + wave * 2;
 	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 1;
 	brainsToSpawn = (wave % 2 == 0) ? wave : 0;
 	enforcersToSpawn = (wave >= 2) ? (wave/2) : 0;
+
 	if (humansToSpawn > 10) humansToSpawn = 10;
 	if (gruntsToSpawn > 30) gruntsToSpawn = 20;
 	if(hulksToSpawn > 6) hulksToSpawn = 6;
-	if (enforcersToSpawn > 5) enforcersToSpawn = 5;
 	if (brainsToSpawn < 1) brainsToSpawn = 2;
+	if (enforcersToSpawn > 5) enforcersToSpawn = 5;
 }
 
 void WaveManager::SpawnEntity()
