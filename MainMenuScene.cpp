@@ -45,8 +45,8 @@ void MainMenuScene::HandleInput(sf::RenderWindow& window)
 void MainMenuScene::Update()
 {
 	UIManager::FlashText(titleText);
-    UIManager::FlashText(startText);
-    UIManager::FlashText(exitText);
+	UIManager::FlashText(startText);
+	UIManager::FlashText(exitText);
 
 }
 

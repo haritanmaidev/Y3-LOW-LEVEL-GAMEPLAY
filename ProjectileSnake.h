@@ -18,6 +18,7 @@ public:
 			sprite.setScale(sf::Vector2f(.08f, .05f));
 			sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 			sprite.setPosition(spawnPoint);
+			score = 50;
 			SoundManager::PlayProjectileSound();
 			SetTag("ProjectileSnake");
 			direction = aimDir;
@@ -57,7 +58,7 @@ public:
 		}
 		else if (tag == "Projectile")
 		{
-			UIManager::AddScore(25);
+			UIManager::AddScore(score);
 			SoundManager::PlayEnemyHurtSound();
 			//SoundManager::PlayProjectileDestroySound();
 			SetActive(false);
@@ -71,4 +72,5 @@ private:
 	float projectileSpeed = 0.5f;
 	float wiggleRate = 2.f;
 	float wiggleTimer = 0.f;
+	int score = 50;
 };

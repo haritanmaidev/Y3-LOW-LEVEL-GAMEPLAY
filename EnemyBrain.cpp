@@ -8,7 +8,7 @@ EnemyBrain::EnemyBrain(const sf::Vector2f& spawn, const PlayerCharacter& player,
 	{
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
-		sprite.setScale(sf::Vector2f(.05f, .05f));
+		sprite.setScale(sf::Vector2f(.1f, .1f));
 		SetTag("EnemyBrain");
 		score = 500;
 		speed = 1.5f;

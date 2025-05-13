@@ -51,6 +51,7 @@ void InputHandler::MoveCharacter(Character& character)
 
 	//character.MoveCharacter(character.GetVelocity());
 	character.GetSprite().move(velocity);
+	std::cout << "Character Position: " << character.GetPosition().x << ", " << character.GetPosition().y << std::endl;
 }
 
 void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -68,6 +69,15 @@ void InputHandler::FireProjectile(EntityManager& entManger, const sf::Vector2f& 
 		{
 			isFiring = false;
 		}
+	}
+}
+
+void InputHandler::GetCoordinates(const sf::RenderWindow& win)
+{
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) 
+	{
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(win);
+		std::cout << "Mouse Position: " << pixelPos.x << ", " << pixelPos.y << std::endl;
 	}
 }
 

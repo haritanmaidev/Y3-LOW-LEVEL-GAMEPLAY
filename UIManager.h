@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 class UIManager
 {
 public:
@@ -8,13 +10,13 @@ public:
 		{
 			healthBar.setSize(sf::Vector2f(200.f, 20.f));
 			healthBar.setFillColor(sf::Color(255, 0, 0, 50));
-			healthBar.setPosition(sf::Vector2f(15.f, 10.f));
+			healthBar.setPosition(sf::Vector2f(15.f, 9.f));
 			healthBar.setOutlineColor(sf::Color::White);
 			healthBar.setOutlineThickness(2.f);
 
 			healthBarFill.setSize(sf::Vector2f(200.f, 20.f));
 			healthBarFill.setFillColor(sf::Color(0, 255, 30));
-			healthBarFill.setPosition(sf::Vector2f(15.f, 10.f));
+			healthBarFill.setPosition(sf::Vector2f(15.f, 9.f));
 
 			livesCountText.setCharacterSize(30);
 			livesCountText.setFillColor(sf::Color::White);
@@ -29,11 +31,26 @@ public:
 			waveText.setFont(font);
 			waveText.setCharacterSize(30);
 			waveText.setFillColor(sf::Color::White);
-			waveText.setPosition(sf::Vector2f(415.f, 0.f));
+			waveText.setPosition(sf::Vector2f(425.f, 0.f));
 			waveMessageText.setFont(font);
 			waveMessageText.setCharacterSize(50);
 			waveMessageText.setFillColor(sf::Color::White);
 			waveMessageText.setPosition(sf::Vector2f(200.f, 200.f));
+
+			border.setSize(sf::Vector2f(996.f, 996.f));
+			border.setPosition(sf::Vector2f(500.f, 500.f));
+			border.setFillColor(sf::Color::Transparent);
+			border.setOutlineColor(sf::Color::White);
+			border.setOutlineThickness(2.f);
+			border.setOrigin(sf::Vector2f(border.getSize().x / 2.f, border.getSize().y / 2.f));
+
+			borderTop.setSize({ 999.f, 32.f });
+			borderTop.setPosition({ 500.f, 19.f });
+			borderTop.setFillColor(sf::Color::Transparent);
+			borderTop.setOutlineColor(sf::Color::White);
+			borderTop.setOutlineThickness(2.f);
+			borderTop.setOrigin(sf::Vector2f(borderTop.getSize().x / 2.f, borderTop.getSize().y / 2.f));
+
 		}
 	}
 
@@ -51,10 +68,14 @@ public:
 			if (waveMessageTimer > waveMessageInterval) { isWaveMessageActive = false; }
 		}
 
-		FlashText(waveMessageText);
-		FlashText(scoreText);
+		GetFlashColor();
 		FlashText(livesCountText);
+		FlashText(scoreText);
 		FlashText(waveText);
+		FlashText(waveMessageText);
+		border.setOutlineColor(GetFlashColor());
+		borderTop.setOutlineColor(GetFlashColor());
+		healthBar.setOutlineColor(GetFlashColor());
 	}
 
 	static void RenderUI(sf::RenderWindow& window)
@@ -64,6 +85,8 @@ public:
 		window.draw(livesCountText);
 		window.draw(scoreText);
 		window.draw(waveText);
+		window.draw(border);
+		window.draw(borderTop);
 		if (isWaveMessageActive) { window.draw(waveMessageText); }
 	}
 
@@ -111,8 +134,8 @@ public:
 		isWaveMessageActive = true;
 	}
 
-	//Color Flashing Text
-	static void FlashText(sf::Text& text)
+	//Color Flashing Text & bORDER
+	static sf::Color GetFlashColor()
 	{
 		static int red = 255, green = 0, blue = 0;
 		static float flashTime = 0.5f;
@@ -132,10 +155,16 @@ public:
 			case 4: red += step; if (red >= 255) { red = 255; phase = 5; } break;
 			case 5: blue -= step; if (blue <= 0) { blue = 0; phase = 0; } break;
 			}
+
 			flashTimer = 0.f;
 		}
-		
-		text.setFillColor(sf::Color(red, green, blue));
+
+		return sf::Color(red, green, blue);
+	}
+
+	static void FlashText(sf::Text& text) 
+	{
+		text.setFillColor(GetFlashColor());
 	}
 	
 private:
@@ -154,4 +183,6 @@ private:
 	inline static sf::Text waveMessageText = sf::Text(font);
 	inline static sf::RectangleShape healthBar;
 	inline static sf::RectangleShape healthBarFill;
+	inline static sf::RectangleShape border;
+	inline static sf::RectangleShape borderTop;
 };

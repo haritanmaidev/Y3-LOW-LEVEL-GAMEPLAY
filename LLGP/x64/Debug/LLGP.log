@@ -1,11 +1,16 @@
-﻿  EnemyBrain.cpp
+﻿  Electrode.cpp
+  EnemyBrain.cpp
+  EnemyCharacter.cpp
   EnemyEnforcer.cpp
   EnemyHulk.cpp
   EnemyTank.cpp
   EntityManager.cpp
+  GameOverScene.cpp
   GameScene.cpp
   HumanCharacter.cpp
   InputHandler.cpp
+  MainMenuScene.cpp
+  PlayerCharacter.cpp
   WaveManager.cpp
   main.cpp
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
@@ -14,4 +19,14 @@ D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125):
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:             _Rep=__int64
 D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         ]
   Generating Code...
+sfml-graphics-s-d.lib(Font.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Font.obj)' or at ''; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTarget.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(RenderTarget.obj)' or at ''; linking object as if no debug info
+sfml-graphics-s-d.lib(Shader.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Shader.obj)' or at ''; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTextureImplFBO.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(RenderTextureImplFBO.obj)' or at ''; linking object as if no debug info
+sfml-audio-s-d.lib(AudioDevice.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(AudioDevice.obj)' or at ''; linking object as if no debug info
+sfml-audio-s-d.lib(MiniaudioUtils.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(MiniaudioUtils.obj)' or at ''; linking object as if no debug info
+sfml-audio-s-d.lib(SoundBuffer.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundBuffer.obj)' or at ''; linking object as if no debug info
+sfml-audio-s-d.lib(InputSoundFile.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(InputSoundFile.obj)' or at ''; linking object as if no debug info
+sfml-audio-s-d.lib(SoundFileFactory.obj) : warning LNK4099: PDB '' was not found with 'sfml-audio-s-d.lib(SoundFileFactory.obj)' or at ''; linking object as if no debug info
+vorbisd.lib(psy.obj) : warning LNK4099: PDB '' was not found with 'vorbisd.lib(psy.obj)' or at ''; linking object as if no debug info
   LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

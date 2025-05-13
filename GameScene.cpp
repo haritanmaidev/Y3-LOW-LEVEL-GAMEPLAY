@@ -13,6 +13,7 @@ void GameScene::Init()
 	UIManager::ResetScore();
 	UIManager::ResetWave();
 	UIManager::ResetHealth();
+	SoundManager::PlayBackgroundMusic();
 	entityManager.SpawnPlayerCharacter(sf::Vector2f(700.f, 950.f));
 	waveManager.StartNextWave();	
 	isFinished = false;
