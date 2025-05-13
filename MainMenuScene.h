@@ -4,9 +4,12 @@
 class MainMenuScene : public Scene
 {
 public:
+	//Constructor & Destructor
     MainMenuScene();
 	~MainMenuScene() = default;
 
+    //Override Functions
+	void Init() override;
     void HandleInput(sf::RenderWindow& window) override;
     void Update() override;
     void Render(sf::RenderWindow& window) override;

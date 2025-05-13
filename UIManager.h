@@ -19,7 +19,7 @@ public:
 			livesCountText.setCharacterSize(30);
 			livesCountText.setFillColor(sf::Color::White);
 			livesCountText.setPosition(sf::Vector2f(220.f, 0.f));
-			livesCountText.setString("x 3");
+			livesCountText.setString("x" + std::to_string(lives));
 
 			scoreText.setFont(font);
 			scoreText.setCharacterSize(30);
@@ -63,8 +63,14 @@ public:
 		if (isWaveMessageActive) { window.draw(waveMessageText); }
 	}
 
+	static void GetFont(sf::Font& fontRef) { fontRef = font; }
+
 	//Health Stuff
+	static int GetLives() { return lives; }
+	static void DecrementLives() { lives--; }
+	static void IncrementLives() { lives++; }
 	static void SetLives(int livesCount) { lives = livesCount; }
+	static void ResetHealth() { currentHealth = maxHealth; }
 	static void SetHealthValues(int playerCurrentHealth, int playerMaxHealth)
 	{
 		currentHealth = playerCurrentHealth;
@@ -94,7 +100,7 @@ public:
 	}
 	
 private:
-	inline static int lives = 3;
+	inline static int lives = 0;
 	inline static int currentHealth = 100;
 	inline static int maxHealth = 100;
 	inline static int score = 0;

@@ -22,6 +22,8 @@ public:
 		if (scenes.find(name) != scenes.end())
 		{
 			currentScene = scenes[name].get();
+			currentScene->Init();
+			std::cout << "Switched to scene: " << name << std::endl;
 		}
 		else
 		{
@@ -45,7 +47,7 @@ public:
 
 		if (currentScene->IsFinished())
 		{
-			std::string next = currentScene->NextScene();
+			std::string next = currentScene->GetNextScene();
 			SwitchTo(next);
 		}
 	}

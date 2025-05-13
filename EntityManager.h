@@ -6,20 +6,18 @@
 #include "EnemyCharacter.h"
 #include "HumanCharacter.h"
 #include "EnemyHulk.h"
+#include "EnemyEnforcer.h"
 #include <random>
 
 class EntityManager
 {
 public:
 	//Constructor & Destructor
-	EntityManager()
-	{
-		SpawnPlayerCharacter(sf::Vector2f(500.f, 750.f));
-	}
+	EntityManager() = default;
 	~EntityManager() = default;
 
 	//==================================:::::|||||[--- TEMPLATE FUNCTIONS ---]|||||:::::==================================//
-	template <typename T> void Add(std::unique_ptr<T> && entity, std::vector<std::unique_ptr<T>>& list)
+	template <typename T> void Add(std::unique_ptr<T>&& entity, std::vector<std::unique_ptr<T>>& list)
 	{
 		list.push_back(std::move(entity));
 	}
@@ -28,11 +26,11 @@ public:
 	{
 		for (auto& entity : list)
 		{
-			if (entity->IsActive()) 
+			if (entity->IsActive())
 			{
 				entity->Update();
 				BorderCollisionCheck(*entity);
-			} 
+			}
 		}
 	}
 
@@ -46,7 +44,7 @@ public:
 
 	//==================================:::::|||||[--- ADD TO LIST FUNCTIONS ---]|||||:::::==================================//
 	void AddGameObjectToGameObjectList(std::unique_ptr<GameObject>& entity) { Add(std::move(entity), GameObjectList); }
-	
+
 	void AddPlayerToGameObjectList(std::unique_ptr<PlayerCharacter>& player) { Add(std::unique_ptr<GameObject>(player.release()), GameObjectList); }
 
 	void AddHumanToGameObjectList(std::unique_ptr<HumanCharacter>& human) { Add(std::unique_ptr<GameObject>(human.release()), GameObjectList); }
@@ -54,7 +52,9 @@ public:
 	void AddEnemyGruntToGameObjectList(std::unique_ptr<EnemyCharacter>& enemy) { Add(std::unique_ptr<GameObject>(enemy.release()), GameObjectList); }
 
 	void AddEnemyHulkToGameObjectList(std::unique_ptr<EnemyHulk>& hulk) { Add(std::unique_ptr<GameObject>(hulk.release()), GameObjectList); }
-	
+
+	void AddEnemyEnforcerToGameObjectList(std::unique_ptr<EnemyEnforcer>& enforcer) { Add(std::unique_ptr<GameObject>(enforcer.release()), GameObjectList); }
+
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
 	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
@@ -79,12 +79,20 @@ public:
 		AddEnemyGruntToGameObjectList(newCharacter);
 	}
 
-	void SpawnEnemyHulk(const sf::Vector2f& position) 
+	void SpawnEnemyHulk(const sf::Vector2f& position)
 	{
 		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
 		auto newHulk = std::make_unique<EnemyHulk>(position, *Player, randomDirection, *this);
 		newHulk->SetVelocity(randomDirection);
 		AddEnemyHulkToGameObjectList(newHulk);
+	}
+
+	void SpawnEnemyEnforcer(const sf::Vector2f& position)
+	{
+		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
+		auto newEnforcer = std::make_unique<EnemyEnforcer>(position, *Player, randomDirection, *this);
+		newEnforcer->SetVelocity(randomDirection);
+		AddEnemyEnforcerToGameObjectList(newEnforcer);
 	}
 
 	void SpawnProjectile(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
@@ -103,7 +111,7 @@ public:
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
 
 	//==================================:::::|||||[--- COLLISION FUNCTIONS ---]|||||:::::==================================//
-	void GameObjectListCollisionCheck() 
+	void GameObjectListCollisionCheck()
 	{
 		for (int i = 0; i < GameObjectList.size(); i++)
 		{
@@ -122,7 +130,7 @@ public:
 	{
 		for (int i = 0; i < GameObjectList.size(); i++)
 		{
-			if (!GameObjectList[i]->IsActive())
+			if (!GameObjectList[i]->IsActive() && GameObjectList[i]->GetTag() != "Player")
 			{
 				GameObjectList.erase(GameObjectList.begin() + i);
 				i--;
@@ -131,13 +139,19 @@ public:
 		}
 	}
 
+	void ClearAll()
+	{
+		GameObjectList.clear();
+		Player = nullptr;
+	}
+
 	//==================================:::::|||||[--- WAVE SYSTEM RELATED FUNCTIONS ---]|||||:::::==================================//
 	bool AreEnemiesDead() const
 	{
 		int count = 0;
 		for (const auto& obj : GameObjectList)
 		{
-			if (obj->IsActive()) 
+			if (obj->IsActive())
 			{
 				const std::string& tag = obj->GetTag();
 				if (tag == "Enemy" || tag == "EnemyBrain" || tag == "EnemyTank")
@@ -150,7 +164,7 @@ public:
 		return true;
 	}
 
-	void ResetScene() 
+	void ResetSceneForWaves()
 	{
 		for (auto& obj : GameObjectList)
 		{
@@ -167,14 +181,8 @@ public:
 		}
 	}
 
-	void ClearAllExceptPlayer() 
-	{
-		for (auto& obj : GameObjectList)
-		{
-			const std::string tag = obj->GetTag();
-			if (tag != "Player") obj->SetActive(false);
-		}
-	}
+
+
 
 	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
 	Character& GetPlayer() { return *Player; }

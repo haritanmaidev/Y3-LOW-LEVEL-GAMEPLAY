@@ -21,7 +21,6 @@ void EnemyHulk::Update()
 {
 	if (IsActive())
 	{
-		static float randomMoveRate = 10.f;
 		randomMoveTimer += 0.1f;
 		if (randomMoveTimer > randomMoveRate)
 		{

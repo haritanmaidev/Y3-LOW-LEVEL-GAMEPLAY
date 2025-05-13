@@ -5,12 +5,16 @@
 #include "WaveManager.h"
 
 GameScene::GameScene(sf::RenderWindow& windowRef, InputHandler& inputRef, EntityManager& entityManRef, WaveManager& waveRef)
-: window(windowRef), inputHandler(inputRef), entityManager(entityManRef), waveManager(waveRef)
+: window(windowRef), inputHandler(inputRef), entityManager(entityManRef), waveManager(waveRef) {}
+
+void GameScene::Init()
 {
+	UIManager::SetLives(3);
 	UIManager::ResetScore();
 	UIManager::ResetWave();
-	UIManager::SetLives(3);
-	SoundManager::PlayBackgroundMusic();
+	UIManager::ResetHealth();
+	entityManager.SpawnPlayerCharacter(sf::Vector2f(500.f, 750.f));
+	isFinished = false;
 }
 
 void GameScene::HandleInput(sf::RenderWindow& window)
@@ -19,17 +23,28 @@ void GameScene::HandleInput(sf::RenderWindow& window)
 	{
 		window.close();
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+	{
+		SoundManager::PlayBackgroundMusic();
+	}
 }
 
 void GameScene::Update()
 {
-	//if(entityManager)
 	entityManager.GameObjectListCollisionCheck();
 	entityManager.UpdateAllEntities(window, inputHandler);
 	entityManager.RemoveEntityFromList();
 	waveManager.Update();
 	SoundManager::CleanUpSounds();
 	UIManager::Update();
+
+	if (!entityManager.GetPlayer().IsActive())
+	{
+		entityManager.ClearAll();
+		isFinished = true;
+		nextScene = "GameOver";
+	}
 }
 
 void GameScene::Render(sf::RenderWindow& window)

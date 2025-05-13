@@ -11,6 +11,7 @@ public:
 	GameScene(sf::RenderWindow& windowRef, InputHandler& inputRef, EntityManager& entityManRef, WaveManager& waveRef);
 	~GameScene() = default;
 
+	void Init() override;
 	void HandleInput(sf::RenderWindow& window) override;
 	void Update() override;
 	void Render(sf::RenderWindow& window) override;

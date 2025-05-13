@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "GameOverScene.h"
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
@@ -23,7 +24,8 @@ int main()
     //Scene Management
     SceneManager sceneManager;
     sceneManager.AddScene("MainMenu", std::make_unique<MainMenuScene>());
-    sceneManager.AddScene("GameScene", std::make_unique<GameScene>(window, inputHandler, entityManager, waveManager));
+    sceneManager.AddScene("Game", std::make_unique<GameScene>(window, inputHandler, entityManager, waveManager));
+	sceneManager.AddScene("GameOver", std::make_unique<GameOverScene>());
     sceneManager.SwitchTo("MainMenu");
 
     //Time Update

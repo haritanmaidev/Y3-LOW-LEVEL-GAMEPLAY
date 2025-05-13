@@ -8,7 +8,6 @@ PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 		sprite.setTextureRect(drawbox);
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(2.25f, 2.25f));
-		UIManager::SetLives(lives);
 		SetTag("Player");
 		playerHealth = 100;
 		playerMaxHealth = playerHealth;
@@ -51,22 +50,22 @@ void PlayerCharacter::TakeDamage(int damage, const std::string& damageBy)
 
 void PlayerCharacter::Die(const std::string& killedBy)
 {
-	lives--;
+	UIManager::DecrementLives();
 
-	if (lives > 0) 
+	if (UIManager::GetLives() > 0)
 	{
 		//Respawn Logic
 		playerHealth = playerMaxHealth;
 		SetPosition(PlayerSpawnPoint.x , PlayerSpawnPoint.y);
-		//SoundManager::PlayPlayerDeathSound();
-		UIManager::SetLives(lives);
 		UIManager::SetHealthValues(playerHealth, playerMaxHealth);
 		UIManager::SubtractScore(1000);
+		std::cout << "Player Died!" << std::endl;
 	}
 	else 
 	{
+		//SoundManager::PlayPlayerDeathSound();
+		SoundManager::PlayPlayerHurtSound();
 		Character::Die(killedBy);
 		std::cout << "Game Over!" << std::endl;
-		//GAME STATE TRIGGER
 	}
 }

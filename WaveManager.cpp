@@ -40,7 +40,7 @@ void WaveManager::Update()
 void WaveManager::StartNextWave()
 {
 	std::cout << "StartNextWave called" << std::endl;
-	entityManager.ResetScene();
+	entityManager.ResetSceneForWaves();
 	UIManager::IncrementWave();
 	UIManager::DisplayWaveMessage();
 

@@ -19,6 +19,7 @@ public:
 
 private:
 	const EntityManager& entityManager;
-	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
 	float randomMoveTimer = 0.f;
+	float randomMoveRate = 10.f;
+	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
 };

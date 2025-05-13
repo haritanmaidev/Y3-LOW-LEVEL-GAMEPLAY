@@ -24,11 +24,16 @@ MainMenuScene::MainMenuScene()
     }
 }
 
+void MainMenuScene::Init()
+{
+	isFinished = false;
+}
+
 void MainMenuScene::HandleInput(sf::RenderWindow& window)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
         isFinished = true;
-        nextScene = "GameScene";
+        nextScene = "Game";
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
     {
