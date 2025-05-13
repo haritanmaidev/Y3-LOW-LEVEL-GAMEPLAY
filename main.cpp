@@ -10,7 +10,7 @@
 #define WINDOW_HEIGHT 1000
 #define WINDOW_WIDTH 1000
 
-int main()
+int WinMain()
 {
     sf::RenderWindow window(sf::VideoMode({ WINDOW_WIDTH, WINDOW_HEIGHT }), "CODING GLADIATOR");
 	UIManager::Init("Fonts/GODOFWAR.ttf");
