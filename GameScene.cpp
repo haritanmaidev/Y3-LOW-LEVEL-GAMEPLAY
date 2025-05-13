@@ -32,8 +32,8 @@ void GameScene::HandleInput(sf::RenderWindow& window)
 
 void GameScene::Update()
 {
-	entityManager.GameObjectListCollisionCheck();
 	entityManager.UpdateAllEntities(window, inputHandler);
+	entityManager.GameObjectListCollisionCheck();
 	entityManager.RemoveEntityFromList();
 	waveManager.Update();
 	SoundManager::CleanUpSounds();

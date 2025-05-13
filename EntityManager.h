@@ -13,7 +13,10 @@ class EntityManager
 {
 public:
 	//Constructor & Destructor
-	EntityManager() = default;
+	EntityManager() 
+	{
+		GameObjectList.reserve(200);
+	}
 	~EntityManager() = default;
 
 	//==================================:::::|||||[--- TEMPLATE FUNCTIONS ---]|||||:::::==================================//
@@ -29,7 +32,9 @@ public:
 			if (entity->IsActive())
 			{
 				entity->Update();
+				std::cout << "THIS IS RUNNINGggggggggggggggggggggggg!" << std::endl;
 				BorderCollisionCheck(*entity);
+				std::cout << "THIS IS RUNNING!" << std::endl;
 			}
 		}
 	}
@@ -154,7 +159,7 @@ public:
 			if (obj->IsActive())
 			{
 				const std::string& tag = obj->GetTag();
-				if (tag == "Enemy" || tag == "EnemyBrain" || tag == "EnemyTank")
+				if (tag == "Enemy" || tag == "EnemyEnforcer" || tag == "EnemyBrain" || tag == "EnemyTank")
 				{
 					count++;
 					return false;
@@ -180,9 +185,6 @@ public:
 			}
 		}
 	}
-
-
-
 
 	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
 	Character& GetPlayer() { return *Player; }
@@ -216,7 +218,7 @@ private:
 
 	void BorderCollisionCheck(GameObject& object)
 	{
-
+		if (!object.IsActive()) return;
 		//REFACTOR: Makes this work with hitbox variable
 		//Right Collision
 		if (object.GetSprite().getPosition().x < 0)

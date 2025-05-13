@@ -20,14 +20,17 @@ private:
 	bool isWaveActive = false;
 	bool isWaitingToSpawn = false;
 
+	float spawnInterval = 0.5f;
+	float spawnIntervalTimer = 0.f;
+
 	int humansSpawned = 0;
 	int gruntsSpawned = 0;
 	int hulksSpawned = 0;
+	int enforcersSpawned = 0;
+
 	int humansToSpawn = 0;
 	int gruntsToSpawn = 0;
 	int hulksToSpawn = 0;
-
-	float spawnInterval = 0.5f;
-	float spawnIntervalTimer = 0.f;
+	int enforcersToSpawn = 0;
 };
 

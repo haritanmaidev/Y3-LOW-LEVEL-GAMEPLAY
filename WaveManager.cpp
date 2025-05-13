@@ -56,18 +56,27 @@ void WaveManager::StartNextWave()
 	humansSpawned = 0;
 
 	gruntsToSpawn = 3 + wave * 2;
-	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 0;
+	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 1;
 	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
+	enforcersToSpawn = (wave >= 1) ? (wave/1) : 1;
 	if (humansToSpawn > 10) humansToSpawn = 10;
 	if (gruntsToSpawn > 30) gruntsToSpawn = 20;
 	if(hulksToSpawn > 6) hulksToSpawn = 6;
+	if (enforcersToSpawn > -1) enforcersToSpawn = 2;
 }
 
 void WaveManager::SpawnEntity()
 {
+	if (humansSpawned < humansToSpawn)
+	{
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(450, 750), entityManager.GetRandomNumber(10, 100));
+		entityManager.SpawnHumanCharacter(pos);
+		humansSpawned++;
+	}
+
 	if (gruntsSpawned < gruntsToSpawn)
 	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 200));
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 400));
 		entityManager.SpawnEnemyCharacter(pos);
 		gruntsSpawned++;
 	}
@@ -79,10 +88,10 @@ void WaveManager::SpawnEntity()
 		hulksSpawned++;
 	}
 
-	if (humansSpawned < humansToSpawn) 
+	if (enforcersSpawned < enforcersToSpawn)
 	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(450, 750), entityManager.GetRandomNumber(10, 100));
-		entityManager.SpawnHumanCharacter(pos);
-		humansSpawned++;
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(50, 950), entityManager.GetRandomNumber(10, 100));
+		entityManager.SpawnEnemyEnforcer(pos);
+		enforcersSpawned++;
 	}
 }

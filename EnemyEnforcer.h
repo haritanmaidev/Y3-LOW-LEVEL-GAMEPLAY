@@ -18,16 +18,13 @@ public:
 	void Die(const std::string& taggedBy) override;
 
 	//Class Functions
-	void FireMine();
+	void FireMine(const sf ::Vector2f& dir);
 
 private:
 	EntityManager& entityManager;
 	const PlayerCharacter& PlayerRef;
-	float fireRate = 0.5f;
+	float fireRate = 5.5f;
 	float fireTimer = 0.f;
-	float detectionRadius = 800.f;
-	float randomMoveTimer = 0.f;
-	float randomMoveRate = 10.f;
-	sf::Vector2f randomDirection = sf::Vector2f(0.f, 0.f);
+	float detectionRadius = 500.f;
 };
 

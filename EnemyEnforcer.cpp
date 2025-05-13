@@ -6,38 +6,41 @@ EnemyEnforcer::EnemyEnforcer(const sf::Vector2f& spawn, const PlayerCharacter& p
 {
 	if (LoadGameObjectTextureFromFile("assets/Cropped/EnemyEnforcer.png", std::nullopt))
 	{
+		std::cout << "EnemyEnforcer Texture Loaded" << std::endl;
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
-		sprite.setScale(sf::Vector2f(.25f, .25f));
+		sprite.setScale(sf::Vector2f(.05f, .05f));
 		SetTag("EnemyEnforcer");
-		speed = 1.f;
-		health = 5;
+		speed = 1.5f;
+		health = 1;
 		MaxHealth = health;
-		score = 100;
-		randomDirection = entityManager.GetRandomVector(1,-1);
+		score = 150;
+		SetActive(true);
 	}
 }
 
 void EnemyEnforcer::Update()
 {
-	randomMoveTimer += 0.1f;
 	sf::Vector2f playerPosition = PlayerRef.GetPosition();
 	sf::Vector2f position = sprite.getPosition();
 	sf::Vector2f direction = playerPosition - position;
 	float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+	direction /= mag;
 
 	if (mag < detectionRadius && mag != 0.f)
 	{
 		//Move towards Player
-		direction /= mag;
-		MoveCharacter(direction);
-		FireMine(direction);
+		MoveCharacter(-direction);
+		fireTimer += 0.1f;
+		if (fireTimer > fireRate)
+		{
+			//REFACTOR: USE HOMING MISSLE LATER, MISSE WORTH IS 25 PTS
+			FireMine(direction);
+		}
 	}
 	else
 	{
-		//Move towards random Direction
-		MoveCharacter(velocity);
-		std::cout << "EnemyCharacter Velocity: " << velocity.x << ", " << velocity.y << std::endl;
+		MoveCharacter(direction);
 	}
 }
 
@@ -50,34 +53,37 @@ void EnemyEnforcer::OnCollision(const std::string& tag)
 {
 	if (tag == "Player")
 	{
-		SoundManager::PlayEnemyHitSound();
+		TakeDamage(1, "Player");
 	}
 	else if (tag == "Projectile")
 	{
-		SoundManager::PlayEnemyHitSound();
-	}
-	else if (tag == "Human")
-	{
-		SoundManager::PlayEnemyHitSound();
+		TakeDamage(1, "Projectile");
 	}
 }
 
 void::EnemyEnforcer::TakeDamage(int damage, const std::string& damageBy)
 {
+	SoundManager::PlayEnemyHurtSound();
+	Character::TakeDamage(damage, damageBy);
 }
 
 void EnemyEnforcer::Die(const std::string& killedBy)
 {
+	if (killedBy == "Projectile")
+	{
+		UIManager::AddScore(score);
+	}
+	else if (killedBy == "Player")
+	{
+		UIManager::SubtractScore(score);
+	}
 
+	SoundManager::PlayEnemyDeathSound();
+	Character::Die(killedBy);
 }
 
 void EnemyEnforcer::FireMine(const sf::Vector2f& dir)
 {
-	fireTimer += 0.1f;
-	if (fireTimer > fireRate)
-	{
-		//REFACTOR: USE HOMING MISSLE
-		entityManager.SpawnProjectile(sprite.getPosition(), dir, 8.f);
-		fireTimer = 0.f;
-	}
+	entityManager.SpawnProjectile(sprite.getPosition(), dir, 8.f);
+	fireTimer = 0.f;
 }
