@@ -50,7 +50,6 @@ public:
 			borderTop.setOutlineColor(sf::Color::White);
 			borderTop.setOutlineThickness(2.f);
 			borderTop.setOrigin(sf::Vector2f(borderTop.getSize().x / 2.f, borderTop.getSize().y / 2.f));
-
 		}
 	}
 
