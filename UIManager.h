@@ -83,8 +83,16 @@ public:
 	static void SubtractScore(int points) { score -= points; }
 	static void AddScore(int points)
 	{
+		static int extraLifeScore = 10000;
+		const int extraLifeInterval = 10000;
 		score += points;
-		if (score >= 9999) scoreText.setPosition(sf::Vector2f(775.f, 0.f));
+		if (score >= 10000) scoreText.setPosition(sf::Vector2f(775.f, 0.f));
+
+		if (score >= extraLifeScore)
+		{
+			IncrementLives();
+			extraLifeScore += extraLifeInterval;
+		}
 	}
 
 	//Wave Stuff

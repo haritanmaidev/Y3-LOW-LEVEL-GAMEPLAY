@@ -38,6 +38,10 @@ void PlayerCharacter::OnCollision(const std::string& tag)
 	{
 		TakeDamage(30, "ProjectileShell");
 	}
+	else if (tag == "Electrode") 
+	{
+		TakeDamage(MaxHealth, "Electrode");
+	}
 }
 
 void PlayerCharacter::TakeDamage(int damage, const std::string& damageBy)

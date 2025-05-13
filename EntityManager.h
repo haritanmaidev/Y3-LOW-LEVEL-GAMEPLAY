@@ -1,16 +1,17 @@
 #pragma once
 #include <random>
 #include "InputHandler.h"
-#include "Projectile.h"
-#include "ProjectileEnforcer.h"
-#include "ProjectileSnake.h"
-#include "ProjectileShell.h"
 #include "PlayerCharacter.h"
 #include "HumanCharacter.h"
 #include "EnemyHulk.h"
 #include "EnemyBrain.h"
 #include "EnemyEnforcer.h"
 #include "EnemyTank.h"
+#include "Projectile.h"
+#include "ProjectileEnforcer.h"
+#include "ProjectileSnake.h"
+#include "ProjectileShell.h"
+#include "Electrode.h"
 
 class EntityManager
 {
@@ -70,7 +71,9 @@ public:
 
 	void AddProjectileShellToGameObjectList(std::unique_ptr<ProjectileShell> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
-	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
+	void addElectrodeToGameObjectList(std::unique_ptr<Electrode> electrode) { Add(std::unique_ptr<GameObject>(electrode.release()), GameObjectList); }
+
+	//==================================:::::|||||[--- SPAWN FUNCTIONS ---]|||||:::::==================================//
 	void SpawnPlayerCharacter(const sf::Vector2f& position)
 	{
 		auto newCharacter = std::make_unique<PlayerCharacter>(position);
@@ -148,6 +151,13 @@ public:
 		AddProjectileShellToGameObjectList(std::move(newProjectile));
 	}
 
+	void SpawnElectrode(const sf::Vector2f& position)
+	{
+		auto newElectrode = std::make_unique<Electrode>(position);
+		addElectrodeToGameObjectList(std::move(newElectrode));
+	}
+
+	//==================================:::::|||||[--- UPDATE - RENDER FUNCTIONS ---]|||||:::::==================================//
 	void UpdateAllEntities(sf::RenderWindow& window, InputHandler& inputHandler)
 	{
 		UpdateAll(GameObjectList);
