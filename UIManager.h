@@ -45,12 +45,16 @@ public:
 		livesCountText.setString("x " + std::to_string(lives));
 		scoreText.setString("Score: " + std::to_string(GetScore()));
 		waveText.setString("Wave: " + std::to_string(GetWave()));
-
 		if (isWaveMessageActive)
 		{
 			waveMessageTimer += 0.1f;
 			if (waveMessageTimer > waveMessageInterval) { isWaveMessageActive = false; }
 		}
+
+		FlashText(waveMessageText);
+		FlashText(scoreText);
+		FlashText(livesCountText);
+		FlashText(waveText);
 	}
 
 	static void RenderUI(sf::RenderWindow& window)
@@ -105,6 +109,33 @@ public:
 		waveMessageText.setString("WAVE " + std::to_string(wave) + " IS STARTING!!!");
 		waveMessageTimer = 0.f;
 		isWaveMessageActive = true;
+	}
+
+	//Color Flashing Text
+	static void FlashText(sf::Text& text)
+	{
+		static int red = 255, green = 0, blue = 0;
+		static float flashTime = 0.5f;
+		static float flashTimer = 0.f;
+		flashTimer += 0.1f;
+		if (flashTimer > flashTime) 
+		{
+			static int phase = 0;
+			const int step = 1;
+
+			switch (phase)
+			{
+			case 0: green += step; if (green >= 255) { green = 255; phase = 1; } break;
+			case 1: red -= step; if (red <= 0) { red = 0; phase = 2; } break;
+			case 2: blue += step; if (blue >= 255) { blue = 255; phase = 3; } break;
+			case 3: green -= step; if (green <= 0) { green = 0; phase = 4; } break;
+			case 4: red += step; if (red >= 255) { red = 255; phase = 5; } break;
+			case 5: blue -= step; if (blue <= 0) { blue = 0; phase = 0; } break;
+			}
+			flashTimer = 0.f;
+		}
+		
+		text.setFillColor(sf::Color(red, green, blue));
 	}
 	
 private:

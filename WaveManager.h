@@ -29,6 +29,7 @@ private:
 	int brainsSpawned = 0;
 	int enforcersSpawned = 0;
 	int tanksSpawned = 0;
+	int electrodesSpawned = 0;
 
 	int humansToSpawn = 0;
 	int gruntsToSpawn = 0;
@@ -36,5 +37,6 @@ private:
 	int brainsToSpawn = 0;
 	int enforcersToSpawn = 0;
 	int tanksToSpawn = 0;
+	int electrodesToSpawn = 0;
 };
 

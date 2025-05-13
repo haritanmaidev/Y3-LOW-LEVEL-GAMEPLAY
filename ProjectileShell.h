@@ -24,7 +24,7 @@ public:
 
 	void Update() override
 	{
-		sprite.move(aimDirection * projectileSpeed);
+		sprite.move(velocity * projectileSpeed);
 	}
 
 	void OnCollision(const std::string& tag) override
@@ -38,7 +38,6 @@ public:
 			SetActive(false);
 		}
 	}
-
 
 private:
 	sf::Vector2f spawnPoint;

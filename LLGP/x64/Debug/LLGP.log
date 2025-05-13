@@ -1,2 +1,17 @@
-﻿  GameScene.cpp
+﻿  EnemyBrain.cpp
+  EnemyEnforcer.cpp
+  EnemyHulk.cpp
+  EnemyTank.cpp
+  EntityManager.cpp
+  GameScene.cpp
+  HumanCharacter.cpp
+  InputHandler.cpp
+  WaveManager.cpp
+  main.cpp
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         with
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         [
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:             _Rep=__int64
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         ]
+  Generating Code...
   LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Debug\LLGP.exe

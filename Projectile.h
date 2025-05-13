@@ -29,27 +29,8 @@ public:
 
 	void OnCollision(const std::string& tag) override
 	{
-		if(tag == "Enemy")
-		{
-			SetActive(false);
-		}
-		else if(tag == "EnemyHulk")
-		{
-			SetActive(false);
-		}
-		else if (tag == "EnemyBrain")
-		{
-			SetActive(false);
-		}
-		else if (tag == "HumanCorrupted")
-		{
-			SetActive(false);
-		}
-		else if (tag == "EnemyEnforcer") 
-		{
-			SetActive(false);
-		}
-		else if (tag == "ProjectileSnake") 
+		if(tag == "Enemy" || tag == "EnemyHulk" || tag == "EnemyBrain" || tag == "HumanCorrupted" 
+			|| tag == "EnemyEnforcer" || tag == "ProjectileSnake" || tag == "ProjectileEnforcer" || tag == "Electrode")
 		{
 			SetActive(false);
 		}

@@ -57,6 +57,7 @@ void WaveManager::StartNextWave()
 	brainsSpawned = 0;
 	enforcersSpawned = 0;
 	tanksSpawned = 0;
+	electrodesSpawned = 0;
 
 	//Didn't want like 10000 if statements here so I made them shorter and readable :)
 	humansToSpawn = (wave <= 3) ? wave + 2 : 3;
@@ -65,6 +66,7 @@ void WaveManager::StartNextWave()
 	brainsToSpawn = (wave % 2 == 0) ? wave - 1 : 0;
 	enforcersToSpawn = (wave % 3 == 0) ? (wave/2) : 0;
 	tanksToSpawn = (wave % 4 == 0) ? (wave / 4) : 0;
+	electrodesToSpawn = (wave % 3 == 0) ? (wave) : 1;
 
 	if(humansToSpawn > 10) humansToSpawn = 10;
 	if(gruntsToSpawn > 30) gruntsToSpawn = 20;
@@ -72,6 +74,7 @@ void WaveManager::StartNextWave()
 	if(brainsToSpawn > 3) brainsToSpawn = 3;
 	if(enforcersToSpawn > 5) enforcersToSpawn = 5;
 	if (tanksToSpawn > 3) tanksToSpawn = 2;
+	if (electrodesToSpawn > 7) electrodesToSpawn = 7;
 }
 
 void WaveManager::SpawnEntity()
@@ -116,5 +119,12 @@ void WaveManager::SpawnEntity()
 		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(50, 950), entityManager.GetRandomNumber(10, 100));
 		entityManager.SpawnEnemyTank(pos);
 		tanksSpawned++;
+	}
+
+	if (electrodesSpawned < electrodesToSpawn)
+	{
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(1, 999), entityManager.GetRandomNumber(1, 999));
+		entityManager.SpawnElectrode(pos);
+		electrodesSpawned++;
 	}
 }

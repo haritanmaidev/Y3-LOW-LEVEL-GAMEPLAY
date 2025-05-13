@@ -9,7 +9,7 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 	{
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
-		sprite.setScale(sf::Vector2f(.25f, .25f));
+		sprite.setScale(sf::Vector2f(.30f, .30f));
 		SetTag("Human");
 		score = 500;
 		speed = 2.f;
@@ -57,6 +57,11 @@ void HumanCharacter::OnCollision(const std::string& tag)
 	{
 		TakeDamage(1, "Player");
 	}
+	else if (tag == "Enemy") 
+	{
+		speed = 1.f;
+		return;
+	}
 	else if (tag == "EnemyHulk")
 	{
 		TakeDamage(1, "EnemyHulk");
@@ -71,6 +76,8 @@ void HumanCharacter::OnCollision(const std::string& tag)
 	{
 		TakeDamage(1, "Projectile");
 	}
+	
+	speed = 2.f;
 }
 
 void HumanCharacter::TakeDamage(int damage, const std::string& damageBy)

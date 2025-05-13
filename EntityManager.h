@@ -148,6 +148,7 @@ public:
 	void SpawnProjectileShell(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
 		auto newProjectile = std::make_unique<ProjectileShell>(position, direction, speed);
+		newProjectile->SetVelocity(direction);
 		AddProjectileShellToGameObjectList(std::move(newProjectile));
 	}
 
@@ -162,7 +163,7 @@ public:
 	{
 		UpdateAll(GameObjectList);
 		inputHandler.MoveCharacter(GetPlayer());
-		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 12.5f);
+		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 15.5f);
 	}
 
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
@@ -211,7 +212,7 @@ public:
 			if (obj->IsActive())
 			{
 				const std::string& tag = obj->GetTag();
-				if (tag == "Enemy" || tag == "EnemyEnforcer" || tag == "EnemyBrain" || tag == "EnemyTank")
+				if (tag == "Enemy" || tag == "EnemyEnforcer" || tag == "EnemyBrain" || tag == "EnemyTank" || tag == "ProjectileSnake")
 				{
 					return false;
 				}
@@ -234,7 +235,7 @@ public:
 		for (auto& obj : GameObjectList)
 		{
 			const std::string& tag = obj->GetTag();
-			if (tag == "EnemyHulk" || tag == "Human")
+			if (tag == "EnemyHulk" || tag == "Human" || tag == "Electrode")
 			{
 				obj->SetActive(false);
 			}
@@ -294,14 +295,14 @@ private:
 	void BorderCollisionCheck(GameObject& object)
 	{
 		//REFACTOR: Makes this work with hitbox variable
-		//Right Collision
+		//Left Collision
 		if (object.GetSprite().getPosition().x < 0)
 		{
-			object.GetSprite().setPosition(sf::Vector2f(0, object.GetSprite().getPosition().y));
+			object.GetSprite().setPosition(sf::Vector2f(1, object.GetSprite().getPosition().y));
 			object.SetVelocity(sf::Vector2f(-object.GetVelocity().x, object.GetVelocity().y));
 			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}
-		//Left Collision
+		//Right Collision
 		if (object.GetSprite().getPosition().x + object.GetSprite().getGlobalBounds().size.x > 1000)
 		{
 			object.GetSprite().setPosition(sf::Vector2f(1000 - object.GetSprite().getGlobalBounds().size.x, object.GetSprite().getPosition().y));
@@ -311,7 +312,7 @@ private:
 		//Top Collision
 		if (object.GetSprite().getPosition().y < 0)
 		{
-			object.GetSprite().setPosition(sf::Vector2f(object.GetSprite().getPosition().x, 0));
+			object.GetSprite().setPosition(sf::Vector2f(object.GetSprite().getPosition().x, 1));
 			object.SetVelocity(sf::Vector2f(object.GetVelocity().x, -object.GetVelocity().y));
 			if (object.GetTag() == "Projectile") object.SetActive(false);
 		}

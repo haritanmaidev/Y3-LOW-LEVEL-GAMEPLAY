@@ -46,7 +46,9 @@ void GameOverScene::HandleInput(sf::RenderWindow& window)
 
 void GameOverScene::Update()
 {
-	// No update logic needed for the game over screen
+	UIManager::FlashText(gameOverText);
+	UIManager::FlashText(restartText);
+	UIManager::FlashText(exitText);
 }
 
 void GameOverScene::Render(sf::RenderWindow& window)
