@@ -51,9 +51,10 @@ void WaveManager::StartNextWave()
 	waveDelayTimer = 0.f;
 	spawnIntervalTimer = 0.f;
 
+	humansSpawned = 0;
 	gruntsSpawned = 0;
 	hulksSpawned = 0;
-	humansSpawned = 0;
+	enforcersSpawned = 0;
 
 	gruntsToSpawn = 3 + wave * 2;
 	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 1;
@@ -62,7 +63,7 @@ void WaveManager::StartNextWave()
 	if (humansToSpawn > 10) humansToSpawn = 10;
 	if (gruntsToSpawn > 30) gruntsToSpawn = 20;
 	if(hulksToSpawn > 6) hulksToSpawn = 6;
-	if (enforcersToSpawn > -1) enforcersToSpawn = 2;
+	if (enforcersToSpawn > 5) enforcersToSpawn = 5;
 }
 
 void WaveManager::SpawnEntity()

@@ -6,16 +6,14 @@ EnemyEnforcer::EnemyEnforcer(const sf::Vector2f& spawn, const PlayerCharacter& p
 {
 	if (LoadGameObjectTextureFromFile("assets/Cropped/EnemyEnforcer.png", std::nullopt))
 	{
-		std::cout << "EnemyEnforcer Texture Loaded" << std::endl;
 		sprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(texture->getSize())));
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.05f, .05f));
 		SetTag("EnemyEnforcer");
+		score = 150;
 		speed = 1.5f;
 		health = 1;
 		MaxHealth = health;
-		score = 150;
-		SetActive(true);
 	}
 }
 
@@ -29,7 +27,7 @@ void EnemyEnforcer::Update()
 
 	if (mag < detectionRadius && mag != 0.f)
 	{
-		//Move towards Player
+		//Move away towards Player
 		MoveCharacter(-direction);
 	}
 	else
