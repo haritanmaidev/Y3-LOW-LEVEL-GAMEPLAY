@@ -1,12 +1,1 @@
-﻿  main.cpp
-D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244: '=': conversion from '_Rep' to 'float', possible loss of data
-D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         with
-D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         [
-D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:             _Rep=__int64
-D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\main.cpp(40,125): warning C4244:         ]
-  Generating code
-  1459 of 1461 functions (99.9%) were compiled, the rest were copied from previous compilation.
-    1177 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe
+﻿LINK : fatal error LNK1104: cannot open file 'D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe'
