@@ -13,10 +13,7 @@ class EntityManager
 {
 public:
 	//Constructor & Destructor
-	EntityManager() 
-	{
-		GameObjectList.reserve(200);
-	}
+	EntityManager() { GameObjectList.reserve(200); }
 	~EntityManager() = default;
 
 	//==================================:::::|||||[--- TEMPLATE FUNCTIONS ---]|||||:::::==================================//
@@ -32,9 +29,7 @@ public:
 			if (entity->IsActive())
 			{
 				entity->Update();
-				std::cout << "THIS IS RUNNINGggggggggggggggggggggggg!" << std::endl;
 				BorderCollisionCheck(*entity);
-				std::cout << "THIS IS RUNNING!" << std::endl;
 			}
 		}
 	}

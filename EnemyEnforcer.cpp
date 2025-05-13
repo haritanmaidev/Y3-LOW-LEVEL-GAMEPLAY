@@ -31,16 +31,19 @@ void EnemyEnforcer::Update()
 	{
 		//Move towards Player
 		MoveCharacter(-direction);
-		fireTimer += 0.1f;
-		if (fireTimer > fireRate)
-		{
-			//REFACTOR: USE HOMING MISSLE LATER, MISSE WORTH IS 25 PTS
-			FireMine(direction);
-		}
 	}
 	else
 	{
 		MoveCharacter(direction);
+	}
+
+	fireTimer += 0.1f;
+	if (fireTimer > fireRate)
+	{
+		//REFACTOR: USE HOMING MISSLE LATER, MISSE WORTH IS 25 PTS
+		fireRate = entityManager.GetRandomNumber(5.5f, 6.5f);
+		entityManager.SpawnProjectile(sprite.getPosition(), direction, 8.f);
+		fireTimer = 0.f;
 	}
 }
 
@@ -80,10 +83,4 @@ void EnemyEnforcer::Die(const std::string& killedBy)
 
 	SoundManager::PlayEnemyDeathSound();
 	Character::Die(killedBy);
-}
-
-void EnemyEnforcer::FireMine(const sf::Vector2f& dir)
-{
-	entityManager.SpawnProjectile(sprite.getPosition(), dir, 8.f);
-	fireTimer = 0.f;
 }

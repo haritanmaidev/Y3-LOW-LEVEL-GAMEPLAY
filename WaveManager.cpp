@@ -58,7 +58,7 @@ void WaveManager::StartNextWave()
 	gruntsToSpawn = 3 + wave * 2;
 	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 1;
 	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
-	enforcersToSpawn = (wave >= 1) ? (wave/1) : 1;
+	enforcersToSpawn = (wave >= 2) ? (wave/2) : 0;
 	if (humansToSpawn > 10) humansToSpawn = 10;
 	if (gruntsToSpawn > 30) gruntsToSpawn = 20;
 	if(hulksToSpawn > 6) hulksToSpawn = 6;

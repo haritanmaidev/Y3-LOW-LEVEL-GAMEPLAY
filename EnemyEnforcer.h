@@ -17,9 +17,6 @@ public:
 	void TakeDamage(int damage, const std::string& damageBy) override;
 	void Die(const std::string& taggedBy) override;
 
-	//Class Functions
-	void FireMine(const sf ::Vector2f& dir);
-
 private:
 	EntityManager& entityManager;
 	const PlayerCharacter& PlayerRef;
