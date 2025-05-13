@@ -1,2 +1,2 @@
 ﻿MSVCRT.lib(exe_winmain.obj) : error LNK2001: unresolved external symbol WinMain
-D:\Repo\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe : fatal error LNK1120: 1 unresolved externals
+D:\UNIVERSITY YEAR 3\Repo LLGP after Kieran\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe : fatal error LNK1120: 1 unresolved externals

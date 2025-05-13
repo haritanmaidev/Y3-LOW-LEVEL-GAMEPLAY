@@ -17,6 +17,20 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		speed = 2.f;
 		health = 2;
 		MaxHealth = health;
+
+		//DIFFICULTY SCALING QUICK PATCH FOR ALL ENEMIES!!
+		if (UIManager::GetWave() > 10) 
+		{
+			health += 1;
+			speed += 2.f;
+			score += 50;
+		}
+		if (UIManager::GetWave() > 20)
+		{
+			health += 1;
+			speed += 2.f;
+			score += 50;
+		}
 	}
 }
 
