@@ -19,7 +19,9 @@ EnemyEnforcer::EnemyEnforcer(const sf::Vector2f& spawn, const PlayerCharacter& p
 
 void EnemyEnforcer::Update()
 {
-	sf::Vector2f playerPosition = PlayerRef.GetPosition();
+	Character::Update();
+
+	sf::Vector2f playerPosition = PlayerRef.GetPositionConst();
 	sf::Vector2f position = sprite.getPosition();
 	sf::Vector2f direction = playerPosition - position;
 	float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
@@ -38,7 +40,6 @@ void EnemyEnforcer::Update()
 	fireTimer += 0.1f;
 	if (fireTimer > fireRate)
 	{
-		//REFACTOR: USE HOMING MISSLE LATER, MISSE WORTH IS 25 PTS
 		fireRate = entityManager.GetRandomNumber(5.5f, 6.5f);
 		entityManager.SpawnProjectileEnforcer(sprite.getPosition(), direction, 4.f);
 		fireTimer = 0.f;

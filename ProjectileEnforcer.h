@@ -25,7 +25,7 @@ public:
 
 	void Update() override
 	{
-		sf::Vector2f playerPosition = player.GetPosition();
+		sf::Vector2f playerPosition = player.GetPositionConst();
 		sf::Vector2f position = sprite.getPosition();
 		sf::Vector2f direction = playerPosition - position;
 		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);

@@ -1,20 +1,21 @@
 #pragma once
+#include <random>
 #include "InputHandler.h"
 #include "GameObject.h"
 #include "Projectile.h"
 #include "ProjectileEnforcer.h"
 #include "PlayerCharacter.h"
-#include "EnemyCharacter.h"
 #include "HumanCharacter.h"
+#include "EnemyCharacter.h"
 #include "EnemyHulk.h"
 #include "EnemyEnforcer.h"
-#include <random>
+#include "EnemyBrain.h"
 
 class EntityManager
 {
 public:
 	//Constructor & Destructor
-	EntityManager() { GameObjectList.reserve(200); }
+	EntityManager();
 	~EntityManager() = default;
 
 	//==================================:::::|||||[--- TEMPLATE FUNCTIONS ---]|||||:::::==================================//
@@ -54,6 +55,8 @@ public:
 
 	void AddEnemyHulkToGameObjectList(std::unique_ptr<EnemyHulk>& hulk) { Add(std::unique_ptr<GameObject>(hulk.release()), GameObjectList); }
 
+	void AddEnemyBrainToGameObjectList(std::unique_ptr<EnemyBrain>& brain) { Add(std::unique_ptr<GameObject>(brain.release()), GameObjectList); }
+
 	void AddEnemyEnforcerToGameObjectList(std::unique_ptr<EnemyEnforcer>& enforcer) { Add(std::unique_ptr<GameObject>(enforcer.release()), GameObjectList); }
 
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
@@ -70,7 +73,7 @@ public:
 
 	void SpawnHumanCharacter(const sf::Vector2f& position)
 	{
-		auto newHuman = std::make_unique<HumanCharacter>(position, *this);
+		auto newHuman = std::make_unique<HumanCharacter>(position, *Player, *this);
 		AddHumanToGameObjectList(newHuman);
 	}
 
@@ -88,6 +91,14 @@ public:
 		auto newHulk = std::make_unique<EnemyHulk>(position, *Player, randomDirection, *this);
 		newHulk->SetVelocity(randomDirection);
 		AddEnemyHulkToGameObjectList(newHulk);
+	}
+
+	void SpawnEnemyBrain(const sf::Vector2f& position)
+	{
+		sf::Vector2f randomDirection = GetRandomVector(-1.f, 1.f);
+		auto newBrain = std::make_unique<EnemyBrain>(position, *Player, randomDirection, *this);
+		newBrain->SetVelocity(randomDirection);
+		AddEnemyBrainToGameObjectList(newBrain);
 	}
 
 	void SpawnEnemyEnforcer(const sf::Vector2f& position)
@@ -155,9 +166,9 @@ public:
 	}
 
 	//==================================:::::|||||[--- WAVE SYSTEM RELATED FUNCTIONS ---]|||||:::::==================================//
+	//The enemies marked here are the ones that are required to be killed in order to clear wave
 	bool AreEnemiesDead() const
 	{
-		int count = 0;
 		for (const auto& obj : GameObjectList)
 		{
 			if (obj->IsActive())
@@ -165,7 +176,6 @@ public:
 				const std::string& tag = obj->GetTag();
 				if (tag == "Enemy" || tag == "EnemyEnforcer" || tag == "EnemyBrain" || tag == "EnemyTank")
 				{
-					count++;
 					return false;
 				}
 			}
@@ -173,6 +183,7 @@ public:
 		return true;
 	}
 
+	//The enemies marked here aren't required to be killed for wave progression
 	void ResetSceneForWaves()
 	{
 		for (auto& obj : GameObjectList)
@@ -191,7 +202,21 @@ public:
 	}
 
 	//==================================:::::|||||[--- EXTRA FUNCTIONS ---]|||||:::::==================================//
-	Character& GetPlayer() { return *Player; }
+	Character& GetPlayer() const { return *Player; }
+
+	HumanCharacter* GetActiveHumanForBrain() const
+	{
+		for (auto& obj : GameObjectList)
+		{
+			HumanCharacter* human = dynamic_cast<HumanCharacter*>(obj.get());
+			if (human && human->IsActive())
+			{
+				if(!human->isCorrupt) return human;
+			}
+		}
+
+		return nullptr;
+	}
 
 	float GetRandomNumber(float a, float b) const
 	{
@@ -210,6 +235,7 @@ public:
 
 private:
 	PlayerCharacter* Player;
+	HumanCharacter* Human;
 	std::vector<std::unique_ptr<GameObject>> GameObjectList;
 
 	sf::Vector2f GetMouseDirection(sf::RenderWindow& window, PlayerCharacter& player)

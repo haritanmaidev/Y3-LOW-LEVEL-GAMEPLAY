@@ -2,8 +2,8 @@
 #include "EntityManager.h"
 #include "UIManager.h"
 
-HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& EntityManagerRef) 
-: Character(spawn), entityManager(EntityManagerRef)
+HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const PlayerCharacter& playerRef, EntityManager& EntityManagerRef)
+: Character(spawn), entityManager(EntityManagerRef), player(playerRef)
 {
 	if (LoadGameObjectTextureFromFile("assets/Cropped/Human.png", std::nullopt))
 	{
@@ -11,8 +11,8 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Human");
-		speed = 2.f;
 		score = 500;
+		speed = 2.f;
 		health = 1;
 		randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
 	}
@@ -20,8 +20,11 @@ HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& E
 
 void HumanCharacter::Update()
 {
-	if (IsActive())
+	//SpriteFlash();
+
+	if (!isCorrupt)
 	{
+		std::cout << "isnt corrupted" << std::endl;
 		randomMoveTimer += 0.1f;
 		static float randomMoveRate = 10.f;
 		if (randomMoveTimer > randomMoveRate)
@@ -34,6 +37,21 @@ void HumanCharacter::Update()
 		{
 			MoveCharacter(randomDirection);
 		}
+	}
+	else 
+	{
+		std::cout << "is corrupted" << std::endl;
+
+		sf::Vector2f playerPos = player.GetPositionConst();
+		sf::Vector2f position = sprite.getPosition();
+		sf::Vector2f direction = playerPos - position;
+		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		direction /= mag;
+
+		Character::MoveCharacter(direction);
+		//MoveCharacter();
+
+		//MoveCharacter(direction);
 	}
 }
 
@@ -51,6 +69,16 @@ void HumanCharacter::OnCollision(const std::string& tag)
 	else if (tag == "EnemyHulk")
 	{
 		TakeDamage(1, "EnemyHulk");
+	}
+	else if (tag == "EnemyBrain") 
+	{
+		isCorrupt = true;
+		SetTag("HumanCorrupted");
+		sprite.setColor(sf::Color::Red);
+	}
+	else if (tag == "Projectile" && isCorrupt) 
+	{
+		TakeDamage(1, "Projectile");
 	}
 }
 
@@ -70,8 +98,21 @@ void HumanCharacter::Die(const std::string& killedBy)
 	}
 	else if(killedBy == "Player")
 	{
-		SoundManager::PlayHumanRescueSound();
+		if (!isCorrupt)
+		{
+			UIManager::AddScore(score);
+			SoundManager::PlayHumanRescueSound();
+		}
+		else
+		{
+			UIManager::SubtractScore(score);
+			SoundManager::PlayEnemyDeathSound();
+		}
+	}
+	else if (killedBy == "Projectile" && isCorrupt) 
+	{
 		UIManager::AddScore(score);
+		SoundManager::PlayEnemyDeathSound();
 	}
 
 	Character::Die(killedBy);

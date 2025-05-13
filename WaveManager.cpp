@@ -4,7 +4,7 @@
 
 WaveManager::WaveManager(EntityManager& entityManagerRef, const float& waveDelayRef) : entityManager(entityManagerRef), waveDelay(waveDelayRef)
 {
-	StartNextWave();
+	//StartNextWave();
 }
 
 void WaveManager::Update()
@@ -54,45 +54,55 @@ void WaveManager::StartNextWave()
 	humansSpawned = 0;
 	gruntsSpawned = 0;
 	hulksSpawned = 0;
+	brainsSpawned = 0;
 	enforcersSpawned = 0;
 
+	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
 	gruntsToSpawn = 3 + wave * 2;
 	hulksToSpawn = (wave >= 2) ? (wave - 2) / 2 : 1;
-	humansToSpawn = (wave <= 3) ? 1 + wave * 2 : 7;
+	brainsToSpawn = (wave % 2 == 0) ? wave : 0;
 	enforcersToSpawn = (wave >= 2) ? (wave/2) : 0;
 	if (humansToSpawn > 10) humansToSpawn = 10;
 	if (gruntsToSpawn > 30) gruntsToSpawn = 20;
 	if(hulksToSpawn > 6) hulksToSpawn = 6;
 	if (enforcersToSpawn > 5) enforcersToSpawn = 5;
+	if (brainsToSpawn < 1) brainsToSpawn = 2;
 }
 
 void WaveManager::SpawnEntity()
 {
-	if (humansSpawned < humansToSpawn)
+	if(humansSpawned < humansToSpawn)
 	{
 		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(450, 750), entityManager.GetRandomNumber(10, 100));
 		entityManager.SpawnHumanCharacter(pos);
 		humansSpawned++;
 	}
 
-	if (gruntsSpawned < gruntsToSpawn)
+	//if(gruntsSpawned < gruntsToSpawn)
+	//{
+	//	sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 400));
+	//	entityManager.SpawnEnemyCharacter(pos);
+	//	gruntsSpawned++;
+	//}
+
+	//if(hulksSpawned < hulksToSpawn)
+	//{
+	//	sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 200));
+	//	entityManager.SpawnEnemyHulk(pos);
+	//	hulksSpawned++;
+	//}
+
+	if (brainsSpawned < brainsToSpawn)
 	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 400));
-		entityManager.SpawnEnemyCharacter(pos);
-		gruntsSpawned++;
+		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(50, 950), entityManager.GetRandomNumber(700, 950));
+		entityManager.SpawnEnemyBrain(pos);
+		brainsSpawned++;
 	}
 
-	if (hulksSpawned < hulksToSpawn)
-	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(250, 750), entityManager.GetRandomNumber(10, 200));
-		entityManager.SpawnEnemyHulk(pos);
-		hulksSpawned++;
-	}
-
-	if (enforcersSpawned < enforcersToSpawn)
-	{
-		sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(50, 950), entityManager.GetRandomNumber(10, 100));
-		entityManager.SpawnEnemyEnforcer(pos);
-		enforcersSpawned++;
-	}
+	//if(enforcersSpawned < enforcersToSpawn)
+	//{
+	//	sf::Vector2f pos = sf::Vector2f(entityManager.GetRandomNumber(50, 950), entityManager.GetRandomNumber(10, 100));
+	//	entityManager.SpawnEnemyEnforcer(pos);
+	//	enforcersSpawned++;
+	//}
 }

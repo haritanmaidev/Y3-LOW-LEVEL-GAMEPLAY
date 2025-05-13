@@ -14,6 +14,7 @@ void GameScene::Init()
 	UIManager::ResetWave();
 	UIManager::ResetHealth();
 	entityManager.SpawnPlayerCharacter(sf::Vector2f(500.f, 750.f));
+	waveManager.StartNextWave();	
 	isFinished = false;
 }
 

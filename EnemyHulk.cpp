@@ -19,19 +19,18 @@ EnemyHulk::EnemyHulk(const sf::Vector2f& spawn, const PlayerCharacter& player, s
 
 void EnemyHulk::Update() 
 {
-	if (IsActive())
+	Character::Update();
+
+	randomMoveTimer += 0.1f;
+	if (randomMoveTimer > randomMoveRate)
 	{
-		randomMoveTimer += 0.1f;
-		if (randomMoveTimer > randomMoveRate)
-		{
-			randomDirection = entityManager.GetRandomVector(-3, 3);
-			MoveCharacter(randomDirection);
-			randomMoveTimer = 0.f;
-		}
-		else
-		{
-			MoveCharacter(randomDirection);
-		}
+		randomDirection = entityManager.GetRandomVector(-3, 3);
+		MoveCharacter(randomDirection);
+		randomMoveTimer = 0.f;
+	}
+	else
+	{
+		MoveCharacter(randomDirection);
 	}
 }
 

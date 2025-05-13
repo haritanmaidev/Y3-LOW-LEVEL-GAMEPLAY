@@ -13,10 +13,10 @@ EnemyCharacter::EnemyCharacter(const sf::Vector2f& spawn, const PlayerCharacter&
 		sprite.setOrigin(sf::Vector2f(texture->getSize().x / 2.f, texture->getSize().y / 2.f));
 		sprite.setScale(sf::Vector2f(.25f, .25f));
 		SetTag("Enemy");
+		score = 100;
 		speed = 2.f;
 		health = 2;
 		MaxHealth = health;
-		score = 100;
 	}
 }
 
@@ -24,7 +24,7 @@ void EnemyCharacter::Update()
 {
 	Character::Update();
 
-	sf::Vector2f playerPosition = PlayerRef.GetPosition();
+	sf::Vector2f playerPosition = PlayerRef.GetPositionConst();
 	sf::Vector2f position = sprite.getPosition();
 	sf::Vector2f direction = playerPosition - position;
 	float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);

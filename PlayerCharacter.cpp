@@ -17,7 +17,6 @@ PlayerCharacter::PlayerCharacter(const sf::Vector2f& spawn) : Character(spawn)
 void PlayerCharacter::Update()
 {
 	Character::Update();
-	//UIManager::SetHealth(health, MaxHealth);
 }
 
 void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
@@ -34,6 +33,10 @@ void PlayerCharacter::OnCollision(const std::string& tag)
 	else if (tag == "EnemyHulk")
 	{
 		TakeDamage(10, "EnemyHulk");
+	}
+	else if (tag == "HumanCorrupted") 
+	{
+		TakeDamage(10, "HumanCorrupted");
 	}
 }
 
