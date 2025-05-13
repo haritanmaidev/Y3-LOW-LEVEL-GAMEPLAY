@@ -9,8 +9,8 @@ class ProjectileSnake : public GameObject
 {
 public:
 	//ASK: Should these be const?
-	ProjectileSnake(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed, const PlayerCharacter& playerRef, EntityManager& entityManRef)
-	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed), player(playerRef), entityManager(entityManRef)
+	ProjectileSnake(const sf::Vector2f& spawn, const sf::Vector2f& aimDir, float projSpeed, const PlayerCharacter& playerRef)
+	: GameObject(), spawnPoint(spawn), aimDirection(aimDir), projectileSpeed(projSpeed), player(playerRef)
 	{
 		if (LoadGameObjectTextureFromFile("assets/Cropped/ProjectileSnake.png", std::nullopt))
 		{
@@ -32,9 +32,9 @@ public:
 
 		sf::Vector2f perpendicular = { -dir.y, dir.x };
 		float wiggleMax = 0.1f;
-		float wiggle = entityManager.GetRandomNumber(-wiggleMax, wiggleMax);
+		//float wiggle = entityManager.GetRandomNumber(-wiggleMax, wiggleMax);
 
-		dir += perpendicular * wiggle;
+		//dir += perpendicular * wiggle;
 		mag = std::sqrt(dir.x * dir.x + dir.y * dir.y);
 		if (mag != 0.f) { dir /= mag; }
 
@@ -58,7 +58,6 @@ public:
 	}
 
 private:
-	EntityManager& entityManager;
 	const PlayerCharacter& player;
 	sf::Vector2f spawnPoint;
 	sf::Vector2f aimDirection;

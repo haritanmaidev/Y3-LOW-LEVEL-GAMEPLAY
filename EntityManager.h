@@ -1,16 +1,14 @@
 #pragma once
 #include <random>
 #include "InputHandler.h"
-#include "GameObject.h"
 #include "Projectile.h"
 #include "ProjectileEnforcer.h"
 #include "ProjectileSnake.h"
 #include "PlayerCharacter.h"
 #include "HumanCharacter.h"
-#include "EnemyCharacter.h"
 #include "EnemyHulk.h"
-#include "EnemyEnforcer.h"
 #include "EnemyBrain.h"
+#include "EnemyEnforcer.h"
 
 class EntityManager
 {
@@ -120,7 +118,7 @@ public:
 
 	void SpawnProjectileSnake(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
 	{
-		auto newProjectile = std::make_unique<ProjectileSnake>(position, direction, speed, *Player, *this);
+		auto newProjectile = std::make_unique<ProjectileSnake>(position, direction, speed, *Player);
 		AddProjectileSnakeToGameObjectList(std::move(newProjectile));
 	}
 
