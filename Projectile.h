@@ -29,7 +29,6 @@ public:
 
 	void OnCollision(const std::string& tag) override
 	{
-
 		if(tag == "Enemy")
 		{
 			SetActive(false);

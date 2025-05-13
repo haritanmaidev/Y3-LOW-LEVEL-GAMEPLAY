@@ -26,7 +26,7 @@ void PlayerCharacter::MoveCharacter(const sf::Vector2f& direction)
 
 void PlayerCharacter::OnCollision(const std::string& tag)
 {
-	if (tag == "Enemy" || tag == "ProjectileEnforcer")
+	if (tag == "Enemy" || tag == "ProjectileEnforcer" || tag == "ProjectileSnake")
 	{
 		TakeDamage(5, "Enemy");
 	}

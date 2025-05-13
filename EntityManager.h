@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Projectile.h"
 #include "ProjectileEnforcer.h"
+#include "ProjectileSnake.h"
 #include "PlayerCharacter.h"
 #include "HumanCharacter.h"
 #include "EnemyCharacter.h"
@@ -61,6 +62,8 @@ public:
 
 	void AddProjectileToGameObjectList(std::unique_ptr<Projectile> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
+	void AddProjectileSnakeToGameObjectList(std::unique_ptr<ProjectileSnake> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
+
 	void AddProjectileEnforcerToGameObjectList(std::unique_ptr<ProjectileEnforcer> projectile) { Add(std::unique_ptr<GameObject>(projectile.release()), GameObjectList); }
 
 	//==================================:::::|||||[--- SPAWN-UPDATE-RENDER FUNCTIONS ---]|||||:::::==================================//
@@ -113,6 +116,12 @@ public:
 	{
 		auto newProjectile = std::make_unique<Projectile>(position, direction, speed);
 		AddProjectileToGameObjectList(std::move(newProjectile));
+	}
+
+	void SpawnProjectileSnake(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
+	{
+		auto newProjectile = std::make_unique<ProjectileSnake>(position, direction, speed, *Player);
+		AddProjectileSnakeToGameObjectList(std::move(newProjectile));
 	}
 
 	void SpawnProjectileEnforcer(const sf::Vector2f& position, const sf::Vector2f& direction, float speed)
