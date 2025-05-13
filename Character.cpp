@@ -11,7 +11,7 @@ Character::Character(const sf::Vector2f& spawn) : GameObject(), spawnPoint(spawn
 
 void Character::Update()
 {
-	if (isFlashing)
+	if (isFlashing && IsActive())
 	{
 		SpriteFlash();
 	}

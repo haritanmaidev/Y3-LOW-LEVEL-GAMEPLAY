@@ -24,24 +24,21 @@ void EnemyCharacter::Update()
 {
 	Character::Update();
 
-	if (IsActive()) 
-	{
-		sf::Vector2f playerPosition = PlayerRef.GetPosition();
-		sf::Vector2f position = sprite.getPosition();
-		sf::Vector2f direction = playerPosition - position;
-		float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+	sf::Vector2f playerPosition = PlayerRef.GetPosition();
+	sf::Vector2f position = sprite.getPosition();
+	sf::Vector2f direction = playerPosition - position;
+	float mag = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-		if(mag < detectionRadius && mag != 0.f)
-		{
-			//Move towards Player
-			direction /= mag;
-			MoveCharacter(direction);
-		}
-		else
-		{
-			//Move towards random Direction
-			MoveCharacter(velocity);
-		}
+	if (mag < detectionRadius && mag != 0.f)
+	{
+		//Move towards Player
+		direction /= mag;
+		MoveCharacter(direction);
+	}
+	else
+	{
+		//Move towards random Direction
+		MoveCharacter(velocity);
 	}
 }
 

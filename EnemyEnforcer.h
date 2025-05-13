@@ -22,7 +22,9 @@ public:
 
 private:
 	EntityManager& entityManager;
+	const PlayerCharacter& PlayerRef;
 	float fireRate = 0.5f;
+	float fireTimer = 0.f;
 	float detectionRadius = 800.f;
 	float randomMoveTimer = 0.f;
 	float randomMoveRate = 10.f;

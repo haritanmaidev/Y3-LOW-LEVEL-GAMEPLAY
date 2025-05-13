@@ -2,7 +2,8 @@
 #include "EntityManager.h"
 #include "UIManager.h"
 
-HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& EntityManagerRef) : Character(spawn), entityManager(EntityManagerRef)
+HumanCharacter::HumanCharacter(const sf::Vector2f& spawn, const EntityManager& EntityManagerRef) 
+: Character(spawn), entityManager(EntityManagerRef)
 {
 	if (LoadGameObjectTextureFromFile("assets/Cropped/Human.png", std::nullopt))
 	{
