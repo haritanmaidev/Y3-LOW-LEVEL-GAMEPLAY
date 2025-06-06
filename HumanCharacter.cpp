@@ -26,12 +26,12 @@ void HumanCharacter::Update()
 		static float randomMoveRate = 15.f;
 		if (randomMoveTimer > randomMoveRate)
 		{
-			randomDirection = entityManager.GetRandomVector(-1.f, 1.f);
+			velocity = entityManager.GetRandomVector(-1.f, 1.f);
 			randomMoveTimer = 0.f;
 		}
 		else 
 		{
-			MoveCharacter(randomDirection);
+			MoveCharacter(velocity);
 		}
 	}
 	else 

@@ -164,7 +164,7 @@ public:
 		UpdateAll(GameObjectList);
 		inputHandler.MoveCharacter(GetPlayer());
 		inputHandler.FireProjectile(*this, Player->GetSprite().getPosition(), GetMouseDirection(window, *Player), 15.5f);
-		inputHandler.GetCoordinates(window);
+		//inputHandler.GetCoordinates(window);
 	}
 
 	void RenderAllGameObjects(sf::RenderWindow& window) { RenderAll(GameObjectList, window); }
@@ -244,7 +244,6 @@ public:
 			else if (tag == "Player")
 			{
 				sf::Vector2f pos = sf::Vector2f(GetRandomNumber(450, 550), GetRandomNumber(550, 650));
-				obj->SetPosition(pos.x, pos.y);
 			}
 		}
 	}
