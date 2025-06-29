@@ -42,12 +42,10 @@ int main()
         timeSinceLastPhysicsLoop += deltaTime;
         while(timeSinceLastPhysicsLoop > physicsTimeStep)
         {
-            //DO UPDATE HERE!
             timeSinceLastPhysicsLoop -= physicsTimeStep;
 			sceneManager.HandleInput(window);
 			sceneManager.Update();
         }
-        /*--------------------------------:||||[[[FIXED UPDATE FUNCTIONALITY]]]||||:--------------------------------*/
         
         while (const std::optional event = window.pollEvent())
         {

@@ -30,14 +30,14 @@ public:
 		Music.play();
 	}
 
-	static void PlaySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 50.f); }
+	static void PlaySpawnSound() { PlaySound("Audio/EnemySpawn.wav", 40.f); }
 	static void PlayPlayerHurtSound() { PlaySound("Audio/PlayerHurt.wav", 15.f); }
-	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 65.f); }
-	static void PlayEnemyHitSound() { PlaySound("Audio/EnemyHit2.wav", 70.f); }
-	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHurt.wav", 70.f); }
-	static void PlayEnemyDeathSound() { PlaySound("Audio/EnemyDeath.wav", 70.f);}
-	static void PlayProjectileSound() { PlaySound("Audio/GunFireBlop.wav", 35.f); }
-	static void PlayBackgroundMusic() { PlayMusic("Audio/GameMusic.ogg", 85.f); }
+	static void PlayHumanRescueSound() { PlaySound("Audio/HumanPickup.wav", 45.f); }
+	static void PlayEnemyHitSound() { PlaySound("Audio/EnemyHit2.wav", 50.f); }
+	static void PlayEnemyHurtSound() { PlaySound("Audio/EnemyHurt.wav", 50.f); }
+	static void PlayEnemyDeathSound() { PlaySound("Audio/EnemyDeath.wav", 50.f);}
+	static void PlayProjectileSound() { PlaySound("Audio/GunFireBlop.wav", 25.f); }
+	static void PlayBackgroundMusic() { PlayMusic("Audio/GameMusic.ogg", 35.f); }
 
 	static void CleanUpSounds()
 	{
