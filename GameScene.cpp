@@ -51,6 +51,7 @@ void GameScene::Update()
 
 void GameScene::Render(sf::RenderWindow& window)
 {
+	Scene::Render(window);
 	entityManager.RenderAllGameObjects(window);
 	UIManager::RenderUI(window);
 }

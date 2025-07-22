@@ -28,14 +28,6 @@ MainMenuScene::MainMenuScene()
 void MainMenuScene::Init()
 {
 	isFinished = false;
-    if (backgroundTexture.loadFromFile("assets/backgroundgrass.png")) 
-    {
-        backgroundSprite.setTextureRect(sf::IntRect({ 0, 0 }, sf::Vector2i(backgroundTexture.getSize())));
-		//backgroundSprite.setOrigin(sf::Vector2f(10, 10));
-		backgroundSprite.setPosition(sf::Vector2f(0.f, 0.f));
-		backgroundSprite.setTexture(backgroundTexture);
-
-    }
 }
 
 void MainMenuScene::HandleInput(sf::RenderWindow& window)
@@ -55,13 +47,12 @@ void MainMenuScene::Update()
 	UIManager::FlashText(titleText);
 	UIManager::FlashText(startText);
 	UIManager::FlashText(exitText);
-
 }
 
 void MainMenuScene::Render(sf::RenderWindow& window)
 {
+    Scene::Render(window);
 	window.draw(titleText);
 	window.draw(startText);
 	window.draw(exitText);
-	window.draw(backgroundSprite);
 }

@@ -1,7 +1,8 @@
-﻿  MainMenuScene.cpp
+﻿  GameScene.cpp
+  MainMenuScene.cpp
   Generating code
-  1 of 1464 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1467 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  LLGP.vcxproj -> D:\UNIVERSITY YEAR 3\Repo LLGP after Snake\LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe
+  LLGP.vcxproj -> C:\GithubRepo\Y3-LOW-LEVEL-GAMEPLAY\x64\Release\LLGP.exe

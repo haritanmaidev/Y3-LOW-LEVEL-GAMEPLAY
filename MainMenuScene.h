@@ -20,7 +20,5 @@ private:
 	sf::Text titleText = sf::Text(font);
 	sf::Text startText = sf::Text(font);
 	sf::Text exitText = sf::Text(font);
-	sf::Texture backgroundTexture;
-	sf::Sprite backgroundSprite = sf::Sprite(backgroundTexture);
 };
 
